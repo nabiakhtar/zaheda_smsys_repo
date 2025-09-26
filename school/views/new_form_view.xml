@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_student_student_form_custom" model="ir.ui.view">
+        <field name="name">student.student.form.custom</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <form string="Admission Register" class="oe_form_sheet">
+                <sheet>
+                    <!-- Header Section -->
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <div>
+                            <img src="school/static/src/img/logo.png"
+                                 style="width:165px; height:auto;"/>
+                        </div>
+                        <div style="text-align:center; flex:1;">
+                            <img src="school/static/src/img/form_header.png"
+                                 style="width:430px; height:auto;"/>
+                        </div>
+                        <div style="border:1px solid black;text-align:center;width:160px; height:auto;">
+                            <field name="photo" widget="image"/>
+                        </div>
+                    </div>
+
+                    <br/>
+                    <style>
+                        .fl{
+                        font-weight:bold;
+                        margin-left:20px;
+                        }
+
+                        .enfl{
+                        font-weight:bold;
+                        margin-right:20px;
+                        }
+
+                    </style>
+
+
+                    <div style="direction: rtl;width:100%; font-size:12pt;">
+
+                        <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                            <div>
+                                <span class="fl">رجسٹریشن نمبر:</span>
+                                <span style="border-bottom:1px dotted #000; display:inline-block;">
+                                    <field name="reg_no"/>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="fl">تاریخ داخله:</span>
+                                <span style="border-bottom:1px dotted #000; display:inline-block;">
+                                    <field name="admission_date"/>
+                                </span>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-12">
+                                <span class="fl">نام طالب علم:</span>
+                                <span style="width:350px;border-bottom:1px dotted #000;display:inline-block;">
+                                    <field name="name"/>
+                                </span>
+
+
+                                <span class="fl">نام والد:</span>
+                                <span style="width:300px;border-bottom:1px dotted #000;display:inline-block;">
+                                    <field name="father_name"/>
+                                </span>
+
+
+                                <span class="fl">نام والده:</span>
+                                <span style="width:300px;border-bottom:1px dotted #000;display:inline-block;">
+                                    <field name="mother_name"/>
+                                </span>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-12">
+                                <span class="fl">مستقل پتر:</span>
+                                <span style="width:600px;border-bottom:1px dotted #000;display:inline-block;">
+                                    <field name="street"/>
+                                </span>
+
+
+                                <span class="fl">تاریخ پیدائش:</span>
+                                <span style="width:300px;border-bottom:1px dotted #000;display:inline-block;">
+                                    <field name="date_of_birth"/>
+                                </span>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-12">
+                                <span class="fl">سر پرست کا نام و پسته:</span>
+                                <span style="width:600px;border-bottom:1px dotted #000;display:inline-block;">
+                                    <field name="parent_name_address"/>
+                                </span>
+
+
+                                <span class="fl">سر پرست سے رشتہ:</span>
+                                <span style="width:300px;border-bottom:1px dotted #000;display:inline-block;">
+                                    <field name="parent_relation"/>
+                                </span>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-12">
+                                <span class="fl">سابقه درسگاه:</span>
+                                <span style="width:400px;border-bottom:1px dotted #000;display:inline-block;">
+                                    <field name="prev_school"/>
+                                </span>
+
+
+                                <span class="fl">درسگاہ چھوڑنے کی وجہ:</span>
+                                <span style="width:400px;border-bottom:1px dotted #000;display:inline-block;">
+                                    <field name="reason_leave_prev_school"/>
+                                </span>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-12">
+                                <span class="fl">سابقہ درجہ:</span>
+                                <span style="width:300px;border-bottom:1px dotted #000;display:inline-block;">
+                                    <field name="prv_class"/>
+                                </span>
+
+
+                                <span class="fl">مطلوبہ درجہ:</span>
+                                <span style="width:300px;border-bottom:1px dotted #000;display:inline-block;">
+                                    <field name="current_class"/>
+                                </span>
+
+                                <span class="fl">موبائل نمبر:</span>
+                                <span style="text-align:right;direction:ltr;width:300px;border-bottom:1px dotted #000;display:inline-block;">
+                                    <field name="mobile"/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <div style="direction:ltr;width:100%; font-size:12pt;">
+                        <div class="row">
+                            <div class="col-12">
+                                <span class="enfl">Student's Name:</span>
+                                <span style="width:350px;border-bottom:1px dotted #000;display:inline-block;">
+                                    <field name="en_name"/>
+                                </span>
+
+
+                                <span class="enfl">Father's Name:</span>
+                                <span style="width:300px;border-bottom:1px dotted #000;display:inline-block;">
+                                    <field name="en_father_name"/>
+                                </span>
+                            </div>
+                        </div>
+                        <br/>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <span class="enfl">Mother's Name:</span>
+                                <span style="width:350px;border-bottom:1px dotted #000;display:inline-block;">
+                                    <field name="en_mother_name"/>
+                                </span>
+
+
+                                <span class="enfl">Address:</span>
+                                <span style="width:600px;border-bottom:1px dotted #000;display:inline-block;">
+                                    <field name="street"/>
+                                </span>
+                            </div>
+                        </div>
+
+                        <br/>
+                        <div class="row">
+                            <div class="col-12">
+                                <span class="enfl">Date of Birth</span>
+                                <span style="width:300px;border-bottom:1px dotted #000;display:inline-block;">
+                                    <field name="date_of_birth"/>
+                                </span>
+
+                                <span class="enfl">Aadhaar number:</span>
+                                <span style="width:300px;border-bottom:1px dotted #000;display:inline-block;">
+                                    <field name="adhar_no"/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="view_student_student_tree_custom" model="ir.ui.view">
+        <field name="name">student.student.tree.custom</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="reg_no"/>
+                <field name="name"/>
+                <field name="father_name"/>
+                <field name="mother_name"/>
+                <field name="street"/>
+                <field name="mobile"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_student_student_form_2_new" model="ir.actions.act_window">
+        <field name="name">New Form</field>
+        <field name="res_model">student.student</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_student_student_form_2_new" model="ir.actions.act_window">
+        <field name="name">Admission Register New</field>
+        <field name="res_model">student.student</field>
+        <field name="domain">['|',('state','=','draft'),('state','=','cancel')]</field>
+        <field name="view_id" ref="view_student_student_form_custom" />
+<!--        <field name="search_view_id" ref="view_student_student_search_2" />-->
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem
+            id="menu_admission_form_new"
+            name="New Form"
+            parent="school.menu_admission_form_root"
+            action="action_student_student_form_2_new"
+            sequence="1"
+    />
+
+
+</odoo>

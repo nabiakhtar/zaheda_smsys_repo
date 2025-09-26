@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_education_exam_results,access.education.exam.results,education_exam.model_education_exam_results,,1,1,1,0
+access_results_subject_line,access.results.subject.line,education_exam.model_results_subject_line,,1,1,1,1
+access_education_exam_valuation,access.education.exam.valuation,education_exam.model_education_exam_valuation,,1,1,1,1
+access_exam_valuation_line,access.exam.valuation.line,education_exam.model_exam_valuation_line,,1,1,1,1
+access_education_exam,access.education.exam,education_exam.model_education_exam,,1,1,1,1
+access_education_subject_line,access.education.subject.line,education_exam.model_education_subject_line,,1,1,1,1
+access_education_exam_type,access.education.exam.type,education_exam.model_education_exam_type,,1,1,1,0
+access_education_marksheet_config,access.education.marksheet.config,education_exam.model_education_marksheet_config,,1,1,1,0
+access_select_exam_wizard_user,access.select.exam.wizard.user,model_select_exam_wizard,,1,1,1,1
+
+

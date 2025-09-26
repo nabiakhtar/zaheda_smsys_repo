@@ -1,0 +1,42 @@
+<odoo>
+    <data>
+        <!-- The wizard view -->
+        <record id="view_select_exam_wizard_form" model="ir.ui.view">
+            <field name="name">select.exam.wizard.form</field>
+            <field name="model">select.exam.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Select Exam">
+                    <group>
+                        <!-- Field for Session -->
+<!--                        <field name="session_id" />-->
+<!--                        <field name="student_id" />-->
+                         Field for Class
+<!--                        <field name="class_id" />-->
+                        <field name="exam_id1" string="Half Yearly Exam"/>
+                        <field name="exam_id2" string="Final Exam"/>
+<!--                        <field name="result_id" />-->
+                        <!-- Field for Exam -->
+                    </group>
+                    <footer>
+                        <!-- Action button to trigger the selection -->
+                        <button name="build_students_marks" type="object" string="OK" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action to open the wizard -->
+        <record id="action_select_exam_wizard" model="ir.actions.act_window">
+            <field name="name">Select Exam Wizard</field>
+            <field name="res_model">select.exam.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+
+        <menuitem id="print_report_card_menu" parent="education_exam.examination_result_main_menu"
+                  action="action_select_exam_wizard" name="Build Result" sequence="16"/>
+
+    </data>
+</odoo>

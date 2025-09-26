@@ -1,0 +1,27 @@
+<odoo>
+    <record id="view_partner_import_form" model="ir.ui.view">
+        <field name="name">partner.import.form</field>
+        <field name="model">partner.import</field>
+        <field name="arch" type="xml">
+            <form string="Import Partners">
+                <group>
+                    <field name="file" filename="filename" widget="binary"/>
+                </group>
+                <footer>
+                    <button string="Import" type="object" name="import_data" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_partner_import" model="ir.actions.act_window">
+        <field name="name">Import Students</field>
+        <field name="res_model">partner.import</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_partner_import" name="Import Students" parent="menu_configuration" action="action_partner_import"/>
+</odoo>

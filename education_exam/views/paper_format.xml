@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="paperformat_report_card" model="report.paperformat">
+        <field name="name">Report Card Print Format</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">2.8</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">0</field>
+        <field name="margin_right">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">0</field>
+        <field name="disable_shrinking" eval="True"/>
+        <field name="dpi">96</field>
+    </record>
+
+
+    <record id="action_report_exam_report" model="ir.actions.report">
+        <field name="name">Report Card</field>
+        <field name="model">education.exam.results</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">education_exam.report_exam_result</field>
+        <field name="report_file">education_exam.report_exam_result</field>
+        <field name="print_report_name">'Report Card - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_education_exam_results"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_report_card"/>
+    </record>
+
+</odoo>

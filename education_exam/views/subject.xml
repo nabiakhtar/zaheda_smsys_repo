@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<odoo>
+    <!--    subject view-->
+    <record id="view_subject_subject_form_iinherit" model="ir.ui.view">
+        <field name="name">view_subject_subject_form_inherit</field>
+        <field name="model">subject.subject</field>
+        <field name="inherit_id" ref="school.view_subject_subject_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='code']" position="after">
+                <field name="exam_in_final"/>
+            </xpath>
+        </field>
+    </record>
+
+
+     <record id="view_school_school_form_inherit" model="ir.ui.view">
+        <field name="name">view_school_school_form_inherit</field>
+        <field name="model">school.school</field>
+        <field name="inherit_id" ref="school.view_school_school_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="result_card_header" widget="image"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
