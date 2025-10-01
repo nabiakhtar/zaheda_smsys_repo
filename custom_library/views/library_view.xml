@@ -1,0 +1,166 @@
+<?xml version="1.0" ?>
+<odoo>
+    <menuitem
+            id="menu_library_main"
+            name="Library"
+            sequence="1"
+    />
+    <!--    Issue of Book-->
+    <record id="view_issue_book_form" model="ir.ui.view">
+        <field name="name">library.book.issue.form.view</field>
+        <field name="model">library.book.issue</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <form string="Books">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                    </div>
+                    <group>
+                        <group>
+                            <field name="reg_no"/>
+                            <field name="student_id"/>
+                        </group>
+                        <group>
+                            <field name="address"/>
+                            <field name="stud_class"/>
+                            <field name="date"/>
+                        </group>
+                    </group>
+                    <field name="issue_line">
+                        <tree editable="bottom">
+                            <field name="book_id"/>
+                            <field name="issue_date"/>
+                            <field name="return_days"/>
+                            <field name="Remark"/>
+                        </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="view_issue_book_tree" model="ir.ui.view">
+        <field name="name">library.book.issue.tree.view</field>
+        <field name="model">library.book.issue</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="reg_no"/>
+                <field name="student_id"/>
+                <field name="address"/>
+                <field name="stud_class"/>
+                <field name="date"/>
+                    <field name="issue_line" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action Issue Book -->
+    <record id="action_library_issue_book" model="ir.actions.act_window">
+        <field name="name">Issue Book</field>
+        <field name="res_model">library.book.issue</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_issue_book_tree"/>
+        <field name="context"></field>
+    </record>
+
+    <menuitem
+            id="menu_library_issue_bbok"
+            name="Issue Book"
+            parent="menu_library_main"
+            sequence="5"
+            action="action_library_issue_book"
+    />
+
+
+    <!-- Form View Of Product Book -->
+    <record id="view_product_book_form" model="ir.ui.view">
+        <field name="name">product.book.form.view</field>
+        <field name="model">book.book</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <form string="Books">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field
+                                    name="book_author"
+                                    placeholder="Name of Author"
+                            />
+                            <field name="qty"/>
+                            <field name="issued_qty"/>
+                            <field name="available_qty"/>
+                            <field name="location"/>
+                            <field name="sub_location"/>
+                            <field name="issue_duration"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- Tree View Of Product Book -->
+    <record id="view_product_book_tree" model="ir.ui.view">
+        <field name="name">product.book.tree.view</field>
+        <field name="model">book.book</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="book_author"/>
+                <field name="qty"/>
+                <field name="issued_qty"/>
+                <field name="available_qty"/>
+                <field name="price"/>
+                <field name="location"/>
+                <field name="sub_location"/>
+                <field name="issue_duration"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Action Of Product Book List -->
+    <record id="action_library_book" model="ir.actions.act_window">
+        <field name="name">Books</field>
+        <field name="res_model">book.book</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_product_book_tree"/>
+        <field name="context"></field>
+    </record>
+    <!-- Menu Items Of Library Books -->
+
+    <!-- Menu Items Of Library -->
+
+    <menuitem
+            id="menu_library_config"
+            name="Book"
+            parent="menu_library_main"
+            sequence="5"
+            action="action_library_book"
+    />
+
+    <!--    -->
+    <!--    -->
+    <!--    <menuitem-->
+    <!--        id="menu_library_config"-->
+    <!--        name="Library"-->
+    <!--        parent="school.menu_configuration"-->
+    <!--        sequence="5"-->
+    <!--    />-->
+    <!--    <menuitem-->
+    <!--        id="menu_books_student"-->
+    <!--        parent="menu_library"-->
+    <!--        action="action_product_book_list"-->
+    <!--        sequence="71"-->
+    <!--    />-->
+
+</odoo>
