@@ -12,26 +12,45 @@
         <field name="priority" eval="1"/>
         <field name="arch" type="xml">
             <form string="Books">
+                <header>
+                    <field name="state" invisible="1"/>
+                   <button attrs="{'invisible': [('state', '!=', 'draft')]}" string="Confirm Issue"
+                            name="confirm_issue" type="object" class="btn-primary"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,issue,return"/>
+                </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
+                        <button icon="fa-book"  attrs="{'invisible': [('state', '=', 'draft')]}" string="Return Book" type="object"
+                                name="return_book" class="btn-primary"/>
                     </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+
                     <group>
                         <group>
                             <field name="reg_no"/>
-                            <field name="student_id"/>
+                            <field name="student_id" options="{'no_create': True, 'no_open': True}"
+                                   attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="stud_class"/>
+                            <field name="address"/>
                         </group>
                         <group>
-                            <field name="address"/>
-                            <field name="stud_class"/>
-                            <field name="date"/>
+                            <field name="date"  attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="is_returned"  attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                         </group>
                     </group>
+
                     <field name="issue_line">
-                        <tree editable="bottom">
-                            <field name="book_id"/>
+                        <tree editable="bottom" decoration-success="return_date" decoration-danger="not return_date">
+                            <!--                        <tree editable="bottom">-->
+                            <field name="book_id" options="{'no_create': True, 'no_open': True}"/>
                             <field name="issue_date"/>
                             <field name="return_days"/>
                             <field name="Remark"/>
+                            <field name="return_date"/>
                         </tree>
                     </field>
                 </sheet>
@@ -46,15 +65,31 @@
         <field name="priority" eval="1"/>
         <field name="arch" type="xml">
             <tree>
+                <field name="name"/>
                 <field name="reg_no"/>
                 <field name="student_id"/>
-                <field name="address"/>
                 <field name="stud_class"/>
+                <field name="address"/>
                 <field name="date"/>
-                    <field name="issue_line" widget="many2many_tags"/>
+                <field name="issue_line" widget="many2many_tags"
+                />
             </tree>
         </field>
     </record>
+
+    <record id="view_issue_book_search" model="ir.ui.view">
+        <field name="name">library.book.issue.search.view</field>
+        <field name="model">library.book.issue</field>
+        <field name="arch" type="xml">
+            <search string="Search Book Issues">
+                <!-- Search by fields -->
+                <field name="name" string="Issue No"/>
+                <field name="reg_no" string="Registration No"/>
+                <field name="student_id" string="Student"/>
+            </search>
+        </field>
+    </record>
+
 
     <!-- Action Issue Book -->
     <record id="action_library_issue_book" model="ir.actions.act_window">
@@ -81,24 +116,33 @@
         <field name="model">book.book</field>
         <field name="priority" eval="1"/>
         <field name="arch" type="xml">
-            <form string="Books">
+            <form string="Books" style="direction:rtl;font-size:20px;line-height:1.6">
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                     </div>
+
+                    <div>
+                        <h1>
+                            <field name="name" string="کتاب کا نام" placeholder="کتاب کا نام"/>
+                        </h1>
+                    </div>
                     <group>
                         <group>
-                            <field name="name"/>
-                            <field name="code"/>
+                            <field name="code" string="کتاب کوڈ"/>
                             <field
                                     name="book_author"
-                                    placeholder="Name of Author"
+                                    string="مصنف کا نام"
+
                             />
-                            <field name="qty"/>
-                            <field name="issued_qty"/>
-                            <field name="available_qty"/>
-                            <field name="location"/>
-                            <field name="sub_location"/>
-                            <field name="issue_duration"/>
+                            <field name="location" string="الماری نمبر"/>
+                            <field name="sub_location" string="خانه نمبر"/>
+                        </group>
+                        <group>
+                            <field name="qty" string="تعداد"/>
+                            <field name="price" string="قیمت"/>
+                            <field name="issued_qty" string="جاری کردہ_ مقدار" readonly="1"/>
+                            <field name="available_qty" string="دستیاب مقدار" readonly="1"/>
+                            <field name="issue_duration" string="مسئلہ_دورانیہ"/>
                         </group>
                     </group>
                 </sheet>
@@ -136,9 +180,20 @@
         <field name="view_id" ref="view_product_book_tree"/>
         <field name="context"></field>
     </record>
-    <!-- Menu Items Of Library Books -->
 
-    <!-- Menu Items Of Library -->
+    <record id="view_book_book_search" model="ir.ui.view">
+        <field name="name">book.book.search.view</field>
+        <field name="model">book.book</field>
+        <field name="arch" type="xml">
+            <search string="Search Book">
+                <!-- Search by fields -->
+                <field name="name" string="Name"/>
+                <field name="code" string="Book Code"/>
+                <field name="book_author" string="Author"/>
+                <field name="location" string="Location"/>
+            </search>
+        </field>
+    </record>
 
     <menuitem
             id="menu_library_config"
@@ -148,19 +203,66 @@
             action="action_library_book"
     />
 
-    <!--    -->
-    <!--    -->
-    <!--    <menuitem-->
-    <!--        id="menu_library_config"-->
-    <!--        name="Library"-->
-    <!--        parent="school.menu_configuration"-->
-    <!--        sequence="5"-->
-    <!--    />-->
-    <!--    <menuitem-->
-    <!--        id="menu_books_student"-->
-    <!--        parent="menu_library"-->
-    <!--        action="action_product_book_list"-->
-    <!--        sequence="71"-->
-    <!--    />-->
+    <record id="view_issue_book_report_tree" model="ir.ui.view">
+        <field name="name">book.book.line.tree.view</field>
+        <field name="model">book.book.line</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="issuse_id"/>
+                <field name="book_id"/>
+                <field name="issue_date"/>
+                <field name="is_due"/>
+                <field name="Remark"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_book_issue_report" model="ir.actions.act_window">
+        <field name="name">Books Issue Report</field>
+        <field name="res_model">book.book.line</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[('return_date','=',False)]</field>
+        <field name="view_id" ref="view_issue_book_report_tree"/>
+        <field name="context"></field>
+    </record>
+
+
+    <menuitem
+            id="menu_library_book_issue_report"
+            name="Report"
+            parent="menu_library_main"
+            sequence="5"
+
+    />
+
+    <menuitem
+            id="menu_library_book_issue_report_sub"
+            name="Issued Book"
+            parent="menu_library_book_issue_report"
+            sequence="5"
+            action="action_book_issue_report"
+    />
+
+
+    <record id="action_book_due_report" model="ir.actions.act_window">
+        <field name="name">Due Books</field>
+        <field name="res_model">book.book.line</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[('is_due', '=', True)]</field>
+        <field name="view_id" ref="view_issue_book_report_tree"/>
+
+    </record>
+
+
+    <menuitem
+            id="menu_library_book_issue_report_due"
+            name="Due Book"
+            parent="menu_library_book_issue_report"
+            sequence="5"
+            action="action_book_due_report"
+    />
+
 
 </odoo>

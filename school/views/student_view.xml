@@ -2393,23 +2393,22 @@
         <field name="model">student.student</field>
         <field name="arch" type="xml">
             <search string="Admission Register">
-                <filter
-                        string="Draft"
-                        name="state_student"
-                        domain="[('state','=', 'draft')]"
-                        help="Admission In Draft State"
-                />
-                <separator orientation="vertical"/>
-                <field name="student_name" invisible="1"/>
-                <field name="year"/>
-                <field name="standard_id"/>
-                <field name="gender"/>
-                <field name="school_id"/>
+                 <group col="10" colspan="4">
+                    <field name="reg_no"/>
+                    <field name="name"/>
+                    <field name="father_name"/>
+                    <field name="mother_name"/>
+                    <field name="street"/>
+                    <field name="student_name" invisible="1"/>
+                    <field name="year"/>
+                    <field name="gender"/>
+                    <field name="school_id" placeholder="School"/>
+                </group>
                 <newline/>
                 <group expand="0" string="Group By..." colspan="12" col="10">
                     <filter
                             name="class"
-                            string="Class"
+                            string="Class1"
                             domain="[]"
                             help="By Class"
                             context="{'group_by':'standard_id'}"
@@ -2441,9 +2440,9 @@
 
     <!-- Action Of Form, Tree & Kanban View Of Admission Register Information -->
     <record id="action_student_student_form_2" model="ir.actions.act_window">
-        <field name="name">Admission Register</field>
+        <field name="name">Admission Register1</field>
         <field name="res_model">student.student</field>
-        <field name="domain">['|',('state','=','draft'),('state','=','cancel')]</field>
+        <field name="domain"></field>
         <field name="view_id" ref="view_student_student_form_2"/>
         <field name="search_view_id" ref="view_student_student_search_2"/>
         <field name="view_mode">kanban,tree,form</field>

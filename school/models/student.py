@@ -6,6 +6,7 @@ from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.fields import first
 from odoo.modules import get_module_resource
+from odoo.osv import expression
 
 from . import school
 
@@ -36,6 +37,7 @@ class StudentStudent(models.Model):
         count=False,
         access_rights_uid=None,
     ):
+
         """Method to get student of parent having group teacher"""
         teacher_group = self.env.user.has_group("school.group_school_teacher")
         parent_grp = self.env.user.has_group("school.group_school_parent")
@@ -55,6 +57,15 @@ class StudentStudent(models.Model):
             count=count,
             access_rights_uid=access_rights_uid,
         )
+
+
+    def _name_search(self, name='', args=None, operator='ilike', limit=100, name_get_uid=None):
+        args = args or []
+        domain = []
+        if name:
+            # Search by reg_no OR by name
+            domain = ['|', ('reg_no', operator, name), ('name', operator, name)]
+        return self._search(domain + args, limit=limit, access_rights_uid=name_get_uid)
 
     @api.depends("date_of_birth")
     def _compute_student_age(self):

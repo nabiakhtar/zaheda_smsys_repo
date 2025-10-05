@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_return_book_wizard_form" model="ir.ui.view">
+        <field name="name">return.book.wizard.form</field>
+        <field name="model">return.book.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Return Book">
+                <group>
+                    <field name="student_id"/>
+                    <field name="reg_no" readonly="1"/>
+                    <field name="stud_class" readonly="1"/>
+                    <field name="address" readonly="1"/>
+                    <field name="date"/>
+                </group>
+
+                <field name="return_line">
+                    <tree>
+                        <field name="book_id"/>
+                        <field name="Remark"/>
+                    </tree>
+                </field>
+                <footer>
+                    <button string="Confirm Return" type="object" name="action_confirm" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>
