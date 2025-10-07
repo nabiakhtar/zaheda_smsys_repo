@@ -27,6 +27,7 @@ class ReturnBook(models.TransientModel):
 				(0, 0, {
 					'book_id': line.book_id.id,
 					'book_unique_code': line.book_unique_code,
+					'Remark': line.Remark,
 				}) for line in issue.issue_line if not line.return_date
 			]
 		return res
@@ -34,7 +35,6 @@ class ReturnBook(models.TransientModel):
 
 	def action_confirm(self):
 		active_id = self._context.get('active_id')
-		print("Ative id =,", active_id)
 		# if not active_id:
 		# 	return
 		if active_id:

@@ -143,6 +143,7 @@ class BookBookLine(models.Model):
 	issuse_id = fields.Many2one('library.book.issue')
 	book_id = fields.Many2one('book.book')
 	book_unique_code = fields.Char("Book Unique Code")
+
 	issue_date = fields.Date(string="Issue Date", related="issuse_id.date", store=True, readonly=False)
 	return_date = fields.Date(string="Return Date", readonly=True) #make readonly true
 
@@ -181,6 +182,7 @@ class BookBookLine(models.Model):
 			book_id = self.env['book.book'].search([('id', '=', uniq_id.book_id.id)], limit=1)
 			if book_id:
 				self.book_id = book_id.id
+				self.Remark = uniq_id.note
 			print("book=======", book_id)
 
 
