@@ -15,6 +15,7 @@
 
                 <field name="return_line">
                     <tree>
+                        <field name="book_unique_code"/>
                         <field name="book_id"/>
                         <field name="Remark"/>
                     </tree>

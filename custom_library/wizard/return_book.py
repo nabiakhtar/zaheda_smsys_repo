@@ -26,6 +26,7 @@ class ReturnBook(models.TransientModel):
 			res['return_line'] = [
 				(0, 0, {
 					'book_id': line.book_id.id,
+					'book_unique_code': line.book_unique_code,
 				}) for line in issue.issue_line if not line.return_date
 			]
 		return res
@@ -64,6 +65,7 @@ class BookBookLine(models.TransientModel):
 
 	return_id = fields.Many2one('return.book.wiz')
 	book_id = fields.Many2one('book.book')
+	book_unique_code = fields.Char("Book Unique Code")
 	Remark = fields.Char(string="Remark")
 	state = fields.Selection(
 		[

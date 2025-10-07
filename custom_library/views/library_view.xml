@@ -14,15 +14,17 @@
             <form string="Books">
                 <header>
                     <field name="state" invisible="1"/>
-                   <button attrs="{'invisible': [('state', '!=', 'draft')]}" string="Confirm Issue"
+                    <button attrs="{'invisible': [('state', '!=', 'draft')]}" string="Confirm Issue"
                             name="confirm_issue" type="object" class="btn-primary"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,issue,return"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button icon="fa-book"  attrs="{'invisible': [('state', '=', 'draft')]}" string="Return Book" type="object"
+                        <button icon="fa-book" attrs="{'invisible': [('state', '=', 'draft')]}" string="Return Book"
+                                type="object"
                                 name="return_book" class="btn-primary"/>
                     </div>
+
                     <div class="oe_title">
                         <h1>
                             <field name="name" readonly="1"/>
@@ -38,14 +40,14 @@
                             <field name="address"/>
                         </group>
                         <group>
-                            <field name="date"  attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                            <field name="is_returned"  attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="is_returned" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                         </group>
                     </group>
 
                     <field name="issue_line">
                         <tree editable="bottom" decoration-success="return_date" decoration-danger="not return_date">
-                            <!--                        <tree editable="bottom">-->
+                            <field name="book_unique_code"/>
                             <field name="book_id" options="{'no_create': True, 'no_open': True}"/>
                             <field name="issue_date"/>
                             <field name="return_days"/>
@@ -145,6 +147,19 @@
                             <field name="issue_duration" string="مسئلہ_دورانیہ"/>
                         </group>
                     </group>
+                    <notebook>
+                        <page string="Details">
+                            <div style="font-size:16px;">
+                                <field name="book_code_line">
+                                    <tree editable="bottom">
+                                        <field name="srno" string="سیریل نمبر"/>
+                                        <field name="name" string="بک یونیک کوڈ"/>
+                                        <field name="note" string="نوٹ"/>
+                                    </tree>
+                                </field>
+                            </div>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
@@ -210,6 +225,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="issuse_id"/>
+                <field name="book_unique_code"/>
                 <field name="book_id"/>
                 <field name="issue_date"/>
                 <field name="is_due"/>
@@ -252,7 +268,6 @@
         <field name="view_mode">tree</field>
         <field name="domain">[('is_due', '=', True)]</field>
         <field name="view_id" ref="view_issue_book_report_tree"/>
-
     </record>
 
 
@@ -263,6 +278,4 @@
             sequence="5"
             action="action_book_due_report"
     />
-
-
 </odoo>

@@ -3,6 +3,9 @@ from pkg_resources import require
 from odoo import _, api, fields, models
 from odoo.addons.test_impex.models import field
 from datetime import date, timedelta
+from odoo.exceptions import ValidationError
+
+from odoo.tools.populate import compute
 
 
 class Book(models.Model):
@@ -19,6 +22,8 @@ class Book(models.Model):
 	location = fields.Char("Location")
 	sub_location = fields.Char("Sub Location")
 	issue_duration = fields.Integer(string='Issue Duration')
+	book_code_line = fields.One2many('book.code.line', 'book_id')
+
 
 	def _cal_available_qty(self):
 		for rec in self:
@@ -31,6 +36,29 @@ class Book(models.Model):
 			# Search by reg_no OR by name
 			domain = ['|', ('code', operator, name), ('name', operator, name)]
 		return self._search(domain + args, limit=limit, access_rights_uid=name_get_uid)
+
+class BookCodeLine(models.Model):
+	_name = 'book.code.line'
+	_description = 'Book Code Line'
+
+
+	name = fields.Char(string='Book Unique Code')
+	srno = fields.Integer(string="SR-NO", compute='_compute_sr_no')
+	note = fields.Char(string="Note")
+	book_id = fields.Many2one('book.book')
+
+
+	@api.depends('book_id.book_code_line')
+	def _compute_sr_no(self):
+		"""Auto-generate Sr. No. based on position in one2many list."""
+		for rec in self:
+			if rec.book_id:
+				# Sort by list order
+				lines = rec.book_id.book_code_line
+				for idx, line in enumerate(lines, start=1):
+					line.srno = idx
+
+
 
 
 class BookIssue(models.Model):
@@ -71,9 +99,6 @@ class BookIssue(models.Model):
 		for rec in self.issue_line:
 			rec.book_id.issued_qty += 1
 
-
-
-
 	@api.depends('state','is_returned')
 	def _cal_all_returned(self):
 		for rec in self:
@@ -90,15 +115,6 @@ class BookIssue(models.Model):
 			vals['name'] = self.env['ir.sequence'].next_by_code('book.issue.seq') or 'New'
 		return super(BookIssue, self).create(vals)
 
-
-
-	# def _name_search(self, name='', args=None, operator='ilike', limit=100, name_get_uid=None):
-	# 	args = args or []
-	# 	print("Nam e=", name)
-	# 	domain = []
-	# 	if name:
-	# 		domain = ['|', ('reg_no', operator, name)]
-	# 	return self._search(domain + args, limit=limit, access_rights_uid=name_get_uid)
 
 	def return_book(self):
 		if self.is_returned:
@@ -126,11 +142,11 @@ class BookBookLine(models.Model):
 
 	issuse_id = fields.Many2one('library.book.issue')
 	book_id = fields.Many2one('book.book')
+	book_unique_code = fields.Char("Book Unique Code")
 	issue_date = fields.Date(string="Issue Date", related="issuse_id.date", store=True, readonly=False)
 	return_date = fields.Date(string="Return Date", readonly=True) #make readonly true
 
 	return_days = fields.Integer(string="Return days", related='book_id.issue_duration')
-	# to_be_return_on_date = fields.Date(string="To be Return", related='book_id.issue_duration')
 	Remark = fields.Char(string="Remark")
 	state = fields.Selection(
 		[
@@ -155,15 +171,21 @@ class BookBookLine(models.Model):
 			else:
 				rec.is_due = False
 
+	@api.onchange('book_unique_code')
+	def search_book(self):
+		if self.book_unique_code:
+			uniq_id = self.env['book.code.line'].search([('name', '=', self.book_unique_code)], limit=1)
+			if not uniq_id:
+				raise ValidationError(_('No Book found for this Unique Code'))
+			print("uniq_id=========",uniq_id)
+			book_id = self.env['book.book'].search([('id', '=', uniq_id.book_id.id)], limit=1)
+			if book_id:
+				self.book_id = book_id.id
+			print("book=======", book_id)
 
-	# @api.model
-	# def create(self, vals):
-	# 	if vals.get('student_id') and not vals.get('issue_date'):
-	# 		print("Student ====", vals)
-	# 		parent = self.env['student.student'].browse(vals['student_id'])
-	# 		print("Parent=",parent)
-	# 		vals['issue_date'] = parent.date
-	# 	return super(BookBookLine, self).create(vals)
+
+
+
 
 
 
