@@ -8,6 +8,7 @@
                 </t>
             </t>
         </template>
+
         <template id="report_exam_document_print">
             <t t-call="web.basic_layout">
                 <div class="page" style="font-family: 'Jameel Noori Nastaleeq'">
@@ -399,8 +400,6 @@
             </t>
         </template>
     </data>
-
-
 </odoo>
 
 

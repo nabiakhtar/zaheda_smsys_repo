@@ -1,0 +1,190 @@
+<odoo>
+    <template id="report_transfer_certificate_document">
+        <!--        <t t-call="web.external_layout">-->
+        <t t-call="web.basic_layout">
+<!--            <div class="page" style="font-family: 'Times New Roman'; font-size: 13px; line-height: 1.8; padding: 20px;">-->
+            <div class="page" style="font-family: 'Times New Roman'; line-height: 1.8; padding: 20px;">
+
+                <!-- Header Section -->
+                <!--                <div style="text-align:center; margin-bottom:10px;">-->
+                <!--                    <h2 style="color:#006400; margin:0;">HOLY CHILD ENGLISH SCHOOL</h2>-->
+                <!--                    <p style="margin:0;">(Affiliated to CBSE, New Delhi, No.230149)</p>-->
+                <!--                    <p style="margin:0;">GOPALPUR, JAMUGURIHAT, SONITPUR, ASSAM-784180</p>-->
+                <!--                    <p style="margin:0;">School Code - 30138</p>-->
+                <!--                </div>-->
+
+                <div style="margin-top:10px;">
+                    <t t-set="record" t-value="doc.env['school.school'].search([])"/>
+                    <img style="width:100%;" t-att-src="image_data_uri(record.tc_header)"/>
+                </div>
+
+                <!-- TC Number and Date -->
+                <div style="display:flex; justify-content:space-between; margin:15px 0;">
+                    <div>
+                        <strong>TC No:</strong>
+                        <span style="border-bottom:1px dotted #000; min-width:80px; display:inline-block;"
+                              t-field="doc.name"/>
+                    </div>
+                    <div>
+                        <strong>Date:</strong>
+                        <span style="border-bottom:1px dotted #000; min-width:100px; display:inline-block;"
+                              t-field="doc.issue_date"/>
+                    </div>
+                </div>
+
+                <!-- Title -->
+                <div style="text-align:center; border:1px solid #000; padding:5px; font-weight:bold; margin:10px 0;">
+                    TRANSFER / SCHOOL LEAVING CERTIFICATE
+                </div>
+
+                <!-- Body -->
+                <div style="margin-top:10px;">
+                    <p>
+                        This is to certify that Shri/Miss
+                        <b>
+                            <span style="border-bottom:1px dotted #000; display:inline-block;"
+                                  t-field="doc.student_id.en_name"/>
+                            <span>/</span>
+                            <span style="border-bottom:1px dotted #000; display:inline-block;"
+                                  t-field="doc.student_id.name"/>
+                        </b>
+
+
+                    </p>
+                    <p>
+                        Son/Daughter of Shri/Late
+                        <b>
+                            <span style="border-bottom:1px dotted #000; display:inline-block;"
+                                  t-field="doc.student_id.en_father_name"/>
+                            <spa>/</spa>
+                            <span style="border-bottom:1px dotted #000; display:inline-block;"
+                                  t-field="doc.student_id.father_name"/>
+                        </b>
+
+                        of Village/Town
+                        <b>
+                            <span style="border-bottom:1px dotted #000; display:inline-block;"
+                                  t-field="doc.en_address"/>
+                            <span>/</span>
+                            <span style="border-bottom:1px dotted #000; display:inline-block;"
+                                  t-field="doc.student_id.street"/>
+                        </b>
+                        <!--                        -->
+                        <!--                        of District-->
+                        <!--                        <span style="border-bottom:1px dotted #000; min-width:120px; display:inline-block;"-->
+                        <!--                              t-field="doc.student_id.city"/>-->
+                        <span>State :</span>
+                        <b>Uttar Pradesh</b>
+                        <!--                    <span style="border-bottom:1px dotted #000; min-width:120px; display:inline-block;" t-field="doc.state_id"/>.-->
+                    </p>
+
+                    <p>
+                        Was admitted to the school on
+                        <span style="border-bottom:1px dotted #000; min-width:120px; display:inline-block;"
+                              t-field="doc.student_id.admission_date"/>
+                        and left on
+                        <span style="border-bottom:1px dotted #000; min-width:120px; display:inline-block;"
+                              t-field="doc.leave_date"/>
+                    </p>
+                    <p>
+                        He/She was reading in class
+                        <span style="border-bottom:1px dotted #000; min-width:80px; display:inline-block;"
+                              t-field="doc.student_id.standard_id"/>
+
+                        <!--                    <span style="border-bottom:1px dotted #000; min-width:150px; display:inline-block;" t-field="doc.class_in_words"/>-->
+                        and passed to class in
+                        <span style="border-bottom:1px dotted #000; min-width:150px; display:inline-block;"
+                              t-field="doc.next_class_id"/>.
+                    </p>
+                    <!--                    <p>-->
+                    <!--                        He/She passed/failed in the All India Senior Secondary School Examination / All India Secondary-->
+                    <!--                        School Examination held in-->
+                    <!--                        &lt;!&ndash;                    <span style="border-bottom:1px dotted #000; min-width:80px; display:inline-block;" t-field="doc.exam_year"/>&ndash;&gt;-->
+                    <!--                        under the Central Board of Secondary Education, New Delhi.-->
+                    <!--                    </p>-->
+                    <p>All the dues are cleared.</p>
+                    <p>
+                        His/Her date of birth according to our Admission Register is
+                        <span style="border-bottom:1px dotted #000; min-width:200px; display:inline-block;"
+                              t-field="doc.student_id.date_of_birth"/>
+                    </p>
+                    <!--                    <p>-->
+                    <!--                        (in words)-->
+                    <!--                        <span style="border-bottom:1px dotted #000; min-width:200px; display:inline-block;"-->
+                    <!--                              t-field="doc.student_id.dob_in_words"/>.-->
+                    <!--                    </p>-->
+                    <p>
+                        His/Her character and conduct were
+                        <span style="border-bottom:1px dotted #000; min-width:150px; display:inline-block;"
+                              t-field="doc.character"/>.
+                    </p>
+
+                    <p style="margin-top:10px;">
+                        <strong>Reasons for Leaving School:</strong>
+                        <span style="border-bottom:1px dotted #000; min-width:150px; display:inline-block;"
+                              t-field="doc.reason"/>.
+                    </p>
+                </div>
+
+                <!-- Signature Section -->
+                <div style="display:flex; justify-content:space-between; margin-top:40px;">
+                    <div>
+                        <p>Date:
+                            <span style="border-bottom:1px dotted #000; min-width:100px; display:inline-block;"
+                                  t-field="doc.issue_date"/>
+                        </p>
+                        <!--                    <p>Place: <span style="border-bottom:1px dotted #000; min-width:150px; display:inline-block;" t-field="doc.place"/></p>-->
+                    </div>
+                    <div style="text-align:right;">
+                        <p style="margin:0;">
+                            <strong>Principal</strong>
+                        </p>
+                        <p style="margin:0;">Holy Child English School</p>
+                        <p style="margin:0;">Gopalpur, Jamugurihat</p>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+
+    <template id="report_transfer_certificate">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="school_transfer_certificate.report_transfer_certificate_document"/>
+            </t>
+        </t>
+    </template>
+
+    <record id="paperformat_tc" model="report.paperformat">
+        <field name="name">TC Print Format</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+                <field name="orientation">Portrait</field>
+        <field name="margin_top">2.8</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">0</field>
+        <field name="margin_right">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">0</field>
+        <field name="disable_shrinking" eval="True"/>
+        <field name="dpi">96</field>
+    </record>
+
+
+    <record id="action_report_transfer_certificate" model="ir.actions.report">
+        <field name="name">Transfer Certificate</field>
+        <field name="model">school.transfer.certificate</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">school_transfer_certificate.report_transfer_certificate</field>
+        <field name="report_file">school_transfer_certificate.report_transfer_certificate</field>
+        <field name="print_report_name">
+            (object.state in ('draft','cancelled') and ('TC - %s' % (object.name))) or ('Transfer Certificate - %s' %
+            (object.name))
+        </field>
+        <field name="binding_model_id" ref="model_school_transfer_certificate"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_tc"/>
+    </record>
+
+</odoo>

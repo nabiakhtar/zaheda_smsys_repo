@@ -1,0 +1,103 @@
+<odoo>
+    <record id="view_transfer_certificate_form" model="ir.ui.view">
+        <field name="name">school.transfer.certificate.form</field>
+        <field name="model">school.transfer.certificate</field>
+        <field name="arch" type="xml">
+            <form string="Transfer Certificate">
+                <header>
+                    <button name="action_issue" type="object" string="Issue"
+                            states="draft" class="btn-primary"/>
+                    <button name="action_cancel" type="object" string="Cancel"
+                            states="issued" class="btn-secondary"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,issued,cancelled"/>
+                </header>
+                <sheet string="Transfer Certificate" style="padding:20px;">
+
+                    <!-- Title / Name field prominently displayed -->
+                    <div style="text-align:center; margin-bottom:20px;">
+                        <h2 style="font-size:22px; color:#2c3e50; margin:0;">
+                            Transfer Certificate No:
+                            <field style="color:#0073b1;" name="name"/>
+                        </h2>
+                    </div>
+                    <group>
+                        <!-- Main student details section -->
+                        <group string="Student Information" style="margin-bottom:10px;">
+                            <field name="en_student_name"/>
+                            <field name="en_father_name"/>
+                            <field name="en_mother_name"/>
+                            <field name="en_address"/>
+                        </group>
+
+                        <group string="طلباء کی معلومات" style="direction:rtl;margin-bottom:10px;">
+                            <field string="رجسٹریشن" name="reg_no"/>
+                            <field name="student_id" options="{'no_create': True}" placeholder="Select Student"/>
+                            <field string="والد کا نام" name="father_name"/>
+                            <field string="ولیدہ کا نام" name="mother_name"/>
+                        </group>
+
+                        <!-- Class progression and academic details -->
+                        <group string="Academic Details" style="margin-bottom:10px;">
+                            <field name="standard_id"/>
+                            <field name="next_class_id"/>
+                            <field name="leave_date"/>
+                        </group>
+
+                        <group string="Other Details">
+                            <field name="character"/>
+                            <field name="issue_date"/>
+                        </group>
+                    </group>
+
+                    <!-- Additional information -->
+                    <group string="Remarks and Reason" col="2">
+                        <field name="reason" widget="text" placeholder="Enter reason for leaving..."/>
+                        <field name="remarks" widget="text" placeholder="Enter additional remarks..."/>
+                    </group>
+
+
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <record id="view_transfer_certificate_tree" model="ir.ui.view">
+        <field name="name">school.transfer.certificate.tree</field>
+        <field name="model">school.transfer.certificate</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="student_id"/>
+                <field name="issue_date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_transfer_certificate" model="ir.actions.act_window">
+        <field name="name">Transfer Certificates</field>
+        <field name="res_model">school.transfer.certificate</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--    <menuitem id="menu_school_root" name="School" sequence="10"/>-->
+    <menuitem id="menu_transfer_certificate1"
+              name="Transfer Certificates"
+              parent="school.menu_ems"
+              action="action_transfer_certificate"/>
+
+
+
+    <record id="view_transfer_cert_form_inherit" model="ir.ui.view">
+        <field name="name">view_school_school_form_inherit</field>
+        <field name="model">school.school</field>
+        <field name="inherit_id" ref="school.view_school_school_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="tc_header" widget="image"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

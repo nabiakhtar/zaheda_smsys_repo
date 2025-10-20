@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="seq_transfer_certificate" model="ir.sequence">
+        <field name="name">Transfer Certificate</field>
+        <field name="code">school.transfer.certificate</field>
+        <field name="prefix">TC/%(year)s/</field>
+        <field name="padding">4</field>
+    </record>
+</odoo>
+
+
+

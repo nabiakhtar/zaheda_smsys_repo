@@ -218,12 +218,11 @@ class StudentStudent(models.Model):
     current_class = fields.Many2one('standard.standard')
     fee_dis = fields.Boolean("Fee Discount")
     registration_date = fields.Date(string="Registration Date")
+    dob_in_words = fields.Char()
     w_standard_id = fields.Many2one(
         "standard.standard", "Standard", help="Standard"
     )
     bus_no = fields.Char("Bus No")
-
-
     mother_tongue = fields.Many2one(
         "mother.toungue", help="Select student mother tongue"
     )
