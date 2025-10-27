@@ -42,11 +42,14 @@
                             <field name="standard_id"/>
                             <field name="next_class_id"/>
                             <field name="leave_date"/>
+                            <field name="fail_pass"/>
+                            <field name="fee_paid"/>
                         </group>
 
                         <group string="Other Details">
                             <field name="character"/>
                             <field name="issue_date"/>
+                            <field name="last_exam_date"/>
                         </group>
                     </group>
 

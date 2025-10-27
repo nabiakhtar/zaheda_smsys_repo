@@ -22,6 +22,9 @@ class SchoolTransferCertificate(models.Model):
     reason = fields.Text(string='Reason for Leaving')
     leave_date = fields.Date("Leave Date")
     next_class_id = fields.Many2one('standard.standard')
+    fail_pass = fields.Char("Student is passed or failed")
+    last_exam_date = fields.Date("Last Exam Date")
+    fee_paid = fields.Selection([('yes', 'YES'), ('no', 'NO')])
 
     character = fields.Char()
     remarks = fields.Text(string='Remarks')
