@@ -1761,7 +1761,7 @@
 
     <!-- Action Of Form, Tree & Kanban View Of Admission Register Information -->
     <record id="action_student_student_form_2" model="ir.actions.act_window">
-        <field name="name">Admission Register1</field>
+        <field name="name">Admission Register</field>
         <field name="res_model">student.student</field>
         <field name="domain"></field>
         <field name="view_id" ref="view_student_student_form_2"/>

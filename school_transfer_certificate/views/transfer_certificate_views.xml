@@ -40,16 +40,25 @@
                         <!-- Class progression and academic details -->
                         <group string="Academic Details" style="margin-bottom:10px;">
                             <field name="standard_id"/>
-                            <field name="next_class_id"/>
-                            <field name="leave_date"/>
+                            <field name="division_id"/>
+                            <field name="en_class"/>
+                            <field name="en_section"/>
+                            <field name="en_last_class"/>
+                            <!--                            <field name="next_class_id"/>-->
+
                             <field name="fail_pass"/>
                             <field name="fee_paid"/>
+
                         </group>
 
                         <group string="Other Details">
                             <field name="character"/>
+                            <field name="cast_id"/>
                             <field name="issue_date"/>
                             <field name="last_exam_date"/>
+                            <field name="registration_date"/>
+                            <field name="leave_date"/>
+
                         </group>
                     </group>
 
@@ -90,7 +99,6 @@
               name="Transfer Certificates"
               parent="school.menu_ems"
               action="action_transfer_certificate"/>
-
 
 
     <record id="view_transfer_cert_form_inherit" model="ir.ui.view">

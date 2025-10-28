@@ -216,11 +216,11 @@
                         </span>
                         Class:
                         <span style="text-align:center;border-bottom:1px dotted #000; min-width:120px; display:inline-block;">
-                            <t t-esc="doc.student_id.standard_id.name"/>
+                            <t t-esc="doc.en_class"/>
                         </span>
                         Sec:
                         <span style="text-align:center;border-bottom:1px dotted #000; min-width:60px; display:inline-block;">
-                            <t t-esc="doc.student_id.division_id.name"/>
+                            <t t-esc="doc.en_section"/>
                         </span>
                     </p>
 
@@ -254,13 +254,13 @@
                         </span>
                         Date of Admission:
                         <span style="text-align:center;border-bottom:1px dotted #000; min-width:150px; display:inline-block;">
-                            <t t-esc="doc.student_id.admission_date"/>
+                            <t t-esc="doc.registration_date"/>
                         </span>
                     </p>
 
                     <p>Last Class:
                         <span style="text-align:center;border-bottom:1px dotted #000; min-width:150px; display:inline-block;">
-                            <t t-esc="doc.student_id.standard_id.name"/>
+                            <t t-esc="doc.en_last_class"/>
                         </span>
                         Student is:
                         <span style="text-align:center;border-bottom:1px dotted #000; min-width:120px; display:inline-block;">

@@ -1,3 +1,5 @@
+from vobject import readOne
+
 from odoo import models, fields, api
 from datetime import date
 
@@ -25,6 +27,24 @@ class SchoolTransferCertificate(models.Model):
     fail_pass = fields.Char("Student is passed or failed")
     last_exam_date = fields.Date("Last Exam Date")
     fee_paid = fields.Selection([('yes', 'YES'), ('no', 'NO')])
+    cast_id = fields.Many2one(
+        "student.cast", "Religion/Caste", help="Select student cast", related='student_id.cast_id', store=True, readonly=False
+    )
+
+    registration_date = fields.Date(string="Registration Date", related="student_id.registration_date",store=True, readonly=False)
+    en_class = fields.Char("Class -English")
+
+    en_section = fields.Char("Section -English")
+    en_last_class = fields.Char("Last Class -English")
+
+    division_id = fields.Many2one(
+        "standard.division",
+        "Division",
+        help="Select student standard division",
+        related="student_id.division_id",
+        store=False,
+        readonly=False
+    )
 
     character = fields.Char()
     remarks = fields.Text(string='Remarks')
