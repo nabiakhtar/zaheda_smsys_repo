@@ -36,15 +36,15 @@
     'depends': ['base', 'web', 'mail', 'school'],
     'data': [
         'security/ir.model.access.csv',
-        'views/examination.xml',
-        'views/exam_valuation.xml',
-        'views/exam_results.xml',
-        'views/student_view.xml',
-        'views/exam_report_card.xml',
-
-        'views/subject.xml',
-        'wizard/report_card.xml',
-        'views/paper_format.xml',
+        # 'views/examination.xml',
+        # 'views/exam_valuation.xml',
+        # 'views/exam_results.xml',
+        # 'views/student_view.xml',
+        # 'views/exam_report_card.xml',
+        #
+        # 'views/subject.xml',
+        # 'wizard/report_card.xml',
+        # 'views/paper_format.xml',
 
         # 'wizard/marks_line.xml',
     ],

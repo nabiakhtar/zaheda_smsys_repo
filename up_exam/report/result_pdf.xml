@@ -1,0 +1,572 @@
+<odoo>
+
+    <!--     <t t-call="web.external_layout">-->
+    <!--        <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)" />-->
+
+
+    <template id="report_saleorder_document11">
+        <t t-call="web.html_container">
+            <style>
+                .main-page {
+                    width:794px;
+                    height:1123px;
+                    border:1px solid black;
+                    padding:5px;
+                }
+                .student-information {
+                    font-size:16px;
+                    color: #736E6D;
+                    background-color: #EFF6FF;
+                }
+                table {
+                    border-right:1px solid black;
+                    border-top:1px solid black;
+                    width:100%;
+                }
+                .student-information table tr td {
+                    border-bottom: 1px solid black;
+                    border-left: 1px solid black;
+                    padding:0 5px 0 5px;
+                }
+
+                .marks-details table tr th {
+                    font-size: 18px;
+                    background-color: #FFA2A2;
+                }
+                .subjects {
+                     background-color: #FFDF20;
+                }
+                .totals {
+                    background-color: #FFD6A7;
+                }
+            </style>
+            <div class="main-page" name="main-page">
+                <div name="school-head">
+                    <h1>School Header</h1>
+                </div>
+                <div style="font-size:20px;color:red;text-align:center">
+                    <span>(MARKSHEET)</span>
+                </div>
+
+                <div class="student-information" name="student-information">
+                    <table>
+                        <tr>
+                            <td>
+                                Student's Name
+                            </td>
+                            <td colspan="4">
+                                <span>Nabi Akhtar</span>
+                            </td>
+                            <td class="ur_text">
+                                <span>
+                                    Student's Name
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Father's Name
+                            </td>
+                            <td colspan="4">
+                                <span>Abdul Rahman</span>
+                            </td>
+                            <td class="ur_text">
+                                <span>
+                                    ----
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Reg. No
+                            </td>
+                            <td>
+                                <span>204556</span>
+                            </td>
+
+                            <td class="ur_text">
+                                <span>
+                                    ---uuuuu--reg no-
+                                </span>
+                            </td>
+                            <td>
+                                <span>Roll No</span>
+                            </td>
+                            <td>
+                                <span>23</span>
+                            </td>
+
+                            <td class="ur_text">
+                                <span>
+                                    ---uuuuu---
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Academic Year
+                            </td>
+                            <td>
+                                <span>2024-25</span>
+                            </td>
+                            <td class="ur_text">
+                                <span>
+                                    ---uuuuu--reg no-
+                                </span>
+                            </td>
+                            <td>
+                                <span>Class</span>
+                            </td>
+                            <td>
+                                <span>II</span>
+                            </td>
+
+                            <td class="ur_text">
+                                <span>
+                                    uuuuuu -----
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="marks-details" name="marks-details">
+                    <div>
+                        <table>
+                            <tr>
+                                <th rowspan="2">
+                                    ---
+                                </th>
+                                <th colspan="2">
+                                    <span>TOTAL</span>
+                                </th>
+                                <th colspan="2">
+                                    <span>Final Exam</span>
+                                </th>
+                                <th colspan="2">
+                                    <span>Half Yearly Exam</span>
+                                </th>
+                                <th colspan="2" >
+                                    <span>Subjects</span>
+                                </th>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span>MAX OBTAINED</span>
+                                </td>
+                                <td>
+                                    <span>MAX MARKS</span>
+                                </td>
+                                <td>
+                                    <span>MAX OBTAINED</span>
+                                </td>
+                                <td>
+                                    <span>MAX MARKS</span>
+                                </td>
+                                <td>
+                                    <span>MAX OBTAINED</span>
+                                </td>
+                                <td>
+                                    <span>MAX MARKS</span>
+                                </td>
+
+                                <td >
+                                    <span>SUBJECTS</span>
+                                </td>
+                            </tr>
+
+<!--                            ========= number start ===================-->
+                            <tr>
+                                <td>
+                                    <span>
+                                        RESULT
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>1</span>
+                                </td>
+                                <td>
+                                    <span>2</span>
+                                </td>
+                                <td>
+                                    <span>3</span>
+                                </td>
+                                <td>
+                                    <span>3</span>
+                                </td>
+                                <td>
+                                    <span>5</span>
+                                </td>
+                                <td>
+                                    <span>6</span>
+                                </td>
+
+                                <td class="subjects">
+                                    <span>
+                                        English
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>
+                                        RESULT
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>1</span>
+                                </td>
+                                <td>
+                                    <span>2</span>
+                                </td>
+                                <td>
+                                    <span>3</span>
+                                </td>
+                                <td>
+                                    <span>3</span>
+                                </td>
+                                <td>
+                                    <span>5</span>
+                                </td>
+                                <td>
+                                    <span>6</span>
+                                </td>
+
+                                <td class="subjects">
+                                    <span>
+                                        English
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>
+                                        RESULT
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>1</span>
+                                </td>
+                                <td>
+                                    <span>2</span>
+                                </td>
+                                <td>
+                                    <span>3</span>
+                                </td>
+                                <td>
+                                    <span>3</span>
+                                </td>
+                                <td>
+                                    <span>5</span>
+                                </td>
+                                <td>
+                                    <span>6</span>
+                                </td>
+
+                                 <td class="subjects">
+                                    <span>
+                                        English
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>
+                                        RESULT
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>1</span>
+                                </td>
+                                <td>
+                                    <span>2</span>
+                                </td>
+                                <td>
+                                    <span>3</span>
+                                </td>
+                                <td>
+                                    <span>3</span>
+                                </td>
+                                <td>
+                                    <span>5</span>
+                                </td>
+                                <td>
+                                    <span>6</span>
+                                </td>
+
+                                 <td class="subjects">
+                                    <span>
+                                        English
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>
+                                        RESULT
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>1</span>
+                                </td>
+                                <td>
+                                    <span>2</span>
+                                </td>
+                                <td>
+                                    <span>3</span>
+                                </td>
+                                <td>
+                                    <span>3</span>
+                                </td>
+                                <td>
+                                    <span>5</span>
+                                </td>
+                                <td>
+                                    <span>6</span>
+                                </td>
+
+                                 <td class="subjects">
+                                    <span>
+                                        English
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>
+                                        RESULT
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>1</span>
+                                </td>
+                                <td>
+                                    <span>2</span>
+                                </td>
+                                <td>
+                                    <span>3</span>
+                                </td>
+                                <td>
+                                    <span>3</span>
+                                </td>
+                                <td>
+                                    <span>5</span>
+                                </td>
+                                <td>
+                                    <span>6</span>
+                                </td>
+
+                                 <td class="subjects">
+                                    <span>
+                                        English
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>
+                                        RESULT
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>1</span>
+                                </td>
+                                <td>
+                                    <span>2</span>
+                                </td>
+                                <td>
+                                    <span>3</span>
+                                </td>
+                                <td>
+                                    <span>3</span>
+                                </td>
+                                <td>
+                                    <span>5</span>
+                                </td>
+                                <td>
+                                    <span>6</span>
+                                </td>
+
+                                 <td class="subjects">
+                                    <span>
+                                        English
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>
+                                        RESULT
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>1</span>
+                                </td>
+                                <td>
+                                    <span>2</span>
+                                </td>
+                                <td>
+                                    <span>3</span>
+                                </td>
+                                <td>
+                                    <span>3</span>
+                                </td>
+                                <td>
+                                    <span>5</span>
+                                </td>
+                                <td>
+                                    <span>6</span>
+                                </td>
+
+                                 <td class="subjects">
+                                    <span>
+                                        English
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>
+                                        RESULT
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>1</span>
+                                </td>
+                                <td>
+                                    <span>2</span>
+                                </td>
+                                <td>
+                                    <span>3</span>
+                                </td>
+                                <td>
+                                    <span>3</span>
+                                </td>
+                                <td>
+                                    <span>5</span>
+                                </td>
+                                <td>
+                                    <span>6</span>
+                                </td>
+
+                                 <td class="subjects">
+                                    <span>
+                                        English
+                                    </span>
+                                </td>
+                            </tr>
+
+<!--                            ============ Totals ==============-->
+                            <tr class="totals">
+                                <td>
+                                    <span>
+                                       TOTAL
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>1</span>
+                                </td>
+                                <td>
+                                    <span>2</span>
+                                </td>
+                                <td>
+                                    <span>3</span>
+                                </td>
+                                <td>
+                                    <span>3</span>
+                                </td>
+                                <td>
+                                    <span>5</span>
+                                </td>
+                                <td>
+                                    <span>6</span>
+                                </td>
+
+                                <td>
+                                    <span>
+                                        UUUUU TOTAL
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="8">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <span>DATE</span>
+                                            </td>
+                                             <td>
+                                                <span>uuu Sin guardian</span>
+                                            </td>
+                                             <td>
+                                                <span>uu sign ct</span>
+                                            </td>
+                                             <td>
+                                                <span>uuu sign principal</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>12/12/2025</span>
+                                            </td>
+                                             <td>
+                                                <span>SIG. GUARDIAN</span>
+                                            </td>
+                                             <td>
+                                                <span>SIG. CT</span>
+                                            </td>
+                                             <td>
+                                                <span>SIG. PRINCIPAL</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>
+
+                                                </span>
+                                            </td>
+                                             <td>
+                                                <span>-------------</span>
+                                            </td>
+                                             <td>
+                                               <span>-------------</span>
+                                            </td>
+                                             <td>
+                                               <span>-------------</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </t>
+
+
+    </template>
+
+    <template id="report_saleorder_raw1">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="argila_license_details.report_saleorder_document11" t-lang="doc.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_student_report_card" model="ir.actions.report">
+        <field name="name">ER</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">argila_license_details.report_saleorder_raw1</field>
+        <field name="report_file">argila_license_details.report_saleorder_raw1</field>
+        <field name="print_report_name">'er'</field>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+</odoo>
+

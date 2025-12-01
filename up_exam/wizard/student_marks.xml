@@ -1,0 +1,101 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="form_subject_marks_wiz" model="ir.ui.view">
+        <field name="name">subject.marks.wiz.form.wizard</field>
+        <field name="model">subject.marks.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Add Marks">
+                <group>
+                    <group>
+                        <field name="exam_id" widget="selection" required="1"/>
+                        <field name="exam_term" required="1"/>
+
+                        <field name="section_id" widget="selection" required="1"/>
+                    </group>
+
+                    <group>
+                        <field name="school_id" required="1"/>
+                        <field name="class_id" widget="selection" required="1"/>
+                                                <field name="subject_id" widget="selection" required="1"/>
+<!--                       <field name="subject_id"-->
+<!--       domain="[('id', 'in', class_id.subject_ids.ids)]"/>-->
+                    </group>
+                </group>
+
+                <field name="student_marks_ids">
+                    <tree editable="bottom" create="false">
+                        <field name="roll_no" readonly="1" force_save="1"/>
+                        <field name="reg_no" readonly="1"/>
+                        <field name="student_id" readonly="1" force_save="1"/>
+                        <field name="marks"/>
+                    </tree>
+                </field>
+                <footer>
+                    <button
+                            name="add_marks"
+                            string="Add Marks"
+                            type="object"
+                    />
+                    <button special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="wizard_action_add_marks_form" model="ir.actions.act_window">
+        <field name="name">Add Marks</field>
+        <field name="res_model">subject.marks.wiz</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+            id="menu_add_marks"
+            name="Add Marks"
+            parent="up_exam.menu_up_exam"
+            action="wizard_action_add_marks_form"
+            groups="school.group_school_administration,school.group_school_teacher"
+            sequence="106"
+    />
+
+
+    <record id="view_mark_slip_form" model="ir.ui.view">
+        <field name="name">mark.slip.form</field>
+        <field name="model">mark.slip.wiz</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="exam_id"/>
+                    <field name="school_ids" widget="many2many_tags"/>
+                    <field name="class_ids" domain="[('school_id', 'in', school_ids)]" widget="many2many_tags"/>
+                </group>
+
+                <footer>
+                    <button string="Generate Mark Slip"
+                            name="action_create_mark_slip"
+                            type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="wizard_action_mark_slip" model="ir.actions.act_window">
+        <field name="name">Marks Slip</field>
+        <field name="res_model">mark.slip.wiz</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+            id="menu_mark_slip"
+            name="Mark Slip"
+            parent="up_exam.menu_up_exam"
+            action="wizard_action_mark_slip"
+            groups="school.group_school_administration,school.group_school_teacher"
+            sequence="106"
+    />
+
+
+</odoo>

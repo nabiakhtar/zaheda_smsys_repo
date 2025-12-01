@@ -1,134 +1,4 @@
 <odoo>
-
-    <!--    BACK OF TC FORMATE-->
-    <!--    <template id="report_transfer_certificate_document">-->
-    <!--        <t t-call="web.basic_layout">-->
-    <!--            <div class="page" style="font-family: 'Times New Roman'; line-height: 1.8; padding: 20px;">-->
-    <!--                <div style="margin-top:10px;">-->
-    <!--                    <t t-set="record" t-value="doc.env['school.school'].search([])"/>-->
-    <!--                    <img style="width:100%;" t-att-src="image_data_uri(record.tc_header)"/>-->
-    <!--                </div>-->
-
-    <!--                &lt;!&ndash; TC Number and Date &ndash;&gt;-->
-    <!--                <div style="display:flex; justify-content:space-between; margin:15px 0;">-->
-    <!--                    <div>-->
-    <!--                        <strong>TC No:</strong>-->
-    <!--                        <span style="border-bottom:1px dotted #000; min-width:80px; display:inline-block;"-->
-    <!--                              t-field="doc.name"/>-->
-    <!--                    </div>-->
-    <!--                    <div>-->
-    <!--                        <strong>Date:</strong>-->
-    <!--                        <span style="border-bottom:1px dotted #000; min-width:100px; display:inline-block;"-->
-    <!--                              t-field="doc.issue_date"/>-->
-    <!--                    </div>-->
-    <!--                </div>-->
-
-    <!--                &lt;!&ndash; Title &ndash;&gt;-->
-    <!--                <div style="text-align:center; border:1px solid #000; padding:5px; font-weight:bold; margin:10px 0;">-->
-    <!--                    TRANSFER / SCHOOL LEAVING CERTIFICATE-->
-    <!--                </div>-->
-
-    <!--                &lt;!&ndash; Body &ndash;&gt;-->
-    <!--                <div style="margin-top:10px;">-->
-    <!--                    <p>-->
-    <!--                        This is to certify that Shri/Miss-->
-    <!--                        <b>-->
-    <!--                            <span style="border-bottom:1px dotted #000; display:inline-block;"-->
-    <!--                                  t-field="doc.student_id.en_name"/>-->
-    <!--                            <span>/</span>-->
-    <!--                            <span style="border-bottom:1px dotted #000; display:inline-block;"-->
-    <!--                                  t-field="doc.student_id.name"/>-->
-    <!--                        </b>-->
-
-
-    <!--                    </p>-->
-    <!--                    <p>-->
-    <!--                        Son/Daughter of Shri/Late-->
-    <!--                        <b>-->
-    <!--                            <span style="border-bottom:1px dotted #000; display:inline-block;"-->
-    <!--                                  t-field="doc.student_id.en_father_name"/>-->
-    <!--                            <spa>/</spa>-->
-    <!--                            <span style="border-bottom:1px dotted #000; display:inline-block;"-->
-    <!--                                  t-field="doc.student_id.father_name"/>-->
-    <!--                        </b>-->
-
-    <!--                        of Village/Town-->
-    <!--                        <b>-->
-    <!--                            <span style="border-bottom:1px dotted #000; display:inline-block;"-->
-    <!--                                  t-field="doc.en_address"/>-->
-    <!--                            <span>/</span>-->
-    <!--                            <span style="border-bottom:1px dotted #000; display:inline-block;"-->
-    <!--                                  t-field="doc.student_id.street"/>-->
-    <!--                        </b>-->
-    <!--                        &lt;!&ndash;                        &ndash;&gt;-->
-    <!--                        &lt;!&ndash;                        of District&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                        <span style="border-bottom:1px dotted #000; min-width:120px; display:inline-block;"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                              t-field="doc.student_id.city"/>&ndash;&gt;-->
-    <!--                        <span>State :</span>-->
-    <!--                        <b>Uttar Pradesh</b>-->
-    <!--                        &lt;!&ndash;                    <span style="border-bottom:1px dotted #000; min-width:120px; display:inline-block;" t-field="doc.state_id"/>.&ndash;&gt;-->
-    <!--                    </p>-->
-
-    <!--                    <p>-->
-    <!--                        Was admitted to the school on-->
-    <!--                        <span style="border-bottom:1px dotted #000; min-width:120px; display:inline-block;"-->
-    <!--                              t-field="doc.student_id.admission_date"/>-->
-    <!--                        and left on-->
-    <!--                        <span style="border-bottom:1px dotted #000; min-width:120px; display:inline-block;"-->
-    <!--                              t-field="doc.leave_date"/>-->
-    <!--                    </p>-->
-    <!--                    <p>-->
-    <!--                        He/She was reading in class-->
-    <!--                        <span style="border-bottom:1px dotted #000; min-width:80px; display:inline-block;"-->
-    <!--                              t-field="doc.student_id.standard_id"/>-->
-
-    <!--                        and passed to class in-->
-    <!--                        <span style="border-bottom:1px dotted #000; min-width:150px; display:inline-block;"-->
-    <!--                              t-field="doc.next_class_id"/>.-->
-    <!--                    </p>-->
-
-    <!--                    <p>All the dues are cleared.</p>-->
-    <!--                    <p>-->
-    <!--                        His/Her date of birth according to our Admission Register is-->
-    <!--                        <span style="border-bottom:1px dotted #000; min-width:200px; display:inline-block;"-->
-    <!--                              t-field="doc.student_id.date_of_birth"/>-->
-    <!--                    </p>-->
-
-    <!--                    <p>-->
-    <!--                        His/Her character and conduct were-->
-    <!--                        <span style="border-bottom:1px dotted #000; min-width:150px; display:inline-block;"-->
-    <!--                              t-field="doc.character"/>.-->
-    <!--                    </p>-->
-
-    <!--                    <p style="margin-top:10px;">-->
-    <!--                        <strong>Reasons for Leaving School:</strong>-->
-    <!--                        <span style="border-bottom:1px dotted #000; min-width:150px; display:inline-block;"-->
-    <!--                              t-field="doc.reason"/>.-->
-    <!--                    </p>-->
-    <!--                </div>-->
-
-    <!--                &lt;!&ndash; Signature Section &ndash;&gt;-->
-    <!--                <div style="display:flex; justify-content:space-between; margin-top:40px;">-->
-    <!--                    <div>-->
-    <!--                        <p>Date:-->
-    <!--                            <span style="border-bottom:1px dotted #000; min-width:100px; display:inline-block;"-->
-    <!--                                  t-field="doc.issue_date"/>-->
-    <!--                        </p>-->
-    <!--                        &lt;!&ndash;                    <p>Place: <span style="border-bottom:1px dotted #000; min-width:150px; display:inline-block;" t-field="doc.place"/></p>&ndash;&gt;-->
-    <!--                    </div>-->
-    <!--                    <div style="text-align:right;">-->
-    <!--                        <p style="margin:0;">-->
-    <!--                            <strong>Principal</strong>-->
-    <!--                        </p>-->
-    <!--                        <p style="margin:0;">Holy Child English School</p>-->
-    <!--                        <p style="margin:0;">Gopalpur, Jamugurihat</p>-->
-    <!--                    </div>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </t>-->
-    <!--    </template>-->
-
-
     <template id="report_transfer_certificate_document">
         <t t-call="web.basic_layout">
             <div class="page" style="font-family:'Times New Roman'; font-size:12pt; line-height:1.6; padding:30px;">
@@ -203,7 +73,7 @@
                     </div>
                 </div>
                 <div style="letter-spacing: 1.5px;">
-<!--                <div style="font-family: Arial;">-->
+                    <!--                <div style="font-family: Arial;">-->
                     <p>Student Name:
                         <span style="text-align:center;border-bottom:1px dotted #000; min-width:500px; display:inline-block;">
                             <t t-esc="doc.en_student_name"/>
@@ -308,7 +178,6 @@
                         </span>
                     </p>
                 </div>
-
 
 
                 <!-- ===== Signature Section ===== -->

@@ -36,8 +36,6 @@ class EducationExamResults(models.Model):
                                        readonly=True, store=True)
     percentage = fields.Float("Percentage",)
     division = fields.Char(string="Division", store=True)
-
-
     result_status = fields.Char(string="Result")
     stud_position = fields.Integer(string="Position")
 
@@ -51,8 +49,6 @@ class EducationExamResults(models.Model):
                 return "II"
             return "III"
         return ''
-
-
 
     #
     # def calculate_position(self, student_score, all_scores):

@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<odoo>
+<!--    <record id="form_build_result_wiz" model="ir.ui.view">-->
+<!--        <field name="name">build.result.wiz</field>-->
+<!--        <field name="model">build.result.wiz</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Result Generate">-->
+<!--                 <group>-->
+<!--                    <field name="exam_id"/>-->
+<!--                    <field name="school_ids" widget="many2many_tags"/>-->
+<!--                    <field name="class_ids" domain="[('school_id', 'in', school_ids)]" widget="many2many_tags"/>-->
+<!--                </group>-->
+
+<!--                <footer>-->
+<!--                    <button-->
+<!--                            name="cal_all_result"-->
+<!--                            string="Calculate Result"-->
+<!--                            type="object"-->
+<!--                    />-->
+
+<!--                    <button-->
+<!--                            name="print_all_result"-->
+<!--                            string="Print Result"-->
+<!--                            type="object"-->
+<!--                    />-->
+<!--                    <button special="cancel" string="Cancel"/>-->
+<!--                </footer>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="action_build_result_form" model="ir.actions.act_window">-->
+<!--        <field name="name">Generate Result</field>-->
+<!--        <field name="res_model">build.result.wiz</field>-->
+<!--        <field name="view_mode">form</field>-->
+<!--        <field name="target">new</field>-->
+<!--    </record>-->
+
+<!--    <menuitem-->
+<!--            id="menu_build_result"-->
+<!--            name="Result Generate"-->
+<!--            parent="up_exam.menu_up_exam"-->
+<!--            action="action_build_result_form"-->
+<!--            groups="school.group_school_administration,school.group_school_teacher"-->
+<!--            sequence="106"-->
+<!--    />-->
+
+
+</odoo>

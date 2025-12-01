@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_exam_exam,exam.exam,model_exam_exam,school.group_school_administration,1,1,1,1
+access_exam_term,exam.term,model_exam_term,school.group_school_administration,1,1,1,1
+access_student_marks,student.marks,model_student_marks,school.group_school_administration,1,1,1,1
+access_subject_marks_wiz,subject.marks.wiz,model_subject_marks_wiz,school.group_school_administration,1,1,1,1
+access_exam_result,exam.result,model_exam_result,school.group_school_administration,1,1,1,1
+access_subject_marks_wiz,subject.marks.wiz,model_subject_marks_wiz,school.group_school_administration,1,1,1,1
+access_student_marks_line,student.marks.line,model_student_marks_line,school.group_school_administration,1,1,1,1
+access_mark_slip_wiz,mark.slip.wiz,model_mark_slip_wiz,school.group_school_administration,1,1,1,1
+access_build_result_wiz,build.result.wiz,model_build_result_wiz,school.group_school_administration,1,1,1,1
+
+
