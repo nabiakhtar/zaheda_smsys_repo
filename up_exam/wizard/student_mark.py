@@ -23,6 +23,9 @@ class SubjectResultWiz(models.TransientModel):
         print("All subjects =", all_subjects)
         return {'domain': {'subject_id': [('id', 'in', all_subjects.ids)]}}
 
+
+
+
     @api.onchange('class_id')
     def _onchange_class_id(self):
         if self.class_id:
@@ -92,13 +95,14 @@ class SubjectResultWiz(models.TransientModel):
 class SubjectResultLine(models.TransientModel):
     _name = 'student.marks.line'
     _description = 'Subject Result Line'
+    _order = 'roll_no asc'
 
     wizard_id = fields.Many2one('subject.marks.wiz', string='Wizard')
     student_id = fields.Many2one('student.student', string='Student')
-    marks = fields.Float(string='Marks')
+    marks = fields.Integer(string='Marks')
     student_name = fields.Char("Student Name", reslated='student_id.name')
-    reg_no = fields.Char('Reg No', related='student_id.reg_no')
-    roll_no = fields.Integer('Roll No', related='student_id.roll_no')
+    reg_no = fields.Char('Reg No', related='student_id.reg_no', store=True)
+    roll_no = fields.Integer('Roll No', related='student_id.roll_no', store=True)
 
 class MarkSlip(models.TransientModel):
     _name = 'mark.slip.wiz'

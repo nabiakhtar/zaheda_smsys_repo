@@ -16,9 +16,7 @@
                     <group>
                         <field name="school_id" required="1"/>
                         <field name="class_id" widget="selection" required="1"/>
-                                                <field name="subject_id" widget="selection" required="1"/>
-<!--                       <field name="subject_id"-->
-<!--       domain="[('id', 'in', class_id.subject_ids.ids)]"/>-->
+                        <field name="subject_id" widget="selection" required="1"/>
                     </group>
                 </group>
 
