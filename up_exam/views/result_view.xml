@@ -1,798 +1,720 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- ===================== REPORT TEMPLATE ====================== -->
-
-    <!--    <template id="exam_report_document">-->
-    <!--        <t t-call="web.html_container">-->
-    <!--            <style>-->
-    <!--                .main-page {-->
-    <!--                border:1px solid black;-->
-    <!--                padding:5px;-->
-    <!--                }-->
-    <!--                .student-information {-->
-    <!--                font-size:16px;-->
-    <!--                color: #736E6D;-->
-    <!--                background-color: #EFF6FF;-->
-    <!--                }-->
-    <!--                table {-->
-    <!--    &lt;!&ndash;                border-right:1px solid black;&ndash;&gt;-->
-    <!--    &lt;!&ndash;                border-top:1px solid black;&ndash;&gt;-->
-    <!--                width:100%;-->
-    <!--                }-->
-    <!--                .student-information table tr td {-->
-    <!--                border-bottom: 1px solid black;-->
-    <!--                border-left: 1px solid black;-->
-    <!--                padding:0 5px 0 5px;-->
-    <!--                }-->
-
-    <!--                .marks-details table tr th {-->
-    <!--                font-size: 18px;-->
-    <!--                background-color: #FFA2A2;-->
-    <!--                text-align:center;-->
-    <!--                border-left:1px solid black;-->
-    <!--                border-bottom: 1px solid black;-->
-    <!--                }-->
-
-    <!--                .marks-details table tr td {-->
-    <!--                font-size: 18px;-->
-    <!--                line-height: 45px;-->
-    <!--                text-align:center;-->
-    <!--                border-left:1px solid black;-->
-    <!--                border-bottom: 1px solid black;-->
-    <!--                }-->
-
-    <!--                .subjects {-->
-    <!--                background-color: #FFDF20;-->
-    <!--                }-->
-    <!--                .totals {-->
-    <!--                background-color: #FFD6A7;-->
-    <!--                }-->
-
-    <!--                .student-information .ur_text {-->
-    <!--                text-align:right;-->
-    <!--                }-->
-
-    <!--                .result-marks-state table tr td {-->
-    <!--                &lt;!&ndash;                    border-bottom: 1px solid black;&ndash;&gt;-->
-    <!--                font-size:15px;-->
-    <!--                text-align:center;-->
-
-    <!--                }-->
-
-    <!--            </style>-->
-    <!--            <div class="main-page" name="main-page">-->
-    <!--                <div name="school-head">-->
-    <!--                    <div style="text-align:center; margin-bottom:15px;">-->
-    <!--                        &lt;!&ndash;                        <t t-set="record" t-value="doc.env['school.school'].search([])"/>&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                        <img t-att-src="image_data_uri(record.tc_header)"&ndash;&gt;-->
-    <!--                        &lt;!&ndash;                             style="width:100%; height:223px; object-fit:contain;"/>&ndash;&gt;-->
-    <!--                        <t t-set="record" t-value="doc.env['school.school'].search([], limit=1)"/>-->
-    <!--                        <img style="width:100%;" t-att-src="image_data_uri(record.result_card_header)"/>-->
-    <!--                    </div>-->
-    <!--                </div>-->
-    <!--                <div style="font-weight:bold;font-size:20px;color:red;text-align:center">-->
-    <!--                    (-->
-    <!--                    <span>MARKSHEET</span>-->
-    <!--                    <span>مارک شیٹ</span>)-->
-    <!--                </div>-->
-
-    <!--                <div class="student-information" name="student-information">-->
-    <!--                    <table>-->
-    <!--                        <tr>-->
-    <!--                            <td>-->
-    <!--                                Student's Name-->
-    <!--                            </td>-->
-    <!--                            <td colspan="4" style="text-align:center">-->
-    <!--                                <span>Nabi Akhtar</span>-->
-    <!--                            </td>-->
-    <!--                            <td class="ur_text">-->
-    <!--                                <span>نام طالب علم</span>-->
-    <!--                            </td>-->
-    <!--                        </tr>-->
-    <!--                        <tr>-->
-    <!--                            <td>-->
-    <!--                                Father's Name-->
-    <!--                            </td>-->
-    <!--                            <td colspan="4" style="text-align:center">-->
-    <!--                                <span>Abdul Rahman</span>-->
-    <!--                            </td>-->
-    <!--                            <td class="ur_text">-->
-    <!--                                <span>والد ‌كا ‌نام</span>-->
-    <!--                            </td>-->
-    <!--                        </tr>-->
-    <!--                        <tr>-->
-    <!--                            <td>-->
-    <!--                                Reg. No-->
-    <!--                            </td>-->
-    <!--                            <td style="text-align:center">-->
-    <!--                                <span>204556</span>-->
-    <!--                            </td>-->
-
-    <!--                            <td class="ur_text">-->
-    <!--                                <span>-->
-    <!--                                    رجسٹریشن نمبر-->
-    <!--                                </span>-->
-    <!--                            </td>-->
-    <!--                            <td>-->
-    <!--                                <span>Roll No</span>-->
-    <!--                            </td>-->
-    <!--                            <td style="text-align:center">-->
-    <!--                                <span>23</span>-->
-    <!--                            </td>-->
-
-    <!--                            <td class="ur_text">-->
-    <!--                                <span>-->
-    <!--                                    رول نمبر-->
-    <!--                                </span>-->
-    <!--                            </td>-->
-    <!--                        </tr>-->
-    <!--                        <tr>-->
-    <!--                            <td>-->
-    <!--                                Academic Year-->
-    <!--                            </td>-->
-    <!--                            <td style="text-align:center">-->
-    <!--                                <span>2024-25</span>-->
-    <!--                            </td>-->
-    <!--                            <td class="ur_text">-->
-    <!--                                <span>-->
-    <!--                                    تعلیمی سال-->
-    <!--                                </span>-->
-    <!--                            </td>-->
-    <!--                            <td>-->
-    <!--                                <span>Class</span>-->
-    <!--                            </td>-->
-    <!--                            <td style="text-align:center">-->
-    <!--                                <span>II</span>-->
-    <!--                            </td>-->
-
-    <!--                            <td class="ur_text">-->
-    <!--                                <span>-->
-    <!--                                    درجہ-->
-    <!--                                </span>-->
-    <!--                            </td>-->
-    <!--                        </tr>-->
-    <!--                    </table>-->
-    <!--                </div>-->
-
-    <!--                <div class="result-marks-state">-->
-    <!--                    <table>-->
-    <!--                        <tr>-->
-    <!--                            <td>-->
-    <!--                                <table style="border:none">-->
-    <!--                                    <tr>-->
-    <!--                                        <td style="font-size:18px;font-weight:bold;border-bottom:1px solid black;padding:20px 0 20px 0">-->
-    <!--                                            <span>RESULT</span>-->
-    <!--                                            <span>نتیجہ:</span>-->
-    <!--                                            <br/>-->
-    <!--                                            <span t-esc="doc.result"/>-->
-    <!--                                        </td>-->
-    <!--                                    </tr>-->
-
-
-    <!--                                    <tr>-->
-    <!--                                       <td style="font-size:18px;font-weight:bold;border-bottom:1px solid black;padding:20px 0 20px 0">-->
-    <!--                                            <span>DIVISION</span>-->
-    <!--                                            <br/>-->
-    <!--                                            <span t-esc="doc.division"/>-->
-    <!--                                        </td>-->
-    <!--                                    </tr>-->
-
-    <!--                                    <tr>-->
-    <!--                                        <td style="font-size:18px;font-weight:bold;border-bottom:1px solid black;padding:20px 0 20px 0">-->
-    <!--                                            <span>PERCENTAGE</span>-->
-    <!--                                            <br/>-->
-    <!--                                            <span t-esc="doc.percentage"/>-->
-    <!--                                            <span>%</span>-->
-    <!--                                        </td>-->
-    <!--                                    </tr>-->
-
-
-    <!--                                    <tr>-->
-    <!--                                        <td style="font-size:18px;font-weight:bold;border-bottom:1px solid black;padding:20px 0 20px 0">-->
-    <!--                                            <span>درجہ میں پوزیشن</span>-->
-    <!--                                            <br/>-->
-    <!--                                            <span t-esc="doc.position"/>-->
-    <!--                                        </td>-->
-    <!--                                    </tr>-->
-    <!--                                </table>-->
-    <!--                            </td>-->
-    <!--                            <td>-->
-    <!--                                <div class="marks-details" name="marks-details" style="margin-top:10px;">-->
-    <!--                                    <div>-->
-    <!--                                        <table>-->
-    <!--                                            <tr>-->
-    <!--                                                <th colspan="3">-->
-    <!--                                                    <span>TOTAL</span>-->
-    <!--                                                    <div>میزان</div>-->
-    <!--                                                </th>-->
-    <!--                                                <th colspan="2">-->
-    <!--                                                    <div>امتحان سالانه</div>-->
-    <!--                                                    <span>ANNUAL YEARLY</span>-->
-    <!--                                                    <div>EXAMINATION</div>-->
-
-    <!--                                                </th>-->
-    <!--                                                <th colspan="2">-->
-    <!--                                                    <div>امتحان ششماری</div>-->
-    <!--                                                    <span>HALF YEARLY</span>-->
-    <!--                                                    <div>EXAMINATION</div>-->
-
-    <!--                                                </th>-->
-    <!--                                                <th colspan="2">-->
-    <!--                                                    <div>مضامین</div>-->
-    <!--                                                    <span>Subjects</span>-->
-    <!--                                                </th>-->
-    <!--                                            </tr>-->
-
-    <!--                                            <tr>-->
-    <!--                                                <td>-->
-    <!--                                                    <span>MAX OBTAINED</span>-->
-    <!--                                                </td>-->
-    <!--                                                <td>-->
-    <!--                                                    <span>MAX MARKS</span>-->
-    <!--                                                </td>-->
-    <!--                                                <td>-->
-    <!--                                                    <span>GRACE MARK</span>-->
-    <!--                                                </td>-->
-    <!--                                                <td>-->
-    <!--                                                    <span>MAX OBTAINED</span>-->
-    <!--                                                </td>-->
-    <!--                                                <td>-->
-    <!--                                                    <span>MAX MARKS</span>-->
-    <!--                                                </td>-->
-    <!--                                                <td>-->
-    <!--                                                    <span>MAX OBTAINED</span>-->
-    <!--                                                </td>-->
-    <!--                                                <td>-->
-    <!--                                                    <span>MAX MARKS</span>-->
-    <!--                                                </td>-->
-
-    <!--                                                <td>-->
-    <!--                                                    <span>SUBJECTS</span>-->
-    <!--                                                </td>-->
-    <!--                                            </tr>-->
-
-    <!--                                            <t t-set="row" t-value="13"/>-->
-    <!--                                            <t t-set="t_total" t-value="0"/>-->
-    <!--                                            <t t-set="t_total_max" t-value="0"/>-->
-    <!--                                            <t t-set="t_grace_mark" t-value="0"/>-->
-    <!--                                            <t t-set="t_mo2" t-value="0"/>-->
-    <!--                                            <t t-set="t_mo2_max" t-value="0"/>-->
-    <!--                                            <t t-set="t_mo1" t-value="0"/>-->
-    <!--                                            <t t-set="t_mo1_max" t-value="0"/>-->
-
-    <!--                                            <t t-foreach="doc.student_marks_ids" t-as="mark_line">-->
-    <!--                                                <t t-set="t_total"-->
-    <!--                                                   t-value="t_total+mark_line.total_mark"/>-->
-
-    <!--                                                <t t-set="t_total_max"-->
-    <!--                                                   t-value="t_total_max+100"/>-->
-
-    <!--                                                <t t-set="t_grace_mark"-->
-    <!--                                                   t-value="t_grace_mark+mark_line.grace_mark"/>-->
-
-    <!--                                                <t t-set="t_mo2"-->
-    <!--                                                   t-value="t_mo2+mark_line.mo2"/>-->
-
-    <!--                                                <t t-set="t_mo2_max"-->
-    <!--                                                   t-value="t_mo2_max+50"/>-->
-
-
-    <!--                                                <t t-set="t_mo1"-->
-    <!--                                                   t-value="t_mo1+mark_line.mo1"/>-->
-
-    <!--                                                <t t-set="t_mo1_max"-->
-    <!--                                                   t-value="t_mo1_max+50"/>-->
-
-
-    <!--                                                <tr>-->
-    <!--                                                    &lt;!&ndash;                                    <td >...</td>&ndash;&gt;-->
-    <!--                                                    <td>-->
-    <!--                                                        <span t-esc="mark_line.total_mark"/>-->
-    <!--                                                    </td>-->
-    <!--                                                    <td>-->
-    <!--                                                        100-->
-    <!--                                                    </td>-->
-    <!--                                                    <td>-->
-    <!--                                                        <span t-esc="mark_line.grace_mark"/>-->
-    <!--                                                    </td>-->
-
-    <!--                                                    <td>-->
-    <!--                                                        <span t-esc="mark_line.mo2"/>-->
-    <!--                                                    </td>-->
-    <!--                                                    <td>-->
-    <!--                                                        50-->
-    <!--                                                    </td>-->
-
-    <!--                                                    <td>-->
-    <!--                                                        <span t-esc="mark_line.mo1"/>-->
-    <!--                                                    </td>-->
-    <!--                                                    <td>-->
-    <!--                                                        50-->
-    <!--                                                    </td>-->
-    <!--                                                    <td style="border:1px black solid;text-align:center;height:22px;">-->
-    <!--                                                        <span t-esc="mark_line.subject_id.name"/>-->
-    <!--                                                    </td>-->
-    <!--                                                </tr>-->
-    <!--                                            </t>-->
-
-
-    <!--                                            &lt;!&ndash;                            ========= number start ===================&ndash;&gt;-->
-
-    <!--                                            &lt;!&ndash;                            ============ Totals ==============&ndash;&gt;-->
-    <!--                                            <tr class="totals">-->
-    <!--                                                &lt;!&ndash;                                <td>&ndash;&gt;-->
-    <!--                                                &lt;!&ndash;                                    <span>&ndash;&gt;-->
-    <!--                                                &lt;!&ndash;                                        TOTAL&ndash;&gt;-->
-    <!--                                                &lt;!&ndash;                                    </span>&ndash;&gt;-->
-    <!--                                                &lt;!&ndash;                                </td>&ndash;&gt;-->
-    <!--                                                <td>-->
-    <!--                                                    <span>-->
-    <!--                                                        <span t-esc="t_total"/>-->
-    <!--                                                    </span>-->
-    <!--                                                </td>-->
-    <!--                                                <td>-->
-    <!--                                                    <span t-esc="t_total_max"/>-->
-    <!--                                                </td>-->
-    <!--                                                <td>-->
-    <!--                                                    <span t-esc="t_grace_mark"/>-->
-    <!--                                                </td>-->
-    <!--                                                <td>-->
-    <!--                                                    <span t-esc="t_mo2"/>-->
-    <!--                                                </td>-->
-    <!--                                                <td>-->
-    <!--                                                    <span t-esc="t_mo2_max"/>-->
-    <!--                                                </td>-->
-    <!--                                                <td>-->
-    <!--                                                    <span t-esc="t_mo1"/>-->
-    <!--                                                </td>-->
-    <!--                                                <td>-->
-    <!--                                                    <span t-esc="t_mo1_max"/>-->
-    <!--                                                </td>-->
-
-    <!--                                                <td>-->
-    <!--                                                    <span>-->
-    <!--                                                        کل میزان-->
-    <!--                                                    </span>-->
-    <!--                                                </td>-->
-    <!--                                            </tr>-->
-
-    <!--                                        </table>-->
-    <!--                                    </div>-->
-    <!--                                </div>-->
-    <!--                            </td>-->
-    <!--                        </tr>-->
-    <!--                    </table>-->
-    <!--                </div>-->
-
-
-    <!--                <div class="signature-sec" style="margin-top:20px;text-align:center;font-size:15px;font-weight:bold;">-->
-    <!--                    <table>-->
-    <!--                        <tr>-->
-    <!--                            <td style="padding-top:100px;">-->
-    <!--                                <span>DATE</span>-->
-    <!--                            </td>-->
-    <!--                            <td>-->
-    <!--                                <span>دستخط سرپرست</span>-->
-    <!--                                <br/>-->
-    <!--                                <span>SIG. GUARDIAN</span>-->
-    <!--                            </td>-->
-    <!--                            <td>-->
-    <!--                                <span>و محط معلم درجہ</span>-->
-    <!--                                <br/>-->
-    <!--                                 <span>SIG. CT</span>-->
-    <!--                            </td>-->
-    <!--                            <td>-->
-    <!--                                <span>دستخط صدر مدرس</span>-->
-    <!--                                <br/>-->
-    <!--                                  <span>SIG. PRINCIPAL</span>-->
-    <!--                            </td>-->
-    <!--                        </tr>-->
-
-    <!--                        <tr>-->
-    <!--                            <td>-->
-    <!--                                <span>-->
-
-    <!--                                </span>-->
-    <!--                            </td>-->
-    <!--                            <td>-->
-    <!--                                <span>-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
-    <!--                            </td>-->
-    <!--                            <td>-->
-    <!--                                <span>-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
-    <!--                            </td>-->
-    <!--                            <td>-->
-    <!--                                <span>-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
-    <!--                            </td>-->
-    <!--                        </tr>-->
-    <!--                    </table>-->
-
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </t>-->
-
-
-    <!--    </template>-->
-
-
-    <template id="exam_report_document">
-        <t t-call="web.html_container">
-
-            <style>
-                .main-page {
-                border: 1px solid #000;
-                padding: 10px;
-                font-family: "Arial", sans-serif;
-                color: #000;
-                }
-                .student-information {
-                font-size: 16px;
-                background: #EFF6FF;
-                border: 1px solid #000;
-                margin-top: 10px;
-                }
-                .student-information table td {
-                border: 1px solid #000;
-                padding: 6px;
-                }
-                .student-information .ur_text {
-                text-align: right;
-                }
-
-                /* General Table */
-                table {
-                width: 100%;
-                border-collapse: collapse;
-                }
-
-                /* Marks Table */
-                .marks-details table th {
-                background: #FFA2A2;
-                color: #000;
-                border: 1px solid #000;
-                padding: 6px;
-                font-size: 17px;
-                text-align: center;
-                }
-                .marks-details table td {
-                border: 1px solid #000;
-                padding: 8px;
-                font-size: 17px;
-                text-align: center;
-                }
-
-                /* Totals row */
-                .totals td {
-                background: #FFD6A7;
-                font-weight: bold;
-                }
-
-                /* Urdu style */
-                .urdu {
-                font-family: "Jameel Noori Nastaleeq", "Arial";
-                direction: rtl;
-                }
-
-                .result-marks-state table td {
-                text-align: center;
-                padding: 15px;
-                font-size: 16px;
-                border-bottom: 1px solid #000;
-                }
-
-                .heading-title {
-                font-size: 22px;
-                font-weight: bold;
-                color: red;
-                text-align: center;
-                margin: 10px 0;
-                }
-
-                .signature-sec table td {
-                padding-top: 60px;
-                text-align: center;
-                font-size: 15px;
-                font-weight: bold;
-                }
-
-
-            </style>
-
-            <!-- OUTER PAGE -->
-            <div class="main-page">
-
-                <!-- Header -->
-                <div style="text-align:center; margin-bottom: 15px;">
-                    <t t-set="school" t-value="doc.env['school.school'].search([], limit=1)"/>
-                    <img t-if="school.result_card_header"
-                         t-att-src="image_data_uri(school.result_card_header)"
-                         style="width:100%; object-fit:cover;"/>
-                </div>
-
-                <div class="heading-title">
-                    (<span>MARKSHEET</span> / <span class="urdu">مارک شیٹ</span>)
-                </div>
-
-                <!-- Student Information -->
-                <div class="student-information">
-                    <table>
-                        <tr>
-                            <td>Student's Name</td>
-                            <td colspan="4" style="text-align:center;">
-                                <span t-esc="doc.student_id.name"/>
-                            </td>
-                            <td class="ur_text urdu">نام طالب علم</td>
-                        </tr>
-
-                        <tr>
-                            <td>Father's Name</td>
-                            <td colspan="4" style="text-align:center;">
-                                <span t-esc="doc.student_id.father_name"/>
-                            </td>
-                            <td class="ur_text urdu">والد کا نام</td>
-                        </tr>
-
-                        <tr>
-                            <td>Reg. No</td>
-                            <td style="text-align:center" t-esc="doc.student_id.reg_no"/>
-                            <td class="ur_text urdu">رجسٹریشن نمبر</td>
-
-                            <td>Roll No</td>
-                            <td style="text-align:center" t-esc="doc.roll_no"/>
-                            <td class="ur_text urdu">رول نمبر</td>
-                        </tr>
-
-                        <tr>
-                            <td>Academic Year</td>
-                            <td style="text-align:center" t-esc="doc.exam_id.academic_year"/>
-                            <td class="ur_text urdu">تعلیمی سال</td>
-
-                            <td>Class</td>
-                            <td style="text-align:center" t-esc="doc.class_id.name"/>
-                            <td class="ur_text urdu">درجہ</td>
-                        </tr>
-                    </table>
-                </div>
-
-                <!-- Result + Marks -->
-                <div class="result-marks-state">
-                    <table style="width:100%">
-                        <tr>
-                            <td>
-                                <table style="border:none;">
-                                    <tr>
-                                        <td style="font-weight:bold; padding:20px 0;">
-                                            <span>RESULT /</span>
-                                            <span class="urdu">نتیجہ</span>
-                                            <br/>
-                                            <span t-esc="doc.result"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="font-weight:bold; padding:20px 0;">
-                                            <span>DIVISION</span>
-                                            <br/>
-                                            <span t-esc="doc.division"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="font-weight:bold; padding:20px 0;">
-                                            <span>PERCENTAGE</span>
-                                            <br/>
-                                            <span t-esc="doc.percentage"/>%
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td style="font-weight:bold; padding:20px 0;">
-                                            <span class="urdu">درجہ میں پوزیشن</span>
-                                            <br/>
-                                            <span t-esc="doc.position"/>
-                                        </td>
-                                    </tr>
-
-                                </table>
-                            </td>
-
-                            <!-- RIGHT — MARKS TABLE -->
-                            <td style="">
-                                <!--                            <div class="marks-details">-->
-                                <!--                                <table style="">-->
-                                <!--                                    <tr>-->
-                                <!--                                        <th colspan="3">TOTAL<br/>میزان</th>-->
-                                <!--                                        <th colspan="2">ANNUAL YEARLY<br/>امتحان سالانہ</th>-->
-                                <!--                                        <th colspan="2">HALF YEARLY<br/>امتحان ششماہی</th>-->
-                                <!--                                        <th colspan="2">SUBJECTS<br/>مضامین</th>-->
-                                <!--                                    </tr>-->
-
-                                <!--                                    <tr>-->
-                                <!--                                        <td>OBTAINED</td>-->
-                                <!--                                        <td>MAX</td>-->
-                                <!--                                        <td>GRACE</td>-->
-
-                                <!--                                        <td>OBTAINED</td>-->
-                                <!--                                        <td>MAX</td>-->
-
-                                <!--                                        <td>OBTAINED</td>-->
-                                <!--                                        <td>MAX</td>-->
-
-                                <!--                                        <td colspan="2">SUBJECT</td>-->
-                                <!--                                    </tr>-->
-
-                                <!--                                    &lt;!&ndash; Initialize Totals &ndash;&gt;-->
-                                <!--                                    <t t-set="t_total" t-value="0"/>-->
-                                <!--                                    <t t-set="t_total_max" t-value="0"/>-->
-                                <!--                                    <t t-set="t_grace" t-value="0"/>-->
-                                <!--                                    <t t-set="t_mo1" t-value="0"/>-->
-                                <!--                                    <t t-set="t_mo2" t-value="0"/>-->
-
-                                <!--                                    <t t-foreach="doc.student_marks_ids" t-as="line">-->
-
-                                <!--                                        <t t-set="t_total"      t-value="t_total + line.total_mark"/>-->
-                                <!--                                        <t t-set="t_total_max"  t-value="t_total_max + 100"/>-->
-                                <!--                                        <t t-set="t_grace"      t-value="t_grace + line.grace_mark"/>-->
-                                <!--                                        <t t-set="t_mo1"        t-value="t_mo1 + line.mo1"/>-->
-                                <!--                                        <t t-set="t_mo2"        t-value="t_mo2 + line.mo2"/>-->
-
-                                <!--                                        <tr>-->
-                                <!--                                            <td t-esc="line.total_mark"/>-->
-                                <!--                                            <td>100</td>-->
-                                <!--                                            <td t-esc="line.grace_mark"/>-->
-
-                                <!--                                            <td t-esc="line.mo2"/>-->
-                                <!--                                            <td>50</td>-->
-
-                                <!--                                            <td t-esc="line.mo1"/>-->
-                                <!--                                            <td>50</td>-->
-
-                                <!--                                            <td colspan="2" t-esc="line.subject_id.name"/>-->
-                                <!--                                        </tr>-->
-                                <!--                                    </t>-->
-
-                                <!--                                    &lt;!&ndash; Totals Row &ndash;&gt;-->
-                                <!--                                    <tr class="totals">-->
-                                <!--                                        <td t-esc="t_total"/>-->
-                                <!--                                        <td t-esc="t_total_max"/>-->
-                                <!--                                        <td t-esc="t_grace"/>-->
-                                <!--                                        <td t-esc="t_mo2"/>-->
-                                <!--                                        <td>50 </td>-->
-                                <!--                                        <td t-esc="t_mo1"/>-->
-                                <!--                                        <td>50 ×</td>-->
-
-                                <!--                                        <td colspan="2" class="urdu">کل میزان</td>-->
-                                <!--                                    </tr>-->
-
-                                <!--                                </table>-->
-                                <!--                            </div>-->
-
-                                <div class="marks-details">
-                                    <table style="width:100%; table-layout:fixed; border-collapse:collapse;">
-
-                                        <!-- HEADER ROW 1 -->
-                                        <tr>
-                                            <th style="width:60px;">TOTAL<br/>میزان
-                                            </th>
-                                            <th style="width:60px;">MAX</th>
-                                            <th style="width:60px;">GRACE</th>
-
-                                            <th style="width:70px;">ANNUAL<br/>حاصل
-                                            </th>
-                                            <th style="width:50px;">MAX</th>
-
-                                            <th style="width:70px;">HALF<br/>حاصل
-                                            </th>
-                                            <th style="width:50px;">MAX</th>
-
-                                            <th colspan="2">SUBJECTS / مضامین</th>
-                                        </tr>
-
-                                        <!-- HEADER ROW 2 -->
-                                        <tr>
-                                            <th>OBT</th>
-                                            <th>100</th>
-                                            <th>G</th>
-
-                                            <th>OBT</th>
-                                            <th>50</th>
-
-                                            <th>OBT</th>
-                                            <th>50</th>
-
-                                            <th colspan="2">NAME</th>
-                                        </tr>
-
-                                        <!-- INIT TOTALS -->
-                                        <t t-set="t_total" t-value="0"/>
-                                        <t t-set="t_total_max" t-value="0"/>
-                                        <t t-set="t_grace" t-value="0"/>
-                                        <t t-set="t_mo1" t-value="0"/>
-                                        <t t-set="t_mo2" t-value="0"/>
-
-                                        <!-- SUBJECT ROWS -->
-                                        <t t-foreach="doc.student_marks_ids" t-as="line">
-
-                                            <t t-set="t_total" t-value="t_total + line.total_mark"/>
-                                            <t t-set="t_total_max" t-value="t_total_max + 100"/>
-                                            <t t-set="t_grace" t-value="t_grace + line.grace_mark"/>
-                                            <t t-set="t_mo1" t-value="t_mo1 + line.mo1"/>
-                                            <t t-set="t_mo2" t-value="t_mo2 + line.mo2"/>
-
-                                            <tr>
-                                                <td>
-                                                    <t t-esc="line.total_mark"/>
-                                                </td>
-                                                <td>100</td>
-                                                <td>
-                                                    <t t-esc="line.grace_mark"/>
-                                                </td>
-
-                                                <td>
-                                                    <t t-esc="line.mo2"/>
-                                                </td>
-                                                <td>50</td>
-
-                                                <td>
-                                                    <t t-esc="line.mo1"/>
-                                                </td>
-                                                <td>50</td>
-
-                                                <td colspan="2">
-                                                    <t t-esc="line.subject_id.name"/>
-                                                </td>
-                                            </tr>
-                                        </t>
-
-                                        <!-- TOTALS ROW -->
-                                        <tr class="totals">
-                                            <td t-esc="t_total"/>
-                                            <td t-esc="t_total_max"/>
-                                            <td t-esc="t_grace"/>
-
-                                            <td t-esc="t_mo2"/>
-                                            <td>
-                                                <t t-esc="len(doc.student_marks_ids)* 50"/>
-                                            </td>
-
-                                            <td t-esc="t_mo1"/>
-                                            <td>
-                                                <t t-esc="len(doc.student_marks_ids) * 50"/>
-                                            </td>
-
-                                            <td colspan="2" class="urdu">کل میزان</td>
-                                        </tr>
-
-                                    </table>
+
+
+
+<!--    <template id="exam_report_document">-->
+<!--        <t t-call="web.html_container">-->
+
+<!--            <style>-->
+<!--                .main-page {-->
+<!--                border: 1px solid #000;-->
+<!--                padding: 10px;-->
+<!--                font-family: "Arial", sans-serif;-->
+<!--                color: #000;-->
+<!--                }-->
+<!--                .student-information {-->
+<!--                font-size: 16px;-->
+<!--                background: #EFF6FF;-->
+<!--                border: 1px solid #000;-->
+<!--                margin-top: 10px;-->
+<!--                }-->
+<!--                .student-information table td {-->
+<!--                border: 1px solid #000;-->
+<!--                padding: 6px;-->
+<!--                }-->
+<!--                .student-information .ur_text {-->
+<!--                text-align: right;-->
+<!--                }-->
+
+<!--                /* General Table */-->
+<!--                table {-->
+<!--                width: 100%;-->
+<!--                border-collapse: collapse;-->
+<!--                }-->
+
+<!--                /* Marks Table */-->
+<!--                .marks-details table th {-->
+<!--                background: #FFA2A2;-->
+<!--                color: #000;-->
+<!--                border: 1px solid #000;-->
+<!--                padding: 6px;-->
+<!--                font-size: 17px;-->
+<!--                text-align: center;-->
+<!--                }-->
+<!--                .marks-details table td {-->
+<!--                border: 1px solid #000;-->
+<!--                padding: 8px;-->
+<!--                font-size: 17px;-->
+<!--                text-align: center;-->
+<!--                }-->
+
+<!--                /* Totals row */-->
+<!--                .totals td {-->
+<!--                background: #FFD6A7;-->
+<!--                font-weight: bold;-->
+<!--                }-->
+
+<!--                /* Urdu style */-->
+<!--                .urdu {-->
+<!--                font-family: "Jameel Noori Nastaleeq", "Arial";-->
+<!--                direction: rtl;-->
+<!--                }-->
+
+<!--                .result-marks-state table td {-->
+<!--                text-align: center;-->
+<!--                padding: 15px;-->
+<!--                font-size: 16px;-->
+<!--                border-bottom: 1px solid #000;-->
+<!--                }-->
+
+<!--                .heading-title {-->
+<!--                font-size: 22px;-->
+<!--                font-weight: bold;-->
+<!--                color: red;-->
+<!--                text-align: center;-->
+<!--                margin: 10px 0;-->
+<!--                }-->
+
+<!--                .signature-sec table td {-->
+<!--                padding-top: 60px;-->
+<!--                text-align: center;-->
+<!--                font-size: 15px;-->
+<!--                font-weight: bold;-->
+<!--                }-->
+
+
+<!--            </style>-->
+
+<!--            &lt;!&ndash; OUTER PAGE &ndash;&gt;-->
+<!--            <div class="main-page">-->
+
+<!--                &lt;!&ndash; Header &ndash;&gt;-->
+<!--                <div style="text-align:center; margin-bottom: 15px;">-->
+<!--                    <t t-set="school" t-value="doc.env['school.school'].search([], limit=1)"/>-->
+<!--                    <img t-if="school.result_card_header"-->
+<!--                         t-att-src="image_data_uri(school.result_card_header)"-->
+<!--                         style="width:100%; object-fit:cover;"/>-->
+<!--                </div>-->
+
+<!--                <div class="heading-title">-->
+<!--                    (<span>MARKSHEET</span> / <span class="urdu">مارک شیٹ</span>)-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Student Information &ndash;&gt;-->
+<!--                <div class="student-information">-->
+<!--                    <table>-->
+<!--                        <tr>-->
+<!--                            <td>Student's Name</td>-->
+<!--                            <td colspan="4" style="text-align:center;">-->
+<!--                                <span t-esc="doc.student_id.name"/>-->
+<!--                            </td>-->
+<!--                            <td class="ur_text urdu">نام طالب علم</td>-->
+<!--                        </tr>-->
+
+<!--                        <tr>-->
+<!--                            <td>Father's Name</td>-->
+<!--                            <td colspan="4" style="text-align:center;">-->
+<!--                                <span t-esc="doc.student_id.father_name"/>-->
+<!--                            </td>-->
+<!--                            <td class="ur_text urdu">والد کا نام</td>-->
+<!--                        </tr>-->
+
+<!--                        <tr>-->
+<!--                            <td>Reg. No</td>-->
+<!--                            <td style="text-align:center" t-esc="doc.student_id.reg_no"/>-->
+<!--                            <td class="ur_text urdu">رجسٹریشن نمبر</td>-->
+
+<!--                            <td>Roll No</td>-->
+<!--                            <td style="text-align:center" t-esc="doc.roll_no"/>-->
+<!--                            <td class="ur_text urdu">رول نمبر</td>-->
+<!--                        </tr>-->
+
+<!--                        <tr>-->
+<!--                            <td>Academic Year</td>-->
+<!--                            <td style="text-align:center" t-esc="doc.exam_id.academic_year"/>-->
+<!--                            <td class="ur_text urdu">تعلیمی سال</td>-->
+
+<!--                            <td>Class</td>-->
+<!--                            <td style="text-align:center" t-esc="doc.class_id.name"/>-->
+<!--                            <td class="ur_text urdu">درجہ</td>-->
+<!--                        </tr>-->
+<!--                    </table>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Result + Marks &ndash;&gt;-->
+<!--                <div class="result-marks-state">-->
+<!--                    <table style="width:100%">-->
+<!--                        <tr>-->
+<!--                            <td>-->
+<!--                                <table style="border:none;">-->
+<!--                                    <tr>-->
+<!--                                        <td style="font-weight:bold; padding:20px 0;">-->
+<!--                                            <span>RESULT /</span>-->
+<!--                                            <span class="urdu">نتیجہ</span>-->
+<!--                                            <br/>-->
+<!--                                            <span t-esc="doc.result"/>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td style="font-weight:bold; padding:20px 0;">-->
+<!--                                            <span>DIVISION</span>-->
+<!--                                            <br/>-->
+<!--                                            <span t-esc="doc.division"/>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td style="font-weight:bold; padding:20px 0;">-->
+<!--                                            <span>PERCENTAGE</span>-->
+<!--                                            <br/>-->
+<!--                                            <span t-esc="doc.percentage"/>%-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+
+<!--                                    <tr>-->
+<!--                                        <td style="font-weight:bold; padding:20px 0;">-->
+<!--                                            <span class="urdu">درجہ میں پوزیشن</span>-->
+<!--                                            <br/>-->
+<!--                                            <span t-esc="doc.position"/>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+
+<!--                                </table>-->
+<!--                            </td>-->
+
+<!--                            &lt;!&ndash; RIGHT — MARKS TABLE &ndash;&gt;-->
+<!--                            <td style="">-->
+<!--                                                              <div class="marks-details">-->
+<!--                                    <table style="width:100%; table-layout:fixed; border-collapse:collapse;">-->
+
+<!--                                        &lt;!&ndash; HEADER ROW 1 &ndash;&gt;-->
+<!--                                        <tr>-->
+<!--                                            <th style="width:60px;">TOTAL<br/>میزان-->
+<!--                                            </th>-->
+<!--                                            <th style="width:60px;">MAX</th>-->
+<!--                                            <th style="width:60px;">GRACE</th>-->
+
+<!--                                            <th style="width:70px;">ANNUAL<br/>حاصل-->
+<!--                                            </th>-->
+<!--                                            <th style="width:50px;">MAX</th>-->
+
+<!--                                            <th style="width:70px;">HALF<br/>حاصل-->
+<!--                                            </th>-->
+<!--                                            <th style="width:50px;">MAX</th>-->
+
+<!--                                            <th colspan="2">SUBJECTS / مضامین</th>-->
+<!--                                        </tr>-->
+
+<!--                                        &lt;!&ndash; HEADER ROW 2 &ndash;&gt;-->
+<!--                                        <tr>-->
+<!--                                            <th>OBT</th>-->
+<!--                                            <th>100</th>-->
+<!--                                            <th>G</th>-->
+
+<!--                                            <th>OBT</th>-->
+<!--                                            <th>50</th>-->
+
+<!--                                            <th>OBT</th>-->
+<!--                                            <th>50</th>-->
+
+<!--                                            <th colspan="2">NAME</th>-->
+<!--                                        </tr>-->
+
+<!--                                        &lt;!&ndash; INIT TOTALS &ndash;&gt;-->
+<!--                                        <t t-set="t_total" t-value="0"/>-->
+<!--                                        <t t-set="t_total_max" t-value="0"/>-->
+<!--                                        <t t-set="t_grace" t-value="0"/>-->
+<!--                                        <t t-set="t_mo1" t-value="0"/>-->
+<!--                                        <t t-set="t_mo2" t-value="0"/>-->
+
+<!--                                        &lt;!&ndash; SUBJECT ROWS &ndash;&gt;-->
+<!--                                        <t t-foreach="doc.student_marks_ids" t-as="line">-->
+
+<!--                                            <t t-set="t_total" t-value="t_total + line.total_mark"/>-->
+<!--                                            <t t-set="t_total_max" t-value="t_total_max + 100"/>-->
+<!--                                            <t t-set="t_grace" t-value="t_grace + line.grace_mark"/>-->
+<!--                                            <t t-set="t_mo1" t-value="t_mo1 + line.mo1"/>-->
+<!--                                            <t t-set="t_mo2" t-value="t_mo2 + line.mo2"/>-->
+
+<!--                                            <tr>-->
+<!--                                                <td>-->
+<!--                                                    <t t-esc="line.total_mark"/>-->
+<!--                                                </td>-->
+<!--                                                <td>100</td>-->
+<!--                                                <td>-->
+<!--                                                    <t t-esc="line.grace_mark"/>-->
+<!--                                                </td>-->
+
+<!--                                                <td>-->
+<!--                                                    <t t-esc="line.mo2"/>-->
+<!--                                                </td>-->
+<!--                                                <td>50</td>-->
+
+<!--                                                <td>-->
+<!--                                                    <t t-esc="line.mo1"/>-->
+<!--                                                </td>-->
+<!--                                                <td>50</td>-->
+
+<!--                                                <td colspan="2">-->
+<!--                                                    <t t-esc="line.subject_id.name"/>-->
+<!--                                                </td>-->
+<!--                                            </tr>-->
+<!--                                        </t>-->
+
+<!--                                        &lt;!&ndash; TOTALS ROW &ndash;&gt;-->
+<!--                                        <tr class="totals">-->
+<!--                                            <td t-esc="t_total"/>-->
+<!--                                            <td t-esc="t_total_max"/>-->
+<!--                                            <td t-esc="t_grace"/>-->
+
+<!--                                            <td t-esc="t_mo2"/>-->
+<!--                                            <td>-->
+<!--                                                <t t-esc="len(doc.student_marks_ids)* 50"/>-->
+<!--                                            </td>-->
+
+<!--                                            <td t-esc="t_mo1"/>-->
+<!--                                            <td>-->
+<!--                                                <t t-esc="len(doc.student_marks_ids) * 50"/>-->
+<!--                                            </td>-->
+
+<!--                                            <td colspan="2" class="urdu">کل میزان</td>-->
+<!--                                        </tr>-->
+
+<!--                                    </table>-->
+<!--                                </div>-->
+
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                    </table>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Signature &ndash;&gt;-->
+<!--                <div class="signature-sec">-->
+<!--                    <table>-->
+<!--                        <tr>-->
+<!--                            <td>DATE</td>-->
+<!--                            <td>دستخط سرپرست<br/>SIGN GUARDIAN-->
+<!--                            </td>-->
+<!--                            <td>و محط معلم درجہ<br/>SIG. CT-->
+<!--                            </td>-->
+<!--                            <td>دستخط صدر مدرس<br/>SIG. PRINCIPAL-->
+<!--                            </td>-->
+<!--                        </tr>-->
+
+<!--                        <tr>-->
+<!--                            <td></td>-->
+<!--                            <td>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</td>-->
+<!--                            <td>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</td>-->
+<!--                            <td>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</td>-->
+<!--                        </tr>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </t>-->
+<!--    </template>-->
+
+
+
+ <template id="exam_report_document">
+            <t t-call="web.basic_layout">
+                <div class="page" style="font-family: 'Jameel Noori Nastaleeq'">
+                    <div style="margin-top:10px;">
+                        <t t-set="record" t-value="doc.env['school.school'].search([])"/>
+                        <img style="width:100%;" t-att-src="image_data_uri(record.result_card_header)"/>
+                    </div>
+                    <!-- Report Header -->
+                    <div class="report_details">
+                        <div style="text-align:center; font-size:16px; font-weight:bold; background-color:#e0e1e3; padding:2px;">
+                            <div class="row">
+                                <div class="col-4">
+                                    <span t-esc="doc.exam_id.academic_year.name"/>
+                                </div>
+                                <div class="col-4" style="text-align:center">
+                                    <span>نتیجہ کارڈ</span>
+                                    <span>
+                                        امتحان ششماہی وسالانہ
+                                    </span>
+                                </div>
+                                <div class="col-4">
+                                    <span>Mobile :</span>
+                                    <span t-esc="doc.exam_id.school_id.company_id.mobile"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Student Details Section -->
+                    <div class="students_details">
+                        <div style="margin-top:0px;border:1.2px solid;padding:2px 10px 0px 10px;font-size: 16px; font-weight: 900; text-align: right;">
+                            <div class="row">
+                                <!-- Student Image -->
+                                <div class="col-4" style="text-align:center;">
+                                    <img t-if="doc.student_id.photo" t-att-src="image_data_uri(doc.student_id.photo)"
+                                         style="width:120px; height:120px; border-radius:5%;" alt="Student"/>
                                 </div>
 
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+                                <!-- Student Info -->
+                                <div class="col-8" style="font-size:17px;">
+                                    <table style="width:100%;text-align:right;border:1px white solid;">
+                                        <tr>
+                                            <td style="width:100px;">
+                                                <t t-esc="doc.student_id.roll_no"/>
+                                            </td>
+                                            <td style="width:20px;">:</td>
+                                            <td style="width:70px;">
+                                                <span>رول نمبر</span>
+                                            </td>
 
-                <!-- Signature -->
-                <div class="signature-sec">
-                    <table>
-                        <tr>
-                            <td>DATE</td>
-                            <td>دستخط سرپرست<br/>SIGN GUARDIAN
-                            </td>
-                            <td>و محط معلم درجہ<br/>SIG. CT
-                            </td>
-                            <td>دستخط صدر مدرس<br/>SIG. PRINCIPAL
-                            </td>
-                        </tr>
 
-                        <tr>
-                            <td></td>
-                            <td>------------------</td>
-                            <td>------------------</td>
-                            <td>------------------</td>
-                        </tr>
-                    </table>
+                                            <td style="width:100px;"></td>
+
+
+                                            <td style="width:100px;">
+                                                <t t-esc="doc.student_id.reg_no"/>
+                                            </td>
+                                            <td style="width:20px;">:</td>
+                                            <td style="width:70px;">
+                                                <span>داخلہ نمبر</span>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <tr>
+                                            <td style="width:100px;">
+                                                <t t-esc="doc.student_id.date_of_birth"/>
+                                            </td>
+                                            <td style="width:20px;">:</td>
+                                            <td style="width:70px;">
+                                                <span>تاريخ پيدائش</span>
+                                            </td>
+
+
+                                            <td style="width:100px;"></td>
+
+
+                                            <td style="width:100px;">
+                                                <t t-esc="doc.student_id.name"/>
+                                            </td>
+                                            <td style="width:20px;">:</td>
+                                            <td style="width:70px;">
+                                                <span>نام طالب علم</span>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <tr>
+                                            <td style="width:100px;">
+                                                <t t-esc="doc.student_id.division_id.name"/>
+                                            </td>
+                                            <td style="width:20px;">:</td>
+                                            <td style="width:70px;">
+                                                <span>سكشن</span>
+                                            </td>
+
+
+                                            <td style="width:100px;"></td>
+
+
+                                            <td style="width:100px;">
+                                                <t t-esc="doc.class_id.name"/>
+                                            </td>
+                                            <td style="width:20px;">:</td>
+                                            <td style="width:70px;">
+                                                <span>درجہ</span>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <tr>
+                                            <td style="width:100px;">
+                                                <t t-esc="doc.student_id.street"/>
+                                            </td>
+                                            <td style="width:20px;">:</td>
+                                            <td style="width:70px;">
+                                                <span>پتہ</span>
+                                            </td>
+
+
+                                            <td style="width:100px;"></td>
+
+
+                                            <td style="width:100px;">
+                                                <t t-esc="doc.student_id.father_name"/>
+                                            </td>
+                                            <td style="width:20px;">:</td>
+                                            <td style="width:70px;">
+                                                <span>والد ‌كا ‌نام</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Marks and Performance Details -->
+                    <div class="marks_details" style="margin-top: 0px;border:1px black solid;">
+                        <div style="background-color:#e0e1e3;padding:7px;border-bottom:1px black solid;font-size: 16px; font-weight: bold; text-align: center;">
+                            تعلیمی کارکردگی
+                        </div>
+                        <div>
+                            <div class="row" style="height:430px;">
+                                <!-- Signature Section -->
+                                <!-- Signature Section -->
+                                <div class="col-2"
+                                     style="border-right:1px black solid;text-align:center; font-size: 14px;">
+                                    <br/>
+                                    <h4>دستخط کلاس ٹیچر</h4>
+                                    <br/>
+                                    <br/>
+                                    <h4>----------------</h4>
+                                    <br/>
+                                    <br/>
+                                    <h4>دستخط صدر مدرس</h4>
+                                    <br/>
+                                    <br/>
+                                    <h4>----------------</h4>
+                                    <br/>
+                                    <br/>
+                                    <h4>دستخط تیار کننده</h4>
+                                    <br/>
+                                    <br/>
+                                    <h4>----------------</h4>
+                                    <br/>
+                                    <br/>
+                                </div>
+
+                                <!-- Result and Performance Section -->
+                                <div class="col-2"
+                                     style="border-right:1px black solid;font-weight:bold">
+                                    <div style="padding:10px;border-bottom:2px black solid">
+                                        <h2 style="text-align:center">
+                                            کیفیت
+                                        </h2>
+                                    </div>
+                                    <br/>
+                                    <div style="text-align:center">
+                                        <h4>
+                                            نتیجہ
+                                        </h4>
+                                        <br/>
+                                        <h4>
+                                            <span t-esc="doc.result"/>
+                                        </h4>
+                                        <br/>
+                                        <h4>
+                                            <t t-if="doc.total_grace_mark == 0">
+                                                <span t-esc="doc.division"/>
+                                            </t>
+                                            <t t-else="">
+                                                --
+                                            </t>
+
+                                            :
+                                            <span>ڈویژن</span>
+                                        </h4>
+                                        <br/>
+
+                                        <h4>
+                                            <t t-if="doc.total_grace_mark == 0">
+                                                <span t-esc="doc.position"/>
+                                            </t>
+                                            <t t-else="">
+                                                --
+                                            </t>
+                                            :
+                                            <span>پوزیشن</span>
+                                        </h4>
+
+                                        <br/>
+
+                                        <h4>
+                                            <t t-if="doc.total_grace_mark == 0">
+                                                <span style="font-size:20px;" t-esc="doc.percentage"/>% :
+                                            </t>
+                                            <t t-else="">
+                                                --
+                                            </t>
+
+                                            <span>نتیجہ فیصد</span>
+                                        </h4>
+                                    </div>
+                                    <table style="margin-bottom:0;width:100%; text-align:center;vertical-align:bottom;">
+                                        <tr>
+                                            <td style="border-top:1px black solid;width:50%;line-height:25px;">
+
+                                            </td>
+                                             <td style="border-top:1px black solid;width:50%;line-height:25px">
+                                                میزان حاضری
+                                            </td>
+                                        </tr>
+                                          <tr>
+                                              <td style="border-top:1px black solid;width:50%;line-height:25px">
+
+                                            </td>
+                                             <td style="border-top:1px black solid;width:50%;line-height:25px">
+                                                فیصد حاضری
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </div>
+
+                                <!-- Marks Table -->
+                                <div class="col-8" style="text-align:center">
+                                    <table style="width: 100%;">
+                                        <thead>
+                                            <tr style="font-weight:bold; background-color: #c7edb7;line-height:24px;">
+                                                <td style="border:1px black solid;height:22px;" colspan="3">میزان
+                                                    مجموعی
+                                                </td>
+                                                <td style="border:1px black solid;height:22px;" colspan="2">سالانہ</td>
+                                                <td style="border:1px black solid;height:22px;" colspan="2">ششماہی</td>
+                                                <td style="border:1px black solid;text-align:center;height:22px;vertical-align: middle;"
+                                                    rowspan="2">
+                                                    مظامین
+                                                </td>
+                                            </tr>
+                                            <tr style="background-color: #c7edb7;line-height:24px;">
+                                                <td style="border:1px black solid;height:22px;">محصلہ</td>
+                                                <td style="border:1px black solid;height:22px;">مجوزہ</td>
+                                                <td style="border:1px black solid;height:22px;">گریس مارک</td>
+                                                <td class="brd1;height:22px;">محصلہ</td>
+                                                <td style="border:1px black solid;height:22px;">مجوزہ</td>
+                                                <td style="border:1px black solid;height:22px;">محصلہ</td>
+                                                <td style="border:1px black solid;height:22px;">مجوزہ</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Loop through subject marks -->
+                                            <t t-set="row" t-value="13"/>
+                                            <t t-set="t_mark_scored_et" t-value="0"/>
+                                            <t t-set="t_max_mark_et" t-value="0"/>
+                                            <t t-set="t_grace_mark" t-value="0"/>
+                                            <t t-set="t_mark_scored_e2" t-value="0"/>
+                                            <t t-set="t_max_mark_e2" t-value="0"/>
+                                            <t t-set="t_mark_scored_e1" t-value="0"/>
+                                            <t t-set="t_max_mark_e1" t-value="0"/>
+
+                                            <t t-foreach="doc.student_marks_ids" t-as="mark_line">
+
+                                                <t t-set="t_mark_scored_et"
+                                                   t-value="t_mark_scored_et+mark_line.total_mark"/>
+
+                                                <t t-set="t_max_mark_et"
+                                                   t-value="t_max_mark_et + mark_line.total_mark_max"/>
+
+                                                <t t-set="t_grace_mark" t-value="t_grace_mark+mark_line.grace_mark"/>
+
+                                                <t t-set="t_mark_scored_e2"
+                                                   t-value="t_mark_scored_e2+mark_line.mo2"/>
+
+                                                <t t-set="t_max_mark_e2" t-value="t_max_mark_e2+mark_line.t_mo2"/>
+
+                                                <t t-set="t_mark_scored_e1"
+                                                   t-value="t_mark_scored_e1+mark_line.mo1"/>
+
+                                                <t t-set="t_max_mark_e1" t-value="t_max_mark_e1+mark_line.t_mo1"/>
+
+
+                                                <t t-set="row" t-value="row-1"/>
+                                                <tr>
+                                                    <td style="border:1px black solid;height:22px;">
+                                                        <span t-esc="mark_line.total_mark"/>
+                                                    </td>
+                                                    <td style="border:1px black solid;height:22px;">
+                                                        <span t-esc="mark_line.total_mark_max"/>
+                                                    </td>
+                                                    <td style="border:1px black solid;height:22px;">
+                                                        <span t-esc="mark_line.grace_mark"/>
+                                                    </td>
+                                                    <td style="border:1px black solid;height:22px;">
+                                                        <span t-esc="mark_line.mo2"/>
+                                                    </td>
+                                                    <td style="border:1px black solid;height:22px;">
+                                                        <span t-esc="mark_line.t_mo2"/>
+                                                    </td>
+                                                    <td style="border:1px black solid;height:22px;">
+                                                        <span t-esc="mark_line.mo1  "/>
+<!--                                                        <t t-if="mark_line.subject_id.exam_in_final">-->
+<!--                                                            - -->
+<!--                                                        </t>-->
+<!--                                                        <t t-else="">-->
+<!--                                                            <span t-esc="mark_line.mark_scored_e1"/>-->
+<!--                                                        </t>-->
+                                                    </td>
+                                                    <td style="border:1px black solid;height:22px;">
+                                                         <span t-esc="mark_line.t_mo1"/>
+<!--                                                        <t t-if="mark_line.subject_id.exam_in_final">-->
+<!--                                                            - -->
+<!--                                                        </t>-->
+<!--                                                        <t t-else="">-->
+<!--                                                            <span t-esc="mark_line.max_mark_e1"/>-->
+<!--                                                        </t>-->
+                                                    </td>
+                                                    <td style="border:1px black solid;text-align:center;height:22px;">
+                                                        <span t-esc="mark_line.subject_id.name"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+
+                                            <t t-foreach="range(row)" t-as="r">
+                                                <tr>
+                                                    <td style="border:1px black solid;height:22px;">
+                                                    </td>
+                                                    <td style="border:1px black solid;height:22px;"></td>
+                                                    <td style="border:1px black solid;height:22px;"></td>
+                                                    <td style="border:1px black solid;height:22px;"></td>
+                                                    <td style="border:1px black solid;height:22px;"></td>
+                                                    <td style="border:1px black solid;height:22px;"></td>
+                                                    <td style="border:1px black solid;height:22px;"></td>
+                                                    <td style="border:1px black solid;height:22px;"></td>
+                                                </tr>
+                                            </t>
+
+                                            <!-- Total Row -->
+                                            <tr style="font-weight:bold; background-color: #c7edb7;height:18px;">
+                                                <td style="border:1px black solid;">
+                                                    <span t-esc="t_mark_scored_et"/>
+                                                </td>
+                                                <td style="border:1px black solid;">
+                                                    <span t-esc="t_max_mark_et"/>
+                                                </td>
+                                                <td style="border:1px black solid;">
+                                                    <span t-esc="t_grace_mark"/>
+                                                </td>
+                                                <td style="border:1px black solid;">
+                                                    <span t-esc="t_mark_scored_e2"/>
+                                                </td>
+                                                <td style="border:1px black solid;">
+                                                    <span t-esc="t_max_mark_e2"/>
+                                                </td>
+                                                <td style="border:1px black solid;">
+                                                    <span t-esc="t_mark_scored_e1"/>
+                                                </td>
+                                                <td style="border:1px black solid;">
+                                                    <span t-esc="t_max_mark_e1"/>
+                                                </td>
+                                                <td style="border:1px black solid;text-align:center;">میزان</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    Print Date :
+                                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('-%d-%m-%Y')"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Page Break -->
+                    <div style="page-break-after: always;"></div>
                 </div>
-            </div>
-        </t>
-    </template>
+            </t>
+        </template>
 
 
     <template id="report_exam_result">
@@ -807,7 +729,7 @@
         <field name="name">Report Card Print Format</field>
         <field name="default" eval="True"/>
         <field name="format">A4</field>
-        <field name="orientation">Portrait</field>
+        <field name="orientation">Landscape</field>
         <field name="margin_top">2.8</field>
         <field name="margin_bottom">0</field>
         <field name="margin_left">0</field>

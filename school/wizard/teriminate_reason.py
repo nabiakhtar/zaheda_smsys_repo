@@ -19,7 +19,7 @@ class TerminateReason(models.TransientModel):
             {
                 "state": "terminate",
                 "terminate_reason": self.reason,
-                "active": False,
+                # "active": False, atr c on date Dec 17 , 2025
                 "leave_date": self.leave_date,
             }
         )

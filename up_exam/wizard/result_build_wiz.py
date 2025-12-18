@@ -86,7 +86,7 @@ class BuildResult(models.TransientModel):
 		result_data = []
 
 		for cls in classes:
-			students = self.env['student.student'].search([('standard_id', '=', cls.id)])
+			students = self.env['student.student'].search([('standard_id', '=', cls.id),('state', '=', 'done')])
 			subjects = cls.subject_ids
 
 			result_data.append({

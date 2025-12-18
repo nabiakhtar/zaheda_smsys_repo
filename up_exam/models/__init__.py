@@ -2,3 +2,4 @@
 
 from . import exam
 from . import school
+from . import report

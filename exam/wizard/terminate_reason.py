@@ -18,8 +18,9 @@ class TerminateReasonExam(models.TransientModel):
         regular_examresult_rec = self.env["exam.result"].search(
             [("student_id", "=", student_rec.id)]
         )
-        if addexam_result_rec:
-            addexam_result_rec.active = False
-        if regular_examresult_rec:
-            regular_examresult_rec.active = False
+        # atr c on date Dec17 2025
+        # if addexam_result_rec:
+        #     addexam_result_rec.active = False
+        # if regular_examresult_rec:
+        #     regular_examresult_rec.active = False
         return super(TerminateReasonExam, self).save_terminate()

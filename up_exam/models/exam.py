@@ -55,8 +55,8 @@ class ExamExam(models.Model):
     e3 = fields.Char("Third Exam")
     e4 = fields.Char("Final Exam")
 
-    mm1 = fields.Integer("Max Mark", default=10)
-    mm2 = fields.Integer("Max Mark", default=30)
+    mm1 = fields.Integer("Max Mark", default=50)
+    mm2 = fields.Integer("Max Mark", default=50)
     mm3 = fields.Integer("Max Mark", default=10)
     mm4 = fields.Integer("Max Mark", default=50)
 
@@ -64,6 +64,9 @@ class ExamExam(models.Model):
     pm2 = fields.Integer("Passing Mark", default=0)
     pm3 = fields.Integer("Passing Mark", default=0)
     pm4 = fields.Integer("Passing Mark", default=0)
+
+    hye_gm = fields.Integer(string="HEY Grace Mark", default=10)
+    fe_gm = fields.Integer(string="FE Grace Mark", default=20)
 
     # ==============================================
     # ==============================================
@@ -122,15 +125,23 @@ class ExamTerm(models.Model):
 
 class ExamStudentMarks(models.Model):
     _name = 'student.marks'
+    _rec_name = 'exam_result_id'
 
     exam_result_id = fields.Many2one('exam.result')
     student_id = fields.Many2one("student.student")
+    reg_no = fields.Char("Reg No")
+    roll_no = fields.Integer("Roll No")
     subject_id = fields.Many2one("subject.subject")
-    # standard_id = fields.Many2one("school.standard")
-    # academic_year_id = fields.Many2one("academic.year", "Academic Year", help="Academic Year")
-    mo1 = fields.Integer("Half Yearly Exam")
-    mo2 = fields.Integer("Final Exam")
+    standard_id = fields.Many2one("school.standard")
+    academic_year_id = fields.Many2one("academic.year", "Academic Year", help="Academic Year")
+
+    mo1 = fields.Integer("HEY Obtain")
+
+    mo2 = fields.Integer("FE Obtain")
+    t_mo2 = fields.Integer("FE Maz")
+    t_mo1 = fields.Integer("HYE Max")
     grace_mark = fields.Integer("Grace Marks")
+    total_mark_max = fields.Integer("Total Max")
     total_mark = fields.Integer("Total")
 
     state = fields.Selection(
@@ -178,6 +189,7 @@ class ExamStudentMarks(models.Model):
 
 class ExamResult(models.Model):
     _name = 'exam.result'
+    _rec_name = 'student_id'
 
 
     exam_id = fields.Many2one("exam.exam", "Exam", help="exam")
@@ -207,6 +219,11 @@ class ExamResult(models.Model):
     is_cald = fields.Boolean(readonly=1)
     is_printed = fields.Boolean(readonly=1)
 
+    total_max = fields.Integer(
+        string="Total Max",
+        store=True,
+        help="Total of Max Marks",
+    )
 
     total = fields.Integer(
         string="Obtain Total",
@@ -240,86 +257,7 @@ class ExamResult(models.Model):
     student_marks_ids = fields.One2many("student.marks", "exam_result_id", "Marks", help="Student Marks")
 
 
-    # def cal_result(self):
-    #     print("CAAAAAl result ================")
-    #     for s in self:
-    #         if not s.is_cald:
-    #             total = 0
-    #             for rec in s.student_marks_ids:
-    #                 passing_marks = 34
-    #                 grace_max_marks = 20
-    #                 remain_grace_mark = grace_max_marks
-    #                 sorted_records = sorted(rec, key=lambda record: record.mo1 + record.mo2, reverse=True)
-    #                 print("Sored ", sorted_records)
-    #                 total_grace_added = 0
-    #                 total_marks_obtained = 0
-    #                 rec.grace_mark = 0
-    #
-    #                 for rec in sorted_records:
-    #                     mark = rec.mo1 + rec.mo2
-    #                     if mark < passing_marks:
-    #                         required_grace = passing_marks - mark
-    #                         grace_for_subject = min(required_grace, grace_max_marks)
-    #                         remaining_grace = grace_max_marks - total_grace_added
-    #                         grace_for_subject = min(grace_for_subject, remaining_grace)
-    #                         rec.grace_mark = grace_for_subject
-    #                         total_grace_added += grace_for_subject
-    #                     else:
-    #                         rec.grace_mark = 0
-    #
-    #                     rec.total_mark = mark + rec.grace_mark
-    #                     total += rec.total_mark
-    #
-    #
-    #             s.total = total
-    #             total_mark = int(len(s.student_marks_ids))
-    #             percentage = round(total / total_mark, 2)
-    #             s.percentage = percentage
-    #             s.is_cald = True
-    #             s.state = 'confirm'
 
-    # def cal_result(self):
-    #     print("Calculating Result ================")
-    #     PASS_MARK = 33
-    #     TOTAL_GRACE = 20
-    #
-    #     for s in self:
-    #         if not s.is_cald:
-    #
-    #             total = 0
-    #             remaining_grace = TOTAL_GRACE  # Student’s total available grace
-    #
-    #             sorted_subjects = s.student_marks_ids.sorted(
-    #                 key=lambda rec: rec.mo1 + rec.mo2,reverse=True
-    #             )
-    #
-    #             for rec in sorted_subjects:
-    #
-    #                 mark = rec.mo1 + rec.mo2
-    #                 rec.grace_mark = 0  # reset initially
-    #
-    #                 if mark < PASS_MARK and remaining_grace > 0:
-    #                     required = PASS_MARK - mark  # how much grace needed
-    #
-    #                     # Give grace only if available
-    #                     given = min(required, remaining_grace)
-    #
-    #                     rec.grace_mark = given
-    #                     remaining_grace -= given
-    #
-    #                 # final mark
-    #                 rec.total_mark = mark + rec.grace_mark
-    #
-    #                 total += rec.total_mark
-    #
-    #             # store student final stats
-    #             s.total = total
-    #             subject_count = len(s.student_marks_ids)
-    #             s.percentage = round(total / subject_count, 2) if subject_count else 0
-    #
-    #             # set flags
-    #             s.is_cald = True
-    #             s.state = 'confirm'
 
     def cal_result(self):
         PASS_MARK = 33
@@ -329,6 +267,7 @@ class ExamResult(models.Model):
             if not s.is_cald:
 
                 total = 0
+                total_max = 0
                 tgrm = 0
                 remaining_grace = TOTAL_GRACE
 
@@ -353,11 +292,13 @@ class ExamResult(models.Model):
 
                     rec.total_mark = mark + rec.grace_mark
                     total += rec.total_mark
+                    total_max += rec.total_mark_max
 
                 # Store student total & percentage
                 subjects = len(s.student_marks_ids)
                 s.total = total
-                s.percentage = round(total / subjects, 2) if subjects else 0
+                s.total_max = total_max
+                s.percentage = round(total / total_max * 100, 2) if subjects else 0
                 s.total_grace_mark = tgrm
 
                 # -----------------------------------------

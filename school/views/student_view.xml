@@ -128,7 +128,7 @@
                                     <field name="standard_id"/>
                                 </span>
                                 <span style="width:150px;border-bottom:1px dotted #000;display:inline-block;">
-                                     <field name="w_standard_id"/>
+                                    <field name="w_standard_id"/>
                                 </span>
                             </div>
                         </div>
@@ -1067,6 +1067,8 @@
                             states="done"
                             groups="school.group_school_administration"
                     />
+
+
                     <button
                             class="oe_stat_button"
                             icon="fa-check"
@@ -1092,6 +1094,16 @@
                             type="object"
                             states="cancel"
                             string="Reset to draft"
+                            groups="school.group_school_administration"
+                    />
+
+                    <button
+                            class="oe_stat_button"
+                            name="reset_to_draft"
+                            string="Reset"
+                            type="object"
+                            icon="fa-archive"
+                            states="done,terminate"
                             groups="school.group_school_administration"
                     />
                     <field
@@ -1130,10 +1142,7 @@
                         }
 
                     </style>
-
-
                     <div style="direction: rtl;width:100%; font-size:14pt;font-family: 'Jameel Noori Nastaleeq'">
-
                         <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
                             <div>
                                 <span class="fl">رجسٹریشن نمبر:</span>
@@ -1152,19 +1161,19 @@
                         <div class="row">
                             <div class="col-12">
                                 <span class="fl">نام طالب علم:</span>
-                                <span style="width:350px;border-bottom:1px dotted #000;display:inline-block;">
+                                <span style="width:250px;border-bottom:1px dotted #000;display:inline-block;">
                                     <field name="name" required="1"/>
                                 </span>
 
 
                                 <span class="fl">نام والد:</span>
-                                <span style="width:300px;border-bottom:1px dotted #000;display:inline-block;">
+                                <span style="width:250px;border-bottom:1px dotted #000;display:inline-block;">
                                     <field name="father_name"/>
                                 </span>
 
 
                                 <span class="fl">نام والده:</span>
-                                <span style="width:300px;border-bottom:1px dotted #000;display:inline-block;">
+                                <span style="width:250px;border-bottom:1px dotted #000;display:inline-block;">
                                     <field name="mother_name"/>
                                 </span>
                             </div>
@@ -1173,13 +1182,13 @@
                         <div class="row">
                             <div class="col-12">
                                 <span class="fl">مستقل پتر:</span>
-                                <span style="width:600px;border-bottom:1px dotted #000;display:inline-block;">
+                                <span style="width:400px;border-bottom:1px dotted #000;display:inline-block;">
                                     <field name="street"/>
                                 </span>
 
 
                                 <span class="fl">تاریخ پیدائش:</span>
-                                <span style="width:300px;border-bottom:1px dotted #000;display:inline-block;">
+                                <span style="width:250px;border-bottom:1px dotted #000;display:inline-block;">
                                     <field name="date_of_birth"/>
                                 </span>
                             </div>
@@ -1188,13 +1197,13 @@
                         <div class="row">
                             <div class="col-12">
                                 <span class="fl">سر پرست کا نام و پسته:</span>
-                                <span style="width:600px;border-bottom:1px dotted #000;display:inline-block;">
+                                <span style="width:400px;border-bottom:1px dotted #000;display:inline-block;">
                                     <field name="parent_name_address"/>
                                 </span>
 
 
                                 <span class="fl">سر پرست سے رشتہ:</span>
-                                <span style="width:300px;border-bottom:1px dotted #000;display:inline-block;">
+                                <span style="width:250px;border-bottom:1px dotted #000;display:inline-block;">
                                     <field name="parent_relation"/>
                                 </span>
                             </div>
@@ -1714,7 +1723,7 @@
         <field name="model">student.student</field>
         <field name="arch" type="xml">
             <search string="Admission Register">
-                 <group col="10" colspan="4">
+                <group col="10" colspan="4">
                     <field name="reg_no"/>
                     <field name="name"/>
                     <field name="father_name"/>
@@ -1760,10 +1769,11 @@
     </record>
 
     <!-- Action Of Form, Tree & Kanban View Of Admission Register Information -->
+<!--    atr Register-->
     <record id="action_student_student_form_2" model="ir.actions.act_window">
         <field name="name">Admission Register</field>
         <field name="res_model">student.student</field>
-        <field name="domain"></field>
+         <field name="domain">['|', ('state', 'in', ['done', 'terminate', 'cancel', 'alumni']), ('active', '=', False)]</field>
         <field name="view_id" ref="view_student_student_form_2"/>
         <field name="search_view_id" ref="view_student_student_search_2"/>
         <field name="view_mode">kanban,tree,form</field>

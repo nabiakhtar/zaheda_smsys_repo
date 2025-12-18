@@ -158,31 +158,33 @@
                     </group>
                     <group col="4" colspan="4">
                         <notebook colspan="4">
-                            <!--                            <page string="Exam Terms">-->
-                            <!--                                <group string="Exam Terms">-->
-                            <!--                                    <group>-->
-                            <!--                                        <field name="e1"/>-->
-                            <!--                                        <field name="mm1"/>-->
-                            <!--                                        <field name="pm1"/>-->
-                            <!--                                    </group>-->
-                            <!--                                    <group >-->
-                            <!--                                        <field name="e2"/>-->
-                            <!--                                        <field name="mm2"/>-->
-                            <!--                                        <field name="pm2"/>-->
-                            <!--                                    </group>-->
+                                                        <page string="Exam Terms">
+                                                            <group string="Exam Terms">
+                                                                <group string="Half Yearly Exam">
+<!--                                                                    <field name="e1" string="HYE"/>-->
+                                                                    <field name="mm1" string="HYE Max Mark" required="1"/>
+                                                                    <field name="pm1" string="HYE Passing Mark" required="1"/>
+                                                                    <field name="hye_gm" required="1"/>
+                                                                    </group>
+                                                                 <group string="Final Exam">
+<!--                                                                    <field name="e2"/>-->
+                                                                    <field name="mm2" string="FYE Max Mark" required="1"/>
+                                                                    <field name="pm2" string="FYE Passing Mark" required="1"/>
+                                                                    <field name="fe_gm" required="1"/>
+                                                                </group>
 
-                            <!--                                    <group >-->
-                            <!--                                        <field name="e3"/>-->
-                            <!--                                        <field name="mm3"/>-->
-                            <!--                                        <field name="pm3"/>-->
-                            <!--                                    </group>-->
-                            <!--                                    <group>-->
-                            <!--                                        <field name="e4"/>-->
-                            <!--                                        <field name="mm4"/>-->
-                            <!--                                        <field name="pm4"/>-->
-                            <!--                                    </group>-->
-                            <!--                                </group>-->
-                            <!--                            </page>-->
+<!--                                                                <group >-->
+<!--                                                                    <field name="e3"/>-->
+<!--                                                                    <field name="mm3"/>-->
+<!--                                                                    <field name="pm3"/>-->
+<!--                                                                </group>-->
+<!--                                                                <group>-->
+<!--                                                                    <field name="e4"/>-->
+<!--                                                                    <field name="mm4"/>-->
+<!--                                                                    <field name="pm4"/>-->
+<!--                                                                </group>-->
+                                                            </group>
+                                                        </page>
                             <page string="Class">
                                 <field
                                         name="standard_id"
@@ -362,24 +364,24 @@
                         </group>
                     </group>
                     <field name="student_marks_ids" nolabel="1" colspan="4">
-                        <tree editable="bottom" create="false" delete="false">
+                        <tree editable="bottom">
                             <field
                                     name="subject_id"
                                     placeholder="Select Subject"
                                     options="{'no_create': True, 'no_open': True}"
                             />
+                            <field name="t_mo1"/>
                             <field
                                     name="mo1"
-                                    string="Half Yearly"
                             />
+                            <field name="t_mo1"/>
                             <field
                                     name="mo2"
-                                    string="Final Yearly"
                             />
                             <field
                                     name="grace_mark"
-                                    string="Grace Marks"
                             />
+                            <field name="total_mark_max"/>
                             <field
                                     name="total_mark"
                                     string="Totals"
@@ -392,6 +394,8 @@
                     <group >
                         <group>
                             <field name="total" readonly="1"/>
+                            <field name="total_max" readonly="1"/>
+
                             <field name="percentage" string="Percentage" readonly="1"/>
                             <field name="division" string="Division" readonly="1"/>
                         </group>

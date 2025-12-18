@@ -21,7 +21,7 @@
                 </group>
 
                 <field name="student_marks_ids">
-                    <tree editable="bottom" create="false">
+                    <tree editable="bottom" create="false" delete="false">
                         <field name="roll_no" readonly="1" force_save="1"/>
                         <field name="reg_no" readonly="1"/>
                         <field name="student_id" readonly="1" force_save="1"/>
@@ -34,11 +34,67 @@
                             string="Add Marks"
                             type="object"
                     />
+
                     <button special="cancel" string="Cancel"/>
                 </footer>
             </form>
         </field>
     </record>
+
+    <record id="wizard_action_add_marks_form" model="ir.actions.act_window">
+        <field name="name">Add Marks</field>
+        <field name="res_model">subject.marks.wiz</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="form_subject_view_marks_wiz" model="ir.ui.view">
+        <field name="name">subject.marks.wiz.form.wizard</field>
+        <field name="model">subject.view.marks.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Add Marks">
+                <group>
+                    <group>
+                        <field name="exam_id" widget="selection" required="1"/>
+                        <field name="exam_term" required="1"/>
+
+                        <field name="section_id" widget="selection" required="1"/>
+                    </group>
+
+                    <group>
+                        <field name="school_id" required="1"/>
+                        <field name="class_id" widget="selection" required="1"/>
+                        <field name="subject_id" widget="selection" required="1"/>
+                    </group>
+                </group>
+
+                <field name="student_marks_ids">
+                    <tree editable="bottom" create="false" delete="false">
+                        <field name="roll_no" readonly="1" force_save="1"/>
+                        <field name="reg_no" readonly="1"/>
+                        <field name="student_id" readonly="1" force_save="1"/>
+                        <field name="marks"/>
+                    </tree>
+                </field>
+                <footer>
+                    <button
+                            name="add_marks"
+                            string="Update Marks"
+                            type="object"
+                    />
+                    <button special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="wizard_action_view_marks_form" model="ir.actions.act_window">
+        <field name="name">View Marks</field>
+        <field name="res_model">subject.view.marks.wiz</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
     <record id="wizard_action_add_marks_form" model="ir.actions.act_window">
         <field name="name">Add Marks</field>
         <field name="res_model">subject.marks.wiz</field>
@@ -47,10 +103,60 @@
     </record>
 
     <menuitem
+            id="menu_marks"
+            name="Marks"
+            parent="up_exam.menu_up_exam"
+            groups="school.group_school_administration,school.group_school_teacher"
+            sequence="106"
+    />
+
+
+    <menuitem
             id="menu_add_marks"
             name="Add Marks"
-            parent="up_exam.menu_up_exam"
+            parent="up_exam.menu_marks"
             action="wizard_action_add_marks_form"
+            groups="school.group_school_administration,school.group_school_teacher"
+            sequence="106"
+    />
+
+
+<!--    <record id="view_view_mark_tree" model="ir.ui.view">-->
+<!--        <field name="name">student.marks.tree</field>-->
+<!--        <field name="model">student.marks</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree create="false" multi_edit="0">-->
+<!--                <field name="academic_year_id"/>-->
+<!--                <field name="roll_no"/>-->
+<!--                <field name="reg_no"/>-->
+<!--                <field name="student_id"/>-->
+<!--                <field name="standard_id"/>-->
+<!--                <field name="subject_id"/>-->
+<!--                <field name="t_mo1"/>-->
+<!--                <field name="mo1"/>-->
+<!--                <field name="t_mo2"/>-->
+<!--                <field name="mo2"/>-->
+<!--                <field name="grace_mark"/>-->
+<!--                <field name="total_mark_max"/>-->
+<!--                <field name="total_mark"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+<!--    <record id="action_view_mark" model="ir.actions.act_window">-->
+<!--        <field name="name">Mark View</field>-->
+<!--        <field name="res_model">student.marks</field>-->
+<!--        <field name="view_mode">tree</field>-->
+<!--        <field name="context">{'group_by': ['academic_year_id', 'standard_id', 'student_id']}</field>-->
+<!--    </record>-->
+
+
+    <menuitem
+            id="menu_view_marks"
+            name="View Marks"
+            parent="up_exam.menu_marks"
+            action="wizard_action_view_marks_form"
             groups="school.group_school_administration,school.group_school_teacher"
             sequence="106"
     />
@@ -62,16 +168,34 @@
         <field name="arch" type="xml">
             <form>
                 <group>
-                    <field name="exam_id"/>
-                    <field name="school_ids" widget="many2many_tags"/>
-                    <field name="class_ids" domain="[('school_id', 'in', school_ids)]" widget="many2many_tags"/>
+                    <group>
+                        <field name="exam_id" required="1"/>
+                        <field name="class_ids" required="1" domain="[('school_id', 'in', school_ids)]"
+                               widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        <field name="school_ids" required="1" widget="many2many_tags"/>
+                    </group>
                 </group>
+
 
                 <footer>
                     <button string="Generate Mark Slip"
                             name="action_create_mark_slip"
                             type="object"
                             class="btn-primary"/>
+
+                    <button string="Print Mark Slips"
+                            name="action_print_markslip"
+                            type="object"
+                            class="btn-warning"/>
+
+                    <button string="Mark Summary"
+                            name="action_print_markssummary"
+                            type="object"
+                            style="background-color:#2D663B"
+                            class="btn-warning"/>
+
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>

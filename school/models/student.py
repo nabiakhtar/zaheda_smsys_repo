@@ -478,8 +478,9 @@ class StudentStudent(models.Model):
         for rec in self:
             rec.state = "alumni"
             rec.standard_id._compute_total_student()
-            rec.active = False
-            rec.user_id.active = False
+            # atr comment on dec 17 2025
+            # rec.active = False
+            # rec.user_id.active = False
             rec.leave_date = fields.Date.today()
 
     def set_done(self):
