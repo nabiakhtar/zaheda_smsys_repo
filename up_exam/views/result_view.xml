@@ -741,7 +741,7 @@
     </record>
 
     <record id="action_report_exam_result" model="ir.actions.report">
-        <field name="name">Print Result</field>
+        <field name="name">Print Result.</field>
         <field name="model">exam.result</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">up_exam.report_exam_result</field>

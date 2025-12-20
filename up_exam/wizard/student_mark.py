@@ -143,7 +143,7 @@ class SubjectResultLine(models.TransientModel):
     _order = 'roll_no asc'
 
     wizard_id = fields.Many2one('subject.marks.wiz', string='Wizard')
-    student_id = fields.Many2one('student.student', string='Student')
+    student_id = fields.Many2one('student.student', string='Student', domain=[('state', '=', 'done')])
     marks = fields.Integer(string='Marks')
     student_name = fields.Char("Student Name", reslated='student_id.name')
     reg_no = fields.Char('Reg No', related='student_id.reg_no', store=True)

@@ -226,6 +226,20 @@
                         <field name="lang" placeholder="Language" />
                         <field name="required_age" required="1" />
                         <field name="company_id" />
+ <field
+                                name="contact_mobile"
+                                placeholder="Mobile no"
+                                widget="phone"
+                        />
+
+                        <field
+                                name="currency_id"
+                                placeholder="Select Or Create Currency"
+                        />
+                        <field name="lang" placeholder="Language"/>
+                        <field name="required_age" required="1"/>
+                        <field name="company_id"/>
+                        <field name="school_logo" widget="image"/>
                     </group>
                     <notebook colspan="4">
                         <page string="Standards">

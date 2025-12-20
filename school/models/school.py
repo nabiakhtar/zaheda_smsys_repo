@@ -313,9 +313,12 @@ class SchoolStandard(models.Model):
         for rec in self:
             rec.remaining_seats = rec.capacity - rec.total_students
 
+    sequence = fields.Integer(related='standard_id.sequence', store=True)
+
     school_id = fields.Many2one(
         "school.school",
         "School",
+        required=True,
         help="School of the following standard",
     )
     standard_id = fields.Many2one(
@@ -426,7 +429,7 @@ class SchoolStandard(models.Model):
     def name_get(self):
         """Method to display standard and division"""
         return [
-            (rec.id, rec.standard_id.name + "[" + rec.division_id.name + "]")
+            (rec.id, rec.standard_id.name + "(" + rec.division_id.name + ")")
             for rec in self
         ]
 
@@ -482,7 +485,10 @@ class SchoolSchool(models.Model):
     state_id = fields.Many2one("res.country.state", string="State", ondelete="restrict")
     country_id = fields.Many2one("res.country", string="Country", ondelete="restrict")
     currency_id = fields.Many2one(related="company_id.currency_id", readonly=True)
+    contact_phone = fields.Char(string="Phone no.", help="Enter School phone no.")
+    contact_mobile = fields.Char(string="Mobile no", help="Enter School mobile no.")
 
+    school_logo = fields.Binary(string='School Logo')
 
     # @api.model
     # def create(self, vals):
