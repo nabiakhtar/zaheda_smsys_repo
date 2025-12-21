@@ -65,6 +65,8 @@ class BuildResult(models.TransientModel):
 
 	def print_all_result(self):
 		"""Print all selected class results in one PDF"""
+
+		print("FF=", self.exam_id.academic_year.name)
 		if not self.class_ids:
 			raise UserError("Please select at least one class.")
 
@@ -72,6 +74,7 @@ class BuildResult(models.TransientModel):
 		data = {
 			"exam_id": self.exam_id.id,
 			"class_ids": self.class_ids.ids,
+			# "academic_year": self.exam_id.academic_year.name or ''
 		}
 
 		return self.env.ref("up_exam.report_exam_result").report_action(self, data=data)
@@ -82,9 +85,7 @@ class BuildResult(models.TransientModel):
 	def _get_report_values(self, docids, data=None):
 		classes = self.env['school.standard'].browse(data['class_ids'])
 		exam = self.env['exam.exam'].browse(data['exam_id'])
-
 		result_data = []
-
 		for cls in classes:
 			students = self.env['student.student'].search([('standard_id', '=', cls.id),('state', '=', 'done')])
 			subjects = cls.subject_ids
@@ -101,69 +102,3 @@ class BuildResult(models.TransientModel):
 			'doc_model': 'school.standard',
 			'data': result_data,
 		}
-
-# def action_create_mark_slip(self):
-#     ExamResult = self.env['exam.result']
-#     Student_marks = self.env['student.marks']
-#
-#     for wizard in self:
-#         classes = wizard.class_ids
-#         print("Classes=", classes)
-#
-#         for std_class in classes:
-#
-#             # Get students of class
-#             students = self.env['student.student'].search([
-#                 ('standard_id', '=', std_class.id)
-#             ])
-#             print("Student==", students, )
-#
-#             # Get subjects of class
-#             subjects = std_class.subject_ids
-#             print("sub-", subjects)
-#
-#             for student in students:
-#                 for subject in subjects:
-#                     # Check if record already exists (avoid duplicates)
-#                     result_id = ExamResult.search([
-#                         ('exam_id', '=', wizard.exam_id.id),
-#                         ('class_id', '=', std_class.id),
-#                         ('student_id', '=', student.id),
-#                     ], limit=1)
-#                     if not result_id:
-#                         result_id = ExamResult.create(
-#                             {
-#                                 'exam_id': wizard.exam_id.id,
-#                                 'school_id': std_class.school_id.id,
-#                                 'class_id': std_class.id,
-#                                 'student_id': student.id,
-#                             }
-#                         )
-#
-#                     student_marks = Student_marks.search([
-#                         ("exam_result_id", '=', result_id.id),
-#                         ("subject_id", '=', subject.id),
-#                     ])
-#                     if not student_marks:
-#                         student_marks = Student_marks.create({
-#                             "exam_result_id": result_id.id,
-#                             "subject_id": subject.id,
-#                             "mo1": 0,
-#                             "mo2": 0,
-#                             "grace_mark": 0,
-#                             "total_mark": 0,
-#                         })
-#
-#
-#                     # ===================================
-#
-#     return {
-#         'type': 'ir.actions.client',
-#         'tag': 'display_notification',
-#         'params': {
-#             'title': _("Success"),
-#             'message': _("Mark slip created successfully."),
-#             'type': 'success',
-#             'sticky': False,
-#         }
-#     }

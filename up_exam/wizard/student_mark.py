@@ -120,22 +120,23 @@ class SubjectResultWiz(models.TransientModel):
         data = self.read()[0]
         return self.env.ref("exam.add_exam_result_id_qweb").report_action([], data=data)
 
-    def action_print_markslip(self):
-        classes = self.class_ids.ids
-        data = {
-            'classes': classes
-        }
-        return self.env.ref('up_exam.mark_slip_report_action').report_action(self, data=data)
+    # def action_print_markslip(self):
+    #     classes = self.class_ids.ids
+    #     data = {
+    #         'classes': classes,
+    #         'academic_year': self.exam_id.academic_year.name or ''
+    #     }
+    #     return self.env.ref('up_exam.mark_slip_report_action').report_action(self, data=data)
 
-    def action_print_markssummary(self):
-        example_id = self.exam_id
-        classes = self.class_ids.ids
-        data = {
-            # 'print_separate': self.print_separate,
-            'classes': classes,
-            'exam': example_id.id
-        }
-        return self.env.ref('up_exam.mark_summary_report_action').report_action(self, data=data)
+    # def action_print_markssummary(self):
+    #     example_id = self.exam_id
+    #     classes = self.class_ids.ids
+    #     data = {
+    #         # 'print_separate': self.print_separate,
+    #         'classes': classes,
+    #         'exam': example_id.id
+    #     }
+    #     return self.env.ref('up_exam.mark_summary_report_action').report_action(self, data=data)
 
 class SubjectResultLine(models.TransientModel):
     _name = 'student.marks.line'
@@ -262,22 +263,25 @@ class SubjectViewMarkWiz(models.TransientModel):
         data = self.read()[0]
         return self.env.ref("exam.add_exam_result_id_qweb").report_action([], data=data)
 
-    def action_print_markslip(self):
-        classes = self.class_ids.ids
-        data = {
-            'classes': classes
-        }
-        return self.env.ref('up_exam.mark_slip_report_action').report_action(self, data=data)
+    # def action_print_markslip(self):
+    #     print("DDDDDDDDDDDDDDDDDDD")
+    #     classes = self.class_ids.ids
+    #     data = {
+    #         'classes': classes,
+    #         'academic_year': self.exam_id.academic_year.name or ''
+    #
+    #     }
+    #     return self.env.ref('up_exam.mark_slip_report_action').report_action(self, data=data)
 
-    def action_print_markssummary(self):
-        example_id = self.exam_id
-        classes = self.class_ids.ids
-        data = {
-            # 'print_separate': self.print_separate,
-            'classes': classes,
-            'exam': example_id.id
-        }
-        return self.env.ref('up_exam.mark_summary_report_action').report_action(self, data=data)
+    # def action_print_markssummary(self):
+    #     example_id = self.exam_id
+    #     classes = self.class_ids.ids
+    #     data = {
+    #         # 'print_separate': self.print_separate,
+    #         'classes': classes,
+    #         'exam': example_id.id
+    #     }
+    #     return self.env.ref('up_exam.mark_summary_report_action').report_action(self, data=data)
 
 class SubjectViewMarkWizLine(models.TransientModel):
     _name = 'student.view.marks.line'
@@ -382,10 +386,12 @@ class MarkSlip(models.TransientModel):
         }
 
     def action_print_markslip(self):
+        print("dvvv-----------------")
         classes = self.class_ids.ids
         data = {
             # 'print_separate': self.print_separate,
-            'classes': classes
+            'classes': classes,
+            'academic_year': self.exam_id.academic_year.name or ''
         }
         return self.env.ref('up_exam.mark_slip_report_action').report_action(self, data=data)
 

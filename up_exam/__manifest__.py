@@ -20,7 +20,7 @@
         "views/school_view.xml",
         "wizard/student_marks.xml",
         "wizard/result_build_wiz.xml",
-        # "report/report_view.xml"
+        "report/report_view.xml"
     ],
     "demo": [],
     "installable": True,

@@ -15,20 +15,23 @@ class Markslip(models.AbstractModel):
 	def _get_report_values(self, docids, data=None):
 		# data = self.get_subject_summary_by_class()
 		# return self.env.ref('your_module.subject_summary_report').report_action(self, data=data)
-		report1 = self.env['ir.actions.report']._get_report_from_name('up_exam.report_markslip')
-		print("Report , ", report1)
-		print("data , ", data)
-		if data and data.get('classes'):
-			clases = self.env['school.standard'].browse(data.get('classes'))
-			print("Class=", clases)
 
+		report1 = self.env['ir.actions.report']._get_report_from_name('up_exam.report_markslip')
+		if data:
+			print("Data=", data)
+			if data.get('classes'):
+				clases = self.env['school.standard'].browse(data.get('classes'))
+				print("Class=", clases)
+			if data.get('academic_year'):
+				academic_year = data.get('academic_year')
 
 		return {
 			'doc_ids': self.ids,
 			'doc_model': report1.model,
 			'docs': clases,
-
+			'academic_year': academic_year
 		}
+
 
 class MarkSummaryReport(models.AbstractModel):
 	_name = 'report.up_exam.report_markssummary'

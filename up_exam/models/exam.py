@@ -134,9 +134,7 @@ class ExamStudentMarks(models.Model):
     subject_id = fields.Many2one("subject.subject")
     standard_id = fields.Many2one("school.standard")
     academic_year_id = fields.Many2one("academic.year", "Academic Year", help="Academic Year")
-
     mo1 = fields.Integer("HEY Obtain")
-
     mo2 = fields.Integer("FE Obtain")
     t_mo2 = fields.Integer("FE Maz")
     t_mo1 = fields.Integer("HYE Max")
@@ -257,8 +255,6 @@ class ExamResult(models.Model):
     student_marks_ids = fields.One2many("student.marks", "exam_result_id", "Marks", help="Student Marks")
 
 
-
-
     def cal_result(self):
         PASS_MARK = 33
         TOTAL_GRACE = 20
@@ -355,7 +351,6 @@ class ExamResult(models.Model):
         self.state = 'draft'
         self.is_cald = False
 
-
     def cal_division(self, percentage):
         if percentage:
             if percentage > 59:
@@ -364,6 +359,14 @@ class ExamResult(models.Model):
                 return "II"
             return "III"
         return ''
+
+    def update_marks1(self):
+        for rec in self.search([]):
+            for c in rec.student_marks_ids:
+                if not c.standard_id:
+                    c.standard_id = rec.class_id.id
+
+
 
 
 

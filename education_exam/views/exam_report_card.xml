@@ -43,8 +43,10 @@
                             <div class="row">
                                 <!-- Student Image -->
                                 <div class="col-4" style="text-align:center;">
-                                    <img t-if="doc.student_id.photo" t-att-src="image_data_uri(doc.student_id.photo)"
+                                    <t t-if="doc.student_id and doc.student_id.photo">
+                                    <img t-att-src="image_data_uri(doc.student_id.photo)"
                                          style="width:120px; height:120px; border-radius:5%;" alt="Student"/>
+                                    </t>
                                 </div>
 
                                 <!-- Student Info -->

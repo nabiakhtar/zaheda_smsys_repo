@@ -2,355 +2,357 @@
 <odoo>
     <template id="report_markslip">
         <t t-call="web.html_container">
-            <style>
-                @font-face {
-                font-family: 'UrduFont';
-                src: url('/up_exam/static/fonts/Jameel Noori Nastaleeq Regular.ttf') format('truetype');
-                }
-                .urdu-text {
-                font-family: 'UrduFont';
-                direction: rtl;
-                unicode-bidi: bidi-override;
-                font-size: 16px;
-                }
-                @page {
-                size: A4;
-                margin: 10mm;
-                @top-center {
-                content: element(header);
-                }
-                @bottom-center {
-                content: element(footer);
-                }
-                }
+            <t t-call="web.basic_layout">
+                <style>
+                    @font-face {
+                    font-family: 'UrduFont';
+                    src: url('/up_exam/static/fonts/Jameel Noori Nastaleeq Regular.ttf') format('truetype');
+                    }
+                    .urdu-text {
+                    font-family: 'UrduFont';
+                    direction: rtl;
+                    unicode-bidi: bidi-override;
+                    font-size: 16px;
+                    }
+                    @page {
+                    size: A4;
+                    margin: 10mm;
+                    @top-center {
+                    content: element(header);
+                    }
+                    @bottom-center {
+                    content: element(footer);
+                    }
+                    }
 
-                /* Watermark style */
-                .watermark {
-                position: absolute;
-                opacity: 0.1;
-                font-size: 80px;
-                font-weight: bold;
-                color: #ccc;
-                transform: rotate(-45deg);
-                top: 40%;
-                left: 10%;
-                z-index: -1;
-                }
+                    /* Watermark style */
+                    .watermark {
+                    position: absolute;
+                    opacity: 0.1;
+                    font-size: 80px;
+                    font-weight: bold;
+                    color: #ccc;
+                    transform: rotate(-45deg);
+                    top: 40%;
+                    left: 10%;
+                    z-index: -1;
+                    }
 
-                .page-header {
-                position: running(header);
-                text-align: center;
-                border-bottom: 2px solid #2c3e50;
-                padding-bottom: 5px;
-                margin-bottom: 15px;
-                }
+                    .page-header {
+                    position: running(header);
+                    text-align: center;
+                    border-bottom: 2px solid #2c3e50;
+                    padding-bottom: 5px;
+                    margin-bottom: 15px;
+                    }
 
-                .page-footer {
-                position: running(footer);
-                text-align: center;
-                font-size: 10px;
-                color: #666;
-                border-top: 1px solid #ddd;
-                padding-top: 5px;
-                margin-top: 20px;
-                }
+                    .page-footer {
+                    position: running(footer);
+                    text-align: center;
+                    font-size: 10px;
+                    color: #666;
+                    border-top: 1px solid #ddd;
+                    padding-top: 5px;
+                    margin-top: 20px;
+                    }
 
-                .slip-row {
-                display: flex;
-                justify-content: space-between;
-                gap: 15px;
-                width: 100%;
-                margin-bottom: 15px;
-                page-break-inside: avoid;
-                }
+                    .slip-row {
+                    display: flex;
+                    justify-content: space-between;
+                    gap: 15px;
+                    width: 100%;
+                    margin-bottom: 15px;
+                    page-break-inside: avoid;
+                    }
 
-                .slip-box {
-                width: 48%;
-                border: 2px solid #2c3e50;
-                border-radius: 8px;
-                padding: 2px 10px;
-                box-sizing: border-box;
-                background: #fff;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-                position: relative;
-                overflow: hidden;
-                }
+                    .slip-box {
+                    width: 48%;
+                    border: 2px solid #2c3e50;
+                    border-radius: 8px;
+                    padding: 2px 10px;
+                    box-sizing: border-box;
+                    background: #fff;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                    position: relative;
+                    overflow: hidden;
+                    }
 
-                /* Copy label */
-                .copy-label {
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                background: #e74c3c;
-                color: white;
-                padding: 2px 8px;
-                border-radius: 3px;
-                font-size: 10px;
-                font-weight: bold;
-                }
+                    /* Copy label */
+                    .copy-label {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    background: #e74c3c;
+                    color: white;
+                    padding: 2px 8px;
+                    border-radius: 3px;
+                    font-size: 10px;
+                    font-weight: bold;
+                    }
 
-                .slip-box:first-child .copy-label {
-                background: #3498db;
-                content: "ORIGINAL";
-                }
+                    .slip-box:first-child .copy-label {
+                    background: #3498db;
+                    content: "ORIGINAL";
+                    }
 
-                .header-container {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin-bottom: 10px;
-                padding-bottom: 8px;
-                border-bottom: 2px solid #3498db;
-                }
+                    .header-container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-bottom: 10px;
+                    padding-bottom: 8px;
+                    border-bottom: 2px solid #3498db;
+                    }
 
-                .logo-section {
-                display: flex;
-                align-items: center;
-                gap: 15px;
-                margin-right: 20px;
-                }
+                    .logo-section {
+                    display: flex;
+                    align-items: center;
+                    gap: 15px;
+                    margin-right: 20px;
+                    }
 
-                .header-logo {
-                width: 70px;
-                height: 70px;
-                object-fit: contain;
-                border: 1px solid #ddd;
-                border-radius: 4px;
-                padding: 3px;
-                background: white;
-                }
+                    .header-logo {
+                    width: 70px;
+                    height: 70px;
+                    object-fit: contain;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    padding: 3px;
+                    background: white;
+                    }
 
-                .school-info {
-                text-align: left;
-                }
+                    .school-info {
+                    text-align: left;
+                    }
 
-                .school-name {
-                font-size: 20px;
-                font-weight: bold;
-                color: #2c3e50;
-                margin: 0;
-                line-height: 1.2;
-                }
+                    .school-name {
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: #2c3e50;
+                    margin: 0;
+                    line-height: 1.2;
+                    }
 
-                .school-address {
-                font-size: 11px;
-                color: #555;
-                margin: 2px 0;
-                }
+                    .school-address {
+                    font-size: 11px;
+                    color: #555;
+                    margin: 2px 0;
+                    }
 
-                .document-title {
-                text-align: center;
-                background: linear-gradient(135deg, #3498db, #2c3e50);
-                color: black;
-                padding: 5px;
-                margin: 10px 0 15px 0;
-                border-radius: 4px;
-                font-size: 18px;
-                font-weight: bold;
-                letter-spacing: 1px;
-                }
+                    .document-title {
+                    text-align: center;
+                    background: linear-gradient(135deg, #3498db, #2c3e50);
+                    color: black;
+                    padding: 5px;
+                    margin: 10px 0 15px 0;
+                    border-radius: 4px;
+                    font-size: 18px;
+                    font-weight: bold;
+                    letter-spacing: 1px;
+                    }
 
-                .info-section {
-                background: #f8f9fa;
-                border: 1px solid #dee2e6;
-                border-radius: 5px;
-                padding: 10px;
-                margin-bottom: 15px;
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 10px;
-                }
+                    .info-section {
+                    background: #f8f9fa;
+                    border: 1px solid #dee2e6;
+                    border-radius: 5px;
+                    padding: 10px;
+                    margin-bottom: 15px;
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                    gap: 10px;
+                    }
 
-                .info-item {
-                display: flex;
-                align-items: center;
-                gap: 5px;
-                }
+                    .info-item {
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    }
 
-                .info-label {
-                font-weight: bold;
-                color: #2c3e50;
-                min-width: 80px;
-                }
+                    .info-label {
+                    font-weight: bold;
+                    color: #2c3e50;
+                    min-width: 80px;
+                    }
 
-                .info-value {
-                color: #34495e;
-                flex-grow: 1;
-                }
+                    .info-value {
+                    color: #34495e;
+                    flex-grow: 1;
+                    }
 
-                .term-label {
-                background: #e74c3c;
-                color: white;
-                padding: 4px 12px;
-                border-radius: 20px;
-                font-size: 12px;
-                font-weight: bold;
-                display: inline-block;
-                margin-left: 10px;
-                }
+                    .term-label {
+                    background: #e74c3c;
+                    color: white;
+                    padding: 4px 12px;
+                    border-radius: 20px;
+                    font-size: 12px;
+                    font-weight: bold;
+                    display: inline-block;
+                    margin-left: 10px;
+                    }
 
-                table {
-                width: 100%;
-                border-collapse: collapse;
-                margin: 15px 0;
-                font-size: 12px;
-                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-                }
+                    table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin: 15px 0;
+                    font-size: 12px;
+                    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+                    }
 
-                table thead {
-                background: linear-gradient(135deg, #3498db, #2980b9);
-                color: white;
-                }
+                    table thead {
+                    background: linear-gradient(135deg, #3498db, #2980b9);
+                    color: white;
+                    }
 
-                table th {
-                padding: 10px 8px;
-                text-align: center;
-                font-weight: bold;
-                border: 1px solid #2980b9;
-                font-size: 13px;
-                }
+                    table th {
+                    padding: 10px 8px;
+                    text-align: center;
+                    font-weight: bold;
+                    border: 1px solid #2980b9;
+                    font-size: 13px;
+                    }
 
-                table td {
-                padding: 5px;
-                border: 1px solid #dee2e6;
-                text-align: center;
-                vertical-align: middle;
-                }
+                    table td {
+                    padding: 5px;
+                    border: 1px solid #dee2e6;
+                    text-align: center;
+                    vertical-align: middle;
+                    }
 
-                table tbody tr:nth-child(even) {
-                background-color: #f8f9fa;
-                }
+                    table tbody tr:nth-child(even) {
+                    background-color: #f8f9fa;
+                    }
 
-                table tbody tr:hover {
-                background-color: #e8f4fc;
-                transition: background-color 0.2s;
-                }
+                    table tbody tr:hover {
+                    background-color: #e8f4fc;
+                    transition: background-color 0.2s;
+                    }
 
-                .marks-cell {
-                width: 80px;
-                font-weight: bold;
-                background: #f1f8ff;
-                }
+                    .marks-cell {
+                    width: 80px;
+                    font-weight: bold;
+                    background: #f1f8ff;
+                    }
 
-                .signature-section {
-                margin-top: 20px;
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-                padding-top: 15px;
-                border-top: 2px dashed #ddd;
-                }
+                    .signature-section {
+                    margin-top: 20px;
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 20px;
+                    padding-top: 15px;
+                    border-top: 2px dashed #ddd;
+                    }
 
-                .signature-box {
-                text-align: center;
-                padding: 10px;
-                border: 1px solid #ddd;
-                border-radius: 5px;
-                background: #f8f9fa;
-                }
+                    .signature-box {
+                    text-align: center;
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    background: #f8f9fa;
+                    }
 
-                .signature-line {
-                width: 200px;
-                border-bottom: 1px solid #2c3e50;
-                margin: 30px auto 5px;
-                position: relative;
-                }
+                    .signature-line {
+                    width: 200px;
+                    border-bottom: 1px solid #2c3e50;
+                    margin: 30px auto 5px;
+                    position: relative;
+                    }
 
-                .signature-label {
-                font-size: 12px;
-                color: #555;
-                margin-top: 5px;
-                }
+                    .signature-label {
+                    font-size: 12px;
+                    color: #555;
+                    margin-top: 5px;
+                    }
 
-                .date-section {
-                text-align: right;
-                margin-top: 15px;
-                font-size: 12px;
-                color: #666;
-                font-style: italic;
-                }
+                    .date-section {
+                    text-align: right;
+                    margin-top: 15px;
+                    font-size: 12px;
+                    color: #666;
+                    font-style: italic;
+                    }
 
-                .footer-note {
-                text-align: center;
-                font-size: 10px;
-                color: #666;
-                margin-top: 5px;
-                margin-bottom:5px;
-                padding: 2px;
-                border-top: 1px solid #eee;
-                }
+                    .footer-note {
+                    text-align: center;
+                    font-size: 10px;
+                    color: #666;
+                    margin-top: 5px;
+                    margin-bottom:5px;
+                    padding: 2px;
+                    border-top: 1px solid #eee;
+                    }
 
-                .stamp {
-                position: absolute;
-                bottom: 20px;
-                right: 20px;
-                width: 80px;
-                height: 80px;
-                opacity: 0.3;
-                z-index: 0;
-                }
+                    .stamp {
+                    position: absolute;
+                    bottom: 20px;
+                    right: 20px;
+                    width: 80px;
+                    height: 80px;
+                    opacity: 0.3;
+                    z-index: 0;
+                    }
 
-                /* Print optimization */
-                @media print {
-                .slip-box {
-                box-shadow: none;
-                border: 2px solid #000;
-                }
+                    /* Print optimization */
+                    @media print {
+                    .slip-box {
+                    box-shadow: none;
+                    border: 2px solid #000;
+                    }
 
-                table tbody tr:nth-child(even) {
-                background-color: #f5f5f5;
-                -webkit-print-color-adjust: exact;
-                }
+                    table tbody tr:nth-child(even) {
+                    background-color: #f5f5f5;
+                    -webkit-print-color-adjust: exact;
+                    }
 
-                .document-title {
-                -webkit-print-color-adjust: exact;
-                }
+                    .document-title {
+                    -webkit-print-color-adjust: exact;
+                    }
 
-                table thead {
-                -webkit-print-color-adjust: exact;
-                }
-                }
+                    table thead {
+                    -webkit-print-color-adjust: exact;
+                    }
+                    }
 
-                /* Responsive adjustments */
-                @media (max-width: 1200px) {
-                .slip-row {
-                flex-direction: column;
-                }
+                    /* Responsive adjustments */
+                    @media (max-width: 1200px) {
+                    .slip-row {
+                    flex-direction: column;
+                    }
 
-                .slip-box {
-                width: 100%;
-                margin-bottom: 20px;
-                }
-                }
+                    .slip-box {
+                    width: 100%;
+                    margin-bottom: 20px;
+                    }
+                    }
 
-                .student-count {
-                background: #2ecc71;
-                color: white;
-                padding: 3px 8px;
-                border-radius: 3px;
-                font-size: 11px;
-                float: right;
-                }
+                    .student-count {
+                    background: #2ecc71;
+                    color: white;
+                    padding: 3px 8px;
+                    border-radius: 3px;
+                    font-size: 11px;
+                    float: right;
+                    }
 
-                .academic-year {
-                background: #9b59b6;
-                color: white;
-                padding: 3px 8px;
-                border-radius: 3px;
-                font-size: 11px;
-                margin-left: 10px;
-                }
-            </style>
-            <table>
-                <tr>
-                    <td>
-                        <t t-call="up_exam.subject_marks"/>
-                    </td>
-                    <td>
-                        <t t-call="up_exam.subject_marks"/>
-                    </td>
-                </tr>
-            </table>
+                    .academic-year {
+                    background: #9b59b6;
+                    color: white;
+                    padding: 3px 8px;
+                    border-radius: 3px;
+                    font-size: 11px;
+                    margin-left: 10px;
+                    }
+                </style>
+                <table>
+                    <tr>
+                        <td>
+                            <t t-call="up_exam.subject_marks"/>
+                        </td>
+                        <td>
+                            <t t-call="up_exam.subject_marks"/>
+                        </td>
+                    </tr>
+                </table>
+            </t>
         </t>
     </template>
     <template id="subject_marks">
@@ -358,9 +360,9 @@
             <!-- Fetch students -->
             <t t-set="students"
                t-value="env['student.student'].search([('standard_id','=', cls.id),('state', '=', 'done')], order='roll_no')"/>
-            <div class="urdu-text">
-                <t t-esc="students[1].name"/>
-            </div>
+            <!--                <div class="urdu-text">-->
+            <!--                    <t t-esc="students[1].name"/>-->
+            <!--                </div>-->
 
             <!-- TWO SLIPS SIDE BY SIDE -->
             <div class="slip-row">
@@ -375,7 +377,9 @@
                             <span class="info-label">Class:</span>
                             <span class="info-value">
                                 <t t-esc="cls.name"/>
-                                <span class="term-label">TERM</span>
+                                <span class="term-label">
+                                   <t t-esc="academic_year"/>
+                                </span>
                             </span>
                         </div>
                         <div class="info-item">
@@ -454,472 +458,478 @@
     <!--    ======================================MARK SUMMARY ================================-->
     <template id="report_markssummary">
         <t t-call="web.html_container">
-            <style>
-                @page {
-                size: A4;
-                margin: 10mm;
-                @top-center {
-                content: element(header);
-                }
-                @bottom-center {
-                content: element(footer);
-                }
-                }
+            <t t-call="web.basic_layout">
+                <style>
+                    @page {
+                    size: A4;
+                    margin: 10mm;
+                    @top-center {
+                    content: element(header);
+                    }
+                    @bottom-center {
+                    content: element(footer);
+                    }
+                    }
 
-                /* Watermark style */
-                .watermark {
-                position: absolute;
-                opacity: 0.1;
-                font-size: 80px;
-                font-weight: bold;
-                color: #ccc;
-                transform: rotate(-45deg);
-                top: 40%;
-                left: 10%;
-                z-index: -1;
-                }
+                    /* Watermark style */
+                    .watermark {
+                    position: absolute;
+                    opacity: 0.1;
+                    font-size: 80px;
+                    font-weight: bold;
+                    color: #ccc;
+                    transform: rotate(-45deg);
+                    top: 40%;
+                    left: 10%;
+                    z-index: -1;
+                    }
 
-                .page-header {
-                position: running(header);
-                text-align: center;
-                border-bottom: 2px solid #2c3e50;
-                padding-bottom: 5px;
-                margin-bottom: 15px;
-                }
+                    .page-header {
+                    position: running(header);
+                    text-align: center;
+                    border-bottom: 2px solid #2c3e50;
+                    padding-bottom: 5px;
+                    margin-bottom: 15px;
+                    }
 
-                .page-footer {
-                position: running(footer);
-                text-align: center;
-                font-size: 10px;
-                color: #666;
-                border-top: 1px solid #ddd;
-                padding-top: 5px;
-                margin-top: 20px;
-                }
+                    .page-footer {
+                    position: running(footer);
+                    text-align: center;
+                    font-size: 10px;
+                    color: #666;
+                    border-top: 1px solid #ddd;
+                    padding-top: 5px;
+                    margin-top: 20px;
+                    }
 
-                .slip-row {
-                display: flex;
-                justify-content: space-between;
-                gap: 15px;
-                width: 100%;
-                margin-bottom: 15px;
-                page-break-inside: avoid;
-                }
+                    .slip-row {
+                    display: flex;
+                    justify-content: space-between;
+                    gap: 15px;
+                    width: 100%;
+                    margin-bottom: 15px;
+                    page-break-inside: avoid;
+                    }
 
-                .slip-box {
-                width: 48%;
-                border: 2px solid #2c3e50;
-                border-radius: 8px;
-                padding: 2px 10px;
-                box-sizing: border-box;
-                background: #fff;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-                position: relative;
-                overflow: hidden;
-                }
+                    .slip-box {
+                    width: 48%;
+                    border: 2px solid #2c3e50;
+                    border-radius: 8px;
+                    padding: 2px 10px;
+                    box-sizing: border-box;
+                    background: #fff;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                    position: relative;
+                    overflow: hidden;
+                    }
 
-                /* Copy label */
-                .copy-label {
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                background: #e74c3c;
-                color: white;
-                padding: 2px 8px;
-                border-radius: 3px;
-                font-size: 10px;
-                font-weight: bold;
-                }
+                    /* Copy label */
+                    .copy-label {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    background: #e74c3c;
+                    color: white;
+                    padding: 2px 8px;
+                    border-radius: 3px;
+                    font-size: 10px;
+                    font-weight: bold;
+                    }
 
-                .slip-box:first-child .copy-label {
-                background: #3498db;
-                content: "ORIGINAL";
-                }
+                    .slip-box:first-child .copy-label {
+                    background: #3498db;
+                    content: "ORIGINAL";
+                    }
 
-                .header-container {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin-bottom: 10px;
-                padding-bottom: 8px;
-                border-bottom: 2px solid #3498db;
-                }
+                    .header-container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-bottom: 10px;
+                    padding-bottom: 8px;
+                    border-bottom: 2px solid #3498db;
+                    }
 
-                .logo-section {
-                display: flex;
-                align-items: center;
-                gap: 15px;
-                margin-right: 20px;
-                }
+                    .logo-section {
+                    display: flex;
+                    align-items: center;
+                    gap: 15px;
+                    margin-right: 20px;
+                    }
 
-                .header-logo {
-                width: 70px;
-                height: 70px;
-                object-fit: contain;
-                border: 1px solid #ddd;
-                border-radius: 4px;
-                padding: 3px;
-                background: white;
-                }
+                    .header-logo {
+                    width: 70px;
+                    height: 70px;
+                    object-fit: contain;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    padding: 3px;
+                    background: white;
+                    }
 
-                .school-info {
-                text-align: left;
-                }
+                    .school-info {
+                    text-align: left;
+                    }
 
-                .school-name {
-                font-size: 20px;
-                font-weight: bold;
-                color: #2c3e50;
-                margin: 0;
-                line-height: 1.2;
-                }
+                    .school-name {
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: #2c3e50;
+                    margin: 0;
+                    line-height: 1.2;
+                    }
 
-                .school-address {
-                font-size: 11px;
-                color: #555;
-                margin: 2px 0;
-                }
+                    .school-address {
+                    font-size: 11px;
+                    color: #555;
+                    margin: 2px 0;
+                    }
 
-                .document-title {
-                text-align: center;
-                background: linear-gradient(135deg, #3498db, #2c3e50);
-                color: black;
-                padding: 5px;
-                margin: 10px 0 15px 0;
-                border-radius: 4px;
-                font-size: 18px;
-                font-weight: bold;
-                letter-spacing: 1px;
-                }
+                    .document-title {
+                    text-align: center;
+                    background: linear-gradient(135deg, #3498db, #2c3e50);
+                    color: black;
+                    padding: 5px;
+                    margin: 10px 0 15px 0;
+                    border-radius: 4px;
+                    font-size: 18px;
+                    font-weight: bold;
+                    letter-spacing: 1px;
+                    }
 
-                .info-section {
-                background: #f8f9fa;
-                border: 1px solid #dee2e6;
-                border-radius: 5px;
-                padding: 10px;
-                margin-bottom: 15px;
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 10px;
-                }
+                    .info-section {
+                    background: #f8f9fa;
+                    border: 1px solid #dee2e6;
+                    border-radius: 5px;
+                    padding: 10px;
+                    margin-bottom: 15px;
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                    gap: 10px;
+                    }
 
-                .info-item {
-                display: flex;
-                align-items: center;
-                gap: 5px;
-                }
+                    .info-item {
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    }
 
-                .info-label {
-                font-weight: bold;
-                color: #2c3e50;
-                min-width: 80px;
-                }
+                    .info-label {
+                    font-weight: bold;
+                    color: #2c3e50;
+                    min-width: 80px;
+                    }
 
-                .info-value {
-                color: #34495e;
-                flex-grow: 1;
-                }
+                    .info-value {
+                    color: #34495e;
+                    flex-grow: 1;
+                    }
 
-                .term-label {
-                background: #e74c3c;
-                color: white;
-                padding: 4px 12px;
-                border-radius: 20px;
-                font-size: 12px;
-                font-weight: bold;
-                display: inline-block;
-                margin-left: 10px;
-                }
+                    .term-label {
+                    background: #e74c3c;
+                    color: white;
+                    padding: 4px 12px;
+                    border-radius: 20px;
+                    font-size: 12px;
+                    font-weight: bold;
+                    display: inline-block;
+                    margin-left: 10px;
+                    }
 
-                table {
-                width: 100%;
-                border-collapse: collapse;
-                margin: 15px 0;
-                font-size: 12px;
-                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-                }
+                    table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin: 15px 0;
+                    font-size: 12px;
+                    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+                    }
 
-                table thead {
-                background: linear-gradient(135deg, #3498db, #2980b9);
-                color: white;
-                }
+                    table thead {
+                    background: linear-gradient(135deg, #3498db, #2980b9);
+                    color: white;
+                    }
 
-                table th {
-                padding: 10px 8px;
-                text-align: center;
-                font-weight: bold;
-                border: 1px solid #2980b9;
-                font-size: 13px;
-                }
+                    table th {
+                    padding: 10px 8px;
+                    text-align: center;
+                    font-weight: bold;
+                    border: 1px solid #2980b9;
+                    font-size: 13px;
+                    }
 
-                table td {
-                padding: 5px;
-                border: 1px solid #dee2e6;
-                text-align: center;
-                vertical-align: middle;
-                }
+                    table td {
+                    padding: 5px;
+                    border: 1px solid #dee2e6;
+                    text-align: center;
+                    vertical-align: middle;
+                    }
 
-                table tbody tr:nth-child(even) {
-                background-color: #f8f9fa;
-                }
+                    table tbody tr:nth-child(even) {
+                    background-color: #f8f9fa;
+                    }
 
-                table tbody tr:hover {
-                background-color: #e8f4fc;
-                transition: background-color 0.2s;
-                }
+                    table tbody tr:hover {
+                    background-color: #e8f4fc;
+                    transition: background-color 0.2s;
+                    }
 
-                .marks-cell {
-                width: 80px;
-                font-weight: bold;
-                background: #f1f8ff;
-                }
+                    .marks-cell {
+                    width: 80px;
+                    font-weight: bold;
+                    background: #f1f8ff;
+                    }
 
-                .signature-section {
-                margin-top: 20px;
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-                padding-top: 15px;
-                border-top: 2px dashed #ddd;
-                }
+                    .signature-section {
+                    margin-top: 20px;
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 20px;
+                    padding-top: 15px;
+                    border-top: 2px dashed #ddd;
+                    }
 
-                .signature-box {
-                text-align: center;
-                padding: 10px;
-                border: 1px solid #ddd;
-                border-radius: 5px;
-                background: #f8f9fa;
-                }
+                    .signature-box {
+                    text-align: center;
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    background: #f8f9fa;
+                    }
 
-                .signature-line {
-                width: 200px;
-                border-bottom: 1px solid #2c3e50;
-                margin: 30px auto 5px;
-                position: relative;
-                }
+                    .signature-line {
+                    width: 200px;
+                    border-bottom: 1px solid #2c3e50;
+                    margin: 30px auto 5px;
+                    position: relative;
+                    }
 
-                .signature-label {
-                font-size: 12px;
-                color: #555;
-                margin-top: 5px;
-                }
+                    .signature-label {
+                    font-size: 12px;
+                    color: #555;
+                    margin-top: 5px;
+                    }
 
-                .date-section {
-                text-align: right;
-                margin-top: 15px;
-                font-size: 12px;
-                color: #666;
-                font-style: italic;
-                }
+                    .date-section {
+                    text-align: right;
+                    margin-top: 15px;
+                    font-size: 12px;
+                    color: #666;
+                    font-style: italic;
+                    }
 
-                .footer-note {
-                text-align: center;
-                font-size: 10px;
-                color: #666;
-                margin-top: 10px;
-                padding: 5px;
-                border-top: 1px solid #eee;
-                }
+                    .footer-note {
+                    text-align: center;
+                    font-size: 10px;
+                    color: #666;
+                    margin-top: 10px;
+                    padding: 5px;
+                    border-top: 1px solid #eee;
+                    }
 
-                .stamp {
-                position: absolute;
-                bottom: 20px;
-                right: 20px;
-                width: 80px;
-                height: 80px;
-                opacity: 0.3;
-                z-index: 0;
-                }
+                    .stamp {
+                    position: absolute;
+                    bottom: 20px;
+                    right: 20px;
+                    width: 80px;
+                    height: 80px;
+                    opacity: 0.3;
+                    z-index: 0;
+                    }
 
-                /* Print optimization */
-                @media print {
-                .slip-box {
-                box-shadow: none;
-                border: 2px solid #000;
-                }
+                    /* Print optimization */
+                    @media print {
+                    .slip-box {
+                    box-shadow: none;
+                    border: 2px solid #000;
+                    }
 
-                table tbody tr:nth-child(even) {
-                background-color: #f5f5f5;
-                -webkit-print-color-adjust: exact;
-                }
+                    table tbody tr:nth-child(even) {
+                    background-color: #f5f5f5;
+                    -webkit-print-color-adjust: exact;
+                    }
 
-                .document-title {
-                -webkit-print-color-adjust: exact;
-                }
+                    .document-title {
+                    -webkit-print-color-adjust: exact;
+                    }
 
-                table thead {
-                -webkit-print-color-adjust: exact;
-                }
-                }
+                    table thead {
+                    -webkit-print-color-adjust: exact;
+                    }
+                    }
 
-                /* Responsive adjustments */
-                @media (max-width: 1200px) {
-                .slip-row {
-                flex-direction: column;
-                }
+                    /* Responsive adjustments */
+                    @media (max-width: 1200px) {
+                    .slip-row {
+                    flex-direction: column;
+                    }
 
-                .slip-box {
-                width: 100%;
-                margin-bottom: 20px;
-                }
-                }
+                    .slip-box {
+                    width: 100%;
+                    margin-bottom: 20px;
+                    }
+                    }
 
-                .student-count {
-                background: #2ecc71;
-                color: white;
-                padding: 3px 8px;
-                border-radius: 3px;
-                font-size: 11px;
-                float: right;
-                }
+                    .student-count {
+                    background: #2ecc71;
+                    color: white;
+                    padding: 3px 8px;
+                    border-radius: 3px;
+                    font-size: 11px;
+                    float: right;
+                    }
 
-                .academic-year {
-                background: #9b59b6;
-                color: white;
-                padding: 3px 8px;
-                border-radius: 3px;
-                font-size: 11px;
-                margin-left: 10px;
-                }
-            </style>
-            <t t-foreach="docs" t-as="cls">
-                <!-- Page Header -->
-                <!--            <div class="page-header">-->
-                <!--                <div class="logo-section">-->
-                <!--                    &lt;!&ndash;                    <img t-if="cls.school_id.logo" class="header-logo" t-att-src="'data:image/png;base64,%s' % cls.school_id.logo"/>&ndash;&gt;-->
-                <!--                    <div class="school-info">-->
-                <!--                        <div class="school-name">-->
-                <!--                            <t t-esc="cls.school_id.name"/>-->
-                <!--&lt;!&ndash;                            atr add session &ndash;&gt;-->
-                <!--&lt;!&ndash;                            <span class="academic-year">2024-25</span>&ndash;&gt;-->
-                <!--                        </div>-->
-                <!--                        <div class="school-address">-->
-                <!--                            &lt;!&ndash;                            <t t-esc="cls.school_id.address or ''"/>&ndash;&gt;-->
-                <!--                        </div>-->
-                <!--                        <div class="school-address">-->
-                <!--                            &lt;!&ndash;                            Phone: <t t-esc="cls.school_id.phone or 'N/A'"/> | Email: <t t-esc="cls.school_id.email or 'N/A'"/>&ndash;&gt;-->
-                <!--                        </div>-->
-                <!--                    </div>-->
-                <!--                </div>-->
-                <!--            </div>-->
+                    .academic-year {
+                    background: #9b59b6;
+                    color: white;
+                    padding: 3px 8px;
+                    border-radius: 3px;
+                    font-size: 11px;
+                    margin-left: 10px;
+                    }
+                </style>
+                <t t-foreach="docs" t-as="cls">
+                    <!-- Page Header -->
+                    <!--            <div class="page-header">-->
+                    <!--                <div class="logo-section">-->
+                    <!--                    &lt;!&ndash;                    <img t-if="cls.school_id.logo" class="header-logo" t-att-src="'data:image/png;base64,%s' % cls.school_id.logo"/>&ndash;&gt;-->
+                    <!--                    <div class="school-info">-->
+                    <!--                        <div class="school-name">-->
+                    <!--                            <t t-esc="cls.school_id.name"/>-->
+                    <!--&lt;!&ndash;                            atr add session &ndash;&gt;-->
+                    <!--&lt;!&ndash;                            <span class="academic-year">2024-25</span>&ndash;&gt;-->
+                    <!--                        </div>-->
+                    <!--                        <div class="school-address">-->
+                    <!--                            &lt;!&ndash;                            <t t-esc="cls.school_id.address or ''"/>&ndash;&gt;-->
+                    <!--                        </div>-->
+                    <!--                        <div class="school-address">-->
+                    <!--                            &lt;!&ndash;                            Phone: <t t-esc="cls.school_id.phone or 'N/A'"/> | Email: <t t-esc="cls.school_id.email or 'N/A'"/>&ndash;&gt;-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <!--                </div>-->
+                    <!--            </div>-->
 
-                <!-- Fetch students -->
-                <!--            <t t-set="students" t-value="env['student.student'].search([('standard_id','=',cls.id),('state', '=', 'done')], order='roll_no')"/>-->
-                <!--                <t t-set="students"-->
-                <!--                   t-value="env['student.student'].search([('standard_id','=',cls.id)], order='roll_no')"/>-->
+                    <!-- Fetch students -->
+                    <!--            <t t-set="students" t-value="env['student.student'].search([('standard_id','=',cls.id),('state', '=', 'done')], order='roll_no')"/>-->
+                    <!--                <t t-set="students"-->
+                    <!--                   t-value="env['student.student'].search([('standard_id','=',cls.id)], order='roll_no')"/>-->
 
-                <t t-set="results"
-                   t-value="env['exam.result'].search([('class_id','=', cls.id), ('exam_id', '=', exam)])"/>
+                    <t t-set="results"
+                       t-value="env['exam.result'].search([('class_id','=', cls.id), ('exam_id', '=', exam)])"/>
 
 
-                <!--            <t t-set="student_count" t-value="len(students)"/>-->
+                    <!--            <t t-set="student_count" t-value="len(students)"/>-->
 
-                <!--            &lt;!&ndash; Document Title &ndash;&gt;-->
-                <!--            <div class="document-title">-->
-                <!--                MARKS REPORT SLIP-->
-                <!--                <span class="student-count">Total Students:-->
-                <!--                    <t t-esc="student_count"/>-->
-                <!--                </span>-->
-                <!--            </div>-->
+                    <!--            &lt;!&ndash; Document Title &ndash;&gt;-->
+                    <!--            <div class="document-title">-->
+                    <!--                MARKS REPORT SLIP-->
+                    <!--                <span class="student-count">Total Students:-->
+                    <!--                    <t t-esc="student_count"/>-->
+                    <!--                </span>-->
+                    <!--            </div>-->
 
-                <!-- TWO SLIPS SIDE BY SIDE -->
-                <div class="slip-row">
+                    <!-- TWO SLIPS SIDE BY SIDE -->
+                    <div class="slip-row">
 
-                    <!-- LEFT SLIP (ORIGINAL) -->
-                    <div class="slip-box">
-                        <div class="copy-label">Mark summary</div>
+                        <!-- LEFT SLIP (ORIGINAL) -->
+                        <div class="slip-box">
+                            <div class="copy-label">Mark summary</div>
 
-                        <!-- Class and Term Info -->
-                        <div class="info-section">
-                            <div class="info-item">
-                                <span class="info-label">Class:</span>
-                                <span class="info-value">
-                                    <t t-esc="cls.name"/>
-
-                                    <!--                                    <span class="term-label">TERM</span>-->
-                                </span>
+                            <!-- Class and Term Info -->
+                            <div class="info-section">
+                                <div class="info-item">
+                                    <span class="info-label">Class:</span>
+                                    <span class="info-value">
+                                        <t t-esc="cls.name"/>
+                                        <span class="term-label">
+                                           <t t-esc="results[0].exam_id.academic_year.name"/>
+                                        </span>
+                                    </span>
+                                </div>
+                                <!--                            <div class="info-item">-->
+                                <!--                                <span class="info-label">Subject:</span>-->
+                                <!--                                <span class="info-value">______________________</span>-->
+                                <!--                            </div>-->
+                                <!--                            <div class="info-item">-->
+                                <!--                                <span class="info-label">Teacher:</span>-->
+                                <!--                                <span class="info-value">______________________</span>-->
+                                <!--                            </div>-->
+                                <!--                        <div class="info-item">-->
+                                <!--                            <span class="info-label">Max Marks:</span>-->
+                                <!--                            <span class="info-value">-&#45;&#45;&#45;&#45;</span>-->
+                                <!--                        </div>-->
                             </div>
-                            <!--                            <div class="info-item">-->
-                            <!--                                <span class="info-label">Subject:</span>-->
-                            <!--                                <span class="info-value">______________________</span>-->
-                            <!--                            </div>-->
-                            <!--                            <div class="info-item">-->
-                            <!--                                <span class="info-label">Teacher:</span>-->
-                            <!--                                <span class="info-value">______________________</span>-->
-                            <!--                            </div>-->
-                            <!--                        <div class="info-item">-->
-                            <!--                            <span class="info-label">Max Marks:</span>-->
-                            <!--                            <span class="info-value">-&#45;&#45;&#45;&#45;</span>-->
-                            <!--                        </div>-->
-                        </div>
 
-                        <!-- Marks Table -->
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th style="width:auto;color:black">Roll No</th>
-                                    <th style="width:auto;color:black">Reg No</th>
-                                    <th style="width:auto;color:black">Student Name</th>
-                                    <!--                                    <th style="width: 20%;color:black" class="marks-cell">Marks</th>-->
-                                    <t t-foreach="cls.subject_ids" t-as="sub">
-                                        <th style="width: 10%;color:black">
-                                            <t t-esc="sub.name"/>
-                                        </th>
-                                    </t>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <t t-foreach="results" t-as="result">
+                            <!-- Marks Table -->
+                            <table>
+                                <thead>
                                     <tr>
-                                        <td>
-                                            <span style="font-weight: bold; color: #2c3e50;">
-                                                <t t-esc="result.roll_no"/>
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <t t-esc="result.reg_no"/>
-                                        </td>
-                                        <td style="text-align: left; padding-left: 15px;">
-                                            <t t-esc="result.student_id.name"/>
-                                        </td>
-
-
-                                        <t t-foreach="result.student_marks_ids" t-as="sub">
-                                            <td class="marks-cell">
-                                                <!--                                                <t t-esc="sub.subject_id.name"/>-->
-                                                <t t-esc="sub.mo1"/>
-                                                +
-                                                <t t-esc="sub.mo2"/>
-                                                =
-                                                <t t-esc="sub.mo1+sub.mo2"/>
-                                                <!--                                                <t t-esc="stud.get_subject_mark(sub.id)"/>-->
-                                            </td>
-
+                                        <th style="width:auto;color:black">Roll No</th>
+                                        <th style="width:auto;color:black">Reg No</th>
+                                        <th style="width:auto;color:black">Student Name</th>
+                                        <!--                                    <th style="width: 20%;color:black" class="marks-cell">Marks</th>-->
+                                        <t t-foreach="cls.subject_ids" t-as="sub">
+                                            <th style="width: 10%;color:black">
+                                                <t t-esc="sub.name"/>
+                                            </th>
                                         </t>
                                     </tr>
-                                </t>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="results" t-as="result">
+                                        <tr>
+                                            <td>
+                                                <span style="font-weight: bold; color: #2c3e50;">
+                                                    <t t-esc="result.roll_no"/>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <t t-esc="result.reg_no"/>
+                                            </td>
+                                            <td style="text-align: left; padding-left: 15px;">
+                                                <t t-esc="result.student_id.name"/>
+                                            </td>
 
 
-                            </tbody>
-                        </table>
+                                            <t t-foreach="result.student_marks_ids" t-as="sub">
+                                                <td class="marks-cell">
+                                                    <!--                                                <t t-esc="sub.subject_id.name"/>-->
+                                                    <t t-esc="sub.mo1"/>
+                                                    +
+                                                    <t t-esc="sub.mo2"/>
+                                                    +
+                                                    <span style="color:red">
+                                                        <t t-esc="sub.grace_mark"/>
+                                                    </span>
+                                                    =
+                                                    <t t-esc="sub.total_mark"/>
+                                                    <!--                                                <t t-esc="stud.get_subject_mark(sub.id)"/>-->
+                                                </td>
+
+                                            </t>
+                                        </tr>
+                                    </t>
+
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
 
-                <!--            &lt;!&ndash; Page Footer &ndash;&gt;-->
-                <!--            <div class="page-footer">-->
-                <!--                Generated on:-->
-                <!--                <t t-esc="datetime.datetime.now().strftime('%d/%m/%Y %H:%M')"/>-->
-                <!--                |-->
-                <!--                Page <span class="pageNumber"></span> of <span class="totalPages"></span> |-->
-                <!--                <t t-esc="cls.school_id.name"/>-->
-                <!--            </div>-->
+                    <!--            &lt;!&ndash; Page Footer &ndash;&gt;-->
+                    <!--            <div class="page-footer">-->
+                    <!--                Generated on:-->
+                    <!--                <t t-esc="datetime.datetime.now().strftime('%d/%m/%Y %H:%M')"/>-->
+                    <!--                |-->
+                    <!--                Page <span class="pageNumber"></span> of <span class="totalPages"></span> |-->
+                    <!--                <t t-esc="cls.school_id.name"/>-->
+                    <!--            </div>-->
 
-                <!--            <div style="page-break-after: always;"></div>-->
+                    <!--            <div style="page-break-after: always;"></div>-->
 
+                </t>
             </t>
         </t>
     </template>
-
 
     <record id="paperformat_mark_summary" model="report.paperformat">
         <field name="name">Mark Summary Format</field>
@@ -947,239 +957,4 @@
         <field name="binding_model_id" ref="model_exam_result"/>
         <field name="paperformat_id" ref="paperformat_mark_summary"/>
     </record>
-
-
-    <!--    ============================================ RESULT ========================================-->
-    <!--    <template id="exam_report_document">-->
-    <!--        <t t-call="web.html_container">-->
-    <!--            <div class="main-page" style="font-family: Arial; padding:15px; font-size:14px; color:#000;">-->
-
-    <!--                &lt;!&ndash; ===================== SCHOOL HEADER ===================== &ndash;&gt;-->
-    <!--                <div class="school-header" style="text-align:center; margin-bottom:10px;">-->
-    <!--                    <img t-if="doc.school_id.company_id.logo" t-att-src="'data:image/png;base64,%s' % doc.school_id.company_id.logo"-->
-    <!--                         style="width:90px; height:auto; margin-bottom:5px;"/>-->
-
-    <!--                    <h2 style="margin:2px 0; font-size:20px;">-->
-    <!--                        <t t-esc="doc.school_id.name"/>-->
-    <!--                    </h2>-->
-
-    <!--                    <div style="font-size:13px;">-->
-    <!--                        <t t-esc="doc.school_id.street"/>-->
-    <!--                        ,-->
-    <!--                        <t t-esc="doc.school_id.city"/>-->
-    <!--                        ,-->
-    <!--                        <t t-esc="doc.school_id.state_id.name"/>-->
-    <!--                        - -->
-    <!--                        <t t-esc="doc.school_id.zip"/>-->
-    <!--                    </div>-->
-    <!--                </div>-->
-
-    <!--                <hr/>-->
-
-    <!--                &lt;!&ndash; ===================== STUDENT DETAILS ===================== &ndash;&gt;-->
-    <!--                <div class="student-details" style="margin-top:10px;">-->
-
-    <!--                    <h3 style="margin-bottom:8px; border-bottom:1px solid #000; display:inline-block;">Student Details-->
-    <!--                    </h3>-->
-
-    <!--                    <table style="width:100%; border-collapse:collapse; margin-top:5px;">-->
-    <!--                        <tr>-->
-    <!--                            <td>Admission No</td>-->
-    <!--                            <td>:</td>-->
-    <!--                            <td>-->
-    <!--                                <t t-esc="doc.reg_no"/>-->
-    <!--                            </td>-->
-    <!--                            <td></td>-->
-    <!--                            <td>Roll No</td>-->
-    <!--                            <td>:</td>-->
-    <!--                            <td>-->
-    <!--                                <t t-esc="doc.roll_no"/>-->
-    <!--                            </td>-->
-    <!--                        </tr>-->
-
-    <!--                        <tr>-->
-    <!--                            <td>Student's Name</td>-->
-    <!--                            <td>:</td>-->
-    <!--                            <td>-->
-    <!--                                <t t-esc="doc.student_id.name"/>-->
-    <!--                            </td>-->
-    <!--                            <td></td>-->
-    <!--                            <td>Class</td>-->
-    <!--                            <td>:</td>-->
-    <!--                            <td>-->
-    <!--                                <t t-esc="doc.class_id.name"/>-->
-    <!--                                - -->
-    <!--                                <t t-esc="doc.student_id.division_id.name"/>-->
-    <!--                            </td>-->
-    <!--                        </tr>-->
-
-    <!--                        <tr>-->
-    <!--                            <td>Mother's Name</td>-->
-    <!--                            <td>:</td>-->
-    <!--                            <td>-->
-    <!--                                <t t-esc="doc.mother_name"/>-->
-    <!--                            </td>-->
-    <!--                            <td></td>-->
-    <!--                            <td>Date of Birth</td>-->
-    <!--                            <td>:</td>-->
-    <!--                            <td>-->
-    <!--                                <t t-esc="doc.dob"/>-->
-    <!--                            </td>-->
-    <!--                        </tr>-->
-
-    <!--                        <tr>-->
-    <!--                            <td>Father's Name</td>-->
-    <!--                            <td>:</td>-->
-    <!--                            <td>-->
-    <!--                                <t t-esc="doc.father_name"/>-->
-    <!--                            </td>-->
-    <!--                            <td></td>-->
-    <!--                            <td>Contact No</td>-->
-    <!--                            <td>:</td>-->
-    <!--                            <td>-->
-    <!--                                <t t-esc="doc.contact_no"/>-->
-    <!--                            </td>-->
-    <!--                        </tr>-->
-
-    <!--                        <tr>-->
-    <!--                            <td>Attendance</td>-->
-    <!--                            <td>:</td>-->
-    <!--                            <td>-->
-    <!--&lt;!&ndash;                                <t t-esc="doc.attendance or ''"/>&ndash;&gt;-->
-    <!--                            </td>-->
-    <!--                        </tr>-->
-    <!--                    </table>-->
-    <!--                </div>-->
-
-
-    <!--                &lt;!&ndash; ===================== ACADEMIC PERFORMANCE ===================== &ndash;&gt;-->
-    <!--                <div class="academic-performance" style="margin-top:20px;">-->
-    <!--                    <h3 style="margin-bottom:8px; border-bottom:1px solid #000; display:inline-block;">Academic-->
-    <!--                        Performance-->
-    <!--                    </h3>-->
-
-    <!--                    <table style="width:100%; border-collapse:collapse; text-align:center; margin-top:5px;">-->
-    <!--                        <thead>-->
-    <!--                            <tr style="background:#f0f0f0;">-->
-    <!--                                <th style="border:1px solid #000; padding:6px;">Subject</th>-->
-    <!--                                <th style="border:1px solid #000; padding:6px;">Max Marks</th>-->
-    <!--                                <th style="border:1px solid #000; padding:6px;">Obtained</th>-->
-    <!--                                <th style="border:1px solid #000; padding:6px;">Grade</th>-->
-    <!--                            </tr>-->
-    <!--                        </thead>-->
-
-    <!--                        <tbody>-->
-    <!--                            <t t-foreach="doc.student_marks_ids" t-as="line">-->
-    <!--                                <tr>-->
-    <!--                                    <td style="border:1px solid #000; padding:6px;">-->
-    <!--                                        <t t-esc="line.subject_id.name"/>-->
-    <!--                                    </td>-->
-    <!--                                    <td style="border:1px solid #000; padding:6px;">100</td>-->
-    <!--                                    <td style="border:1px solid #000; padding:6px;">-->
-    <!--                                        <t t-esc="line.mo1"/>-->
-    <!--                                    </td>-->
-    <!--                                    <td style="border:1px solid #000; padding:6px;">-->
-    <!--                                        <t t-esc="line.mo2 or ''"/>-->
-    <!--                                    </td>-->
-    <!--                                </tr>-->
-    <!--                            </t>-->
-
-    <!--                            &lt;!&ndash; blank rows for proper layout &ndash;&gt;-->
-    <!--                            <tr t-foreach="range(5 - len(doc.student_marks_ids))" t-as="i">-->
-    <!--                                <td style="border:1px solid #000; padding:15px;"></td>-->
-    <!--                                <td style="border:1px solid #000; padding:15px;"></td>-->
-    <!--                                <td style="border:1px solid #000; padding:15px;"></td>-->
-    <!--                                <td style="border:1px solid #000; padding:15px;"></td>-->
-    <!--                            </tr>-->
-    <!--                        </tbody>-->
-    <!--                    </table>-->
-    <!--                </div>-->
-
-    <!--                &lt;!&ndash; ===================== OPTIONAL SUBJECT ===================== &ndash;&gt;-->
-    <!--                <div class="optional-subject" style="margin-top:20px;">-->
-    <!--                    <h3 style="margin-bottom:8px; border-bottom:1px solid #000; display:inline-block;">Optional-->
-    <!--                        Subject-->
-    <!--                    </h3>-->
-
-    <!--                    <div style="margin-left:10px;">-->
-    <!--&lt;!&ndash;                        <t t-esc="doc.optional_subject_id.name or 'None'"/>&ndash;&gt;-->
-    <!--                    </div>-->
-    <!--                </div>-->
-
-    <!--                &lt;!&ndash; ===================== RESULT STATUS ===================== &ndash;&gt;-->
-    <!--                <div class="result-status" style="margin-top:20px;">-->
-    <!--                    <h3 style="margin-bottom:8px; border-bottom:1px solid #000; display:inline-block;">Result Status-->
-    <!--                    </h3>-->
-
-    <!--                    <div style="font-size:16px; margin-left:10px;">-->
-    <!--                        <strong>-->
-    <!--                            <t t-esc="doc.result or ''"/>-->
-    <!--                        </strong>-->
-    <!--                    </div>-->
-    <!--                </div>-->
-
-    <!--                &lt;!&ndash; ===================== SIGNATURES ===================== &ndash;&gt;-->
-    <!--                <div class="signature" style="margin-top:30px;">-->
-    <!--                    <table style="width:100%; text-align:center;">-->
-    <!--                        <tr>-->
-    <!--                            <td>-->
-    <!--                                __________________________-->
-    <!--                                <br/>-->
-    <!--                                Class Teacher-->
-    <!--                            </td>-->
-    <!--                            <td>-->
-    <!--                                __________________________-->
-    <!--                                <br/>-->
-    <!--                                Principal-->
-    <!--                            </td>-->
-    <!--                            <td>-->
-    <!--                                __________________________-->
-    <!--                                <br/>-->
-    <!--                                Parents-->
-    <!--                            </td>-->
-    <!--                        </tr>-->
-    <!--                    </table>-->
-    <!--                </div>-->
-
-    <!--            </div>-->
-    <!--        </t>-->
-    <!--    </template>-->
-
-
-    <template id="report_exam_result">
-        <t t-call="web.html_container">
-            <t t-foreach="docs" t-as="doc">
-                <t t-call="up_exam.exam_report_document"/>
-            </t>
-        </t>
-    </template>
-
-    <record id="paperformat_report_card" model="report.paperformat">
-        <field name="name">Report Card Print Format</field>
-        <field name="default" eval="True"/>
-        <field name="format">A4</field>
-        <field name="orientation">Portrait</field>
-        <field name="margin_top">2</field>
-        <field name="margin_bottom">0</field>
-        <field name="margin_left">0</field>
-        <field name="margin_right">0</field>
-        <field name="header_line" eval="False"/>
-        <field name="header_spacing">0</field>
-        <!--        <field name="disable_shrinking" eval="True"/>-->
-        <field name="dpi">96</field>
-    </record>
-
-    <record id="action_report_exam_result" model="ir.actions.report">
-        <field name="name">Print Result</field>
-        <field name="model">exam.result</field>
-        <field name="report_type">qweb-pdf</field>
-        <field name="report_name">up_exam.report_exam_result</field>
-        <field name="report_file">up_exam.report_exam_result</field>
-        <field name="print_report_name">'Result'</field>
-        <field name="binding_model_id" ref="model_exam_result"/>
-        <field name="binding_type">report</field>
-        <field name="paperformat_id" ref="paperformat_report_card"/>
-    </record>
-
-
 </odoo>
