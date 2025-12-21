@@ -388,10 +388,13 @@ class MarkSlip(models.TransientModel):
     def action_print_markslip(self):
         print("dvvv-----------------")
         classes = self.class_ids.ids
+
         data = {
             # 'print_separate': self.print_separate,
             'classes': classes,
-            'academic_year': self.exam_id.academic_year.name or ''
+            'academic_year': self.exam_id.academic_year.name or '',
+            'school_name': self.school_ids[0].name or '',
+            'school_address':f"{self.school_ids[0].street or ''} , {self.school_ids[0].street2}"
         }
         return self.env.ref('up_exam.mark_slip_report_action').report_action(self, data=data)
 

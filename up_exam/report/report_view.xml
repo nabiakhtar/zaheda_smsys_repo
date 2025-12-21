@@ -360,10 +360,6 @@
             <!-- Fetch students -->
             <t t-set="students"
                t-value="env['student.student'].search([('standard_id','=', cls.id),('state', '=', 'done')], order='roll_no')"/>
-            <!--                <div class="urdu-text">-->
-            <!--                    <t t-esc="students[1].name"/>-->
-            <!--                </div>-->
-
             <!-- TWO SLIPS SIDE BY SIDE -->
             <div class="slip-row">
 
@@ -374,6 +370,9 @@
                     <!-- Class and Term Info -->
                     <div class="info-section">
                         <div class="info-item">
+                            <span style="font-size:20px;" t-esc="school_name"/>
+                            <br/>
+                            <span t-esc="school_address"/><br/>
                             <span class="info-label">Class:</span>
                             <span class="info-value">
                                 <t t-esc="cls.name"/>
@@ -396,29 +395,32 @@
                     <table>
                         <thead>
                             <tr>
-                                <th style="width: 15%;color:black">Roll No</th>
-                                <th style="width: 20%;color:black">Reg No</th>
-                                <th style="width: 45%;color:black">Student Name</th>
-                                <th style="width: 20%;color:black" class="marks-cell">Marks</th>
+                                <th style="width: 55%;color:black">کیفیت</th>
+                                <th style="width: 20%;color:black">محصلہ نمبر</th>
+                                <th style="width: 15%;color:black">رول نمبر</th>
+                                <th style="width: 20%;color:black" class="marks-cell">نمبر شمار</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <t t-set="sr" t-value="0"/>
                             <t t-foreach="students" t-as="stud">
+                                <t t-set="sr" t-value="sr+1"/>
                                 <tr>
+                                    <td class="marks-cell">
+                                    </td>
+
+                                    <td>
+<!--                                        <t t-esc="stud.reg_no"/>-->
+                                    </td>
                                     <td>
                                         <span style="font-weight: bold; color: #2c3e50;">
                                             <t t-esc="stud.roll_no"/>
                                         </span>
                                     </td>
-                                    <td>
-                                        <t t-esc="stud.reg_no"/>
-                                    </td>
                                     <td style="text-align: left; padding-left: 15px;">
-                                        <t t-esc="stud.name"/>
+                                        <t t-esc="sr"/>
                                     </td>
-                                    <td class="marks-cell">
-                                        <!--                                        <div></div>-->
-                                    </td>
+
                                 </tr>
                             </t>
                         </tbody>

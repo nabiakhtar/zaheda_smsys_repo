@@ -24,12 +24,18 @@ class Markslip(models.AbstractModel):
 				print("Class=", clases)
 			if data.get('academic_year'):
 				academic_year = data.get('academic_year')
+			if data.get('school_name'):
+				school_name = data.get('school_name')
+			if data.get('school_address'):
+				school_address = data.get('school_address')
 
 		return {
 			'doc_ids': self.ids,
 			'doc_model': report1.model,
 			'docs': clases,
-			'academic_year': academic_year
+			'academic_year': academic_year,
+			'school_name': school_name,
+			'school_address': school_address,
 		}
 
 

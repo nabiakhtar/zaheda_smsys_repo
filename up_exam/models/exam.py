@@ -360,6 +360,8 @@ class ExamResult(models.Model):
             return "III"
         return ''
 
+
+    # one time use
     def update_marks1(self):
         for rec in self.search([]):
             for c in rec.student_marks_ids:
