@@ -363,8 +363,11 @@ class ExamResult(models.Model):
     def update_marks1(self):
         for rec in self.search([]):
             for c in rec.student_marks_ids:
-                if not c.standard_id:
+                if not c.student_id:
                     c.standard_id = rec.class_id.id
+                    c.student_id = rec.student_id.id
+                    c.reg_no = rec.reg_no
+                    c.roll_no = rec.roll_no
 
 
 

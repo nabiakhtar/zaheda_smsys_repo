@@ -122,7 +122,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <span class="fl">سابقہ درجہ:</span>
-                                <span style="width:300px;border-bottom:1px dotted #000;display:inline-block;">
+                                <span style="width:100px;border-bottom:1px dotted #000;display:inline-block;">
                                     <field name="prv_class"/>
                                 </span>
 
