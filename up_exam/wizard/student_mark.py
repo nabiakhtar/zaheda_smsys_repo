@@ -17,6 +17,24 @@ class SubjectResultWiz(models.TransientModel):
     subject_id = fields.Many2one('subject.subject')
     student_marks_ids = fields.One2many('student.marks.line', 'wizard_id', string='Student Marks')
 
+
+    def fetch_student(self):
+        if self.class_id:
+            self.student_marks_ids = [(5, 0, 0)]
+            students = self.env['student.student'].search([
+                ('standard_id', '=', self.class_id.id),
+                ('state', '=', 'done')
+            ])
+            lines = []
+            for student in students:
+                lines.append((0, 0, {
+                    'student_id': student.id,
+                    'marks': 0.0,  # default marks
+                }))
+            self.student_marks_ids = lines
+        else:
+            self.student_marks_ids = [(5, 0, 0)]  #
+
     @api.onchange('class_id')
     def _onchange_class_ids(self):
         all_subjects = self.class_id.mapped('subject_ids')
@@ -43,34 +61,15 @@ class SubjectResultWiz(models.TransientModel):
                 }))
             self.student_marks_ids = lines
         else:
-            self.student_marks_ids = [(5, 0, 0)]  #
+            self.student_marks_ids = [(5, 0, 0)]
 
+    @api.onchange('subject_id')
+    def _onchange_subject_id(self):
+        self.fetch_student()
 
-    # @api.onchange('subject_id')
-    # def _onchange_subject(self):
-    #     if self.exam_id and self.school_id and self.exam_term and self.class_id:
-    #         self.student_marks_ids = False
-    #         marks = self.env['student.marks'].search([
-    #             ('academic_year_id', '=', self.exam_id.academic_year.id),
-    #             ('subject_id', '=', self.subject_id.id),
-    #             ('standard_id', '=', self.class_id.id),
-    #         ])
-    #         # marline = self.env['student.marks.line'].search([('wizard_id', '=', self.id)])
-    #         print("m=", marks)
-    #         # print("marline=", marline)
-    #         lines = []
-    #         for m in marks:
-    #             lines.append((0, 0, {
-    #                 'student_id': m.student_id.id,
-    #                 'marks':  m.mo1 if self.exam_term == 'e1' else m.mo2
-    #             }))
-    #         self.student_marks_ids = lines
-
-
-
-
+    # this is for add marks
     def add_marks(self):
-        print("Add marks.........")
+        print("Add marks....aaaaaaaaaaaaaaaaa.....")
         exam_result_obj = self.env['exam.result']
         student_mark_obj = self.env['student.marks']
         print("ccc", self.student_marks_ids)
@@ -104,7 +103,11 @@ class SubjectResultWiz(models.TransientModel):
                     "reg_no" : student_id.reg_no,
                     "roll_no" : student_id.roll_no,
                     "standard_id": self.class_id.id,
-                    "academic_year_id": self.exam_id.academic_year.id
+                    "academic_year_id": self.exam_id.academic_year.id,
+                    "t_mo1": self.exam_id.mm1,
+                    "t_mo2": self.exam_id.mm2,
+                    "total_mark_max": self.exam_id.mm1 + self.exam_id.mm2,
+
                 })
             if self.exam_term == 'e1':
                 student_marks.mo1 = rec.marks
@@ -114,6 +117,17 @@ class SubjectResultWiz(models.TransientModel):
             #     student_marks.mo3 = rec.marks
             # if self.exam_term == 'e4':
             #     student_marks.mo4 = rec.marks
+
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'display_notification',
+            'params': {
+                'title': _("Success"),
+                'message': _("Mark Saved successfully."),
+                'type': 'success',
+                'sticky': False,
+            }
+        }
 
     def result_report(self):
         """Method to get the result report"""
@@ -174,23 +188,6 @@ class SubjectViewMarkWiz(models.TransientModel):
     def _onchange_school_id(self):
         self.student_marks_ids = [(5, 0, 0)]
 
-    # @api.onchange('class_id')
-    # def _onchange_class_id(self):
-    #     if self.class_id:
-    #         self.student_marks_ids = [(5, 0, 0)]
-    #         students = self.env['student.student'].search([
-    #             ('standard_id', '=', self.class_id.id),
-    #             ('state', '=', 'done')
-    #         ])
-    #         lines = []
-    #         for student in students:
-    #             lines.append((0, 0, {
-    #                 'student_id': student.id,
-    #                 'marks': 0.0,  # default marks
-    #             }))
-    #         self.student_marks_ids = lines
-    #     else:
-    #         self.student_marks_ids = [(5, 0, 0)]  #
 
     @api.onchange('subject_id')
     def _onchange_subject(self):
@@ -257,6 +254,18 @@ class SubjectViewMarkWiz(models.TransientModel):
             #     student_marks.mo3 = rec.marks
             # if self.exam_term == 'e4':
             #     student_marks.mo4 = rec.marks
+
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'display_notification',
+            'params': {
+                'title': _("Success"),
+                'message': _("Mark Saved successfully."),
+                'type': 'success',
+                'sticky': False,
+            }
+        }
+
 
     def result_report(self):
         """Method to get the result report"""

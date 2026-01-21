@@ -364,7 +364,7 @@
                         </group>
                     </group>
                     <field name="student_marks_ids" nolabel="1" colspan="4">
-                        <tree editable="bottom">
+                        <tree create="false" delete="false">
                             <field
                                     name="subject_id"
                                     placeholder="Select Subject"
