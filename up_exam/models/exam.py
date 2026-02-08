@@ -162,6 +162,20 @@ class ExamStudentMarks(models.Model):
     #         rec.total_mark = rec.mo1 +rec.mo2 + rec.grace_mark
 
 
+    def write(self, vals):
+        print("Write====", vals)
+        result = super(ExamStudentMarks, self).write(vals)
+        if result:
+            standard_id = self.standard_id
+            student_results = self.env['exam.result'].search([('class_id', '=', standard_id.id)])
+            print("Stufent=", student_results)
+            if student_results:
+                for sr in student_results:
+                    sr.is_cald = False
+                    sr.state = 'draft'
+        return result
+
+
     @api.depends('mo1', 'mo2')
     def _cal_grace_mark(self):
         passing_marks = 34

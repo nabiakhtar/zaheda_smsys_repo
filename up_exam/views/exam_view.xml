@@ -335,7 +335,7 @@
                     />
 
                     <button name="cal_result" string="Calculate" type="object"/>
-                    <button name="re_cal_result" string="Re-Calculate" type="object"/>
+<!--                    <button name="re_cal_result" string="Re-Calculate" type="object"/>-->
 
                 </header>
                 <sheet>
@@ -364,27 +364,26 @@
                         </group>
                     </group>
                     <field name="student_marks_ids" nolabel="1" colspan="4">
-                        <tree create="false" delete="false">
-                            <field
+                        <tree create="false" delete="false" editable="bottom">
+                            <field readonly="1"
                                     name="subject_id"
                                     placeholder="Select Subject"
                                     options="{'no_create': True, 'no_open': True}"
                             />
-                            <field name="t_mo1"/>
+                            <field name="t_mo1" readonly="1"/>
                             <field
                                     name="mo1"
                             />
-                            <field name="t_mo1"/>
                             <field
                                     name="mo2"
                             />
                             <field
-                                    name="grace_mark"
+                                    name="grace_mark" readonly="1"
                             />
-                            <field name="total_mark_max"/>
+                            <field name="total_mark_max" readonly="1"/>
                             <field
                                     name="total_mark"
-                                    string="Totals"
+                                    string="Totals" readonly="1"
                             />
                             <field name="state" invisible="1"/>
 
