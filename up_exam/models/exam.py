@@ -323,7 +323,7 @@ class ExamResult(models.Model):
                 if count_below_34 == 1:
                     result = 'ترقی'
                 if count_below_34 == 2:
-                    result = 'jimni'
+                    result = 'ضمنی'
                 if count_below_34 >= 3:
                     result = 'نا کام'
                 s.result = result
