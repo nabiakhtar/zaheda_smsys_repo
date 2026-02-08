@@ -165,14 +165,15 @@ class ExamStudentMarks(models.Model):
     def write(self, vals):
         print("Write====", vals)
         result = super(ExamStudentMarks, self).write(vals)
-        if result:
-            standard_id = self.standard_id
-            student_results = self.env['exam.result'].search([('class_id', '=', standard_id.id)])
-            print("Stufent=", student_results)
-            if student_results:
-                for sr in student_results:
-                    sr.is_cald = False
-                    sr.state = 'draft'
+        if 'mo1' in vals or 'mo2' in vals:
+            if result:
+                standard_id = self.standard_id
+                student_results = self.env['exam.result'].search([('class_id', '=', standard_id.id)])
+                print("Stufent=", student_results)
+                if student_results:
+                    for sr in student_results:
+                        sr.is_cald = False
+                        sr.state = 'draft'
         return result
 
 
